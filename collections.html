@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PAGE TITLE (browser tab + Google results). TIP: add your city, e.g. "... in Lahore | Muhammad Furnitures" -->
+  <title>Furniture Collections: Sofa Sets, Beds, Office | Muhammad Furnitures</title>
+
+  <!-- SEO META DESCRIPTION (keep under 155 characters). TIP: add your city name here too -->
+  <meta name="description" content="Explore sofa sets, bed sets, dining tables, office desks and wardrobes made to your size in Pakistan by Muhammad Furnitures.">
+
+  <!-- SOCIAL SHARING PREVIEW (WhatsApp, Facebook). ADD og:image WITH A REAL PHOTO URL WHEN YOUR SITE IS LIVE -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Muhammad Furnitures">
+  <meta property="og:locale" content="en_PK">
+  <meta property="og:title" content="Furniture Collections: Sofa Sets, Beds, Office | Muhammad Furnitures">
+  <meta property="og:description" content="Explore sofa sets, bed sets, dining tables, office desks and wardrobes made to your size in Pakistan by Muhammad Furnitures.">
+  
+  <!-- og:image appears automatically once SITE_URL is set in build_site.py -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#4a2c1a">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <!-- CANONICAL: set SITE_URL in build_site.py and this becomes <link rel="canonical" href="https://YOUR-DOMAIN/collections.html"> -->
+
+  <!-- FAVICON: simple "M" icon, no file needed. REPLACE WITH YOUR OWN favicon.png IF YOU HAVE ONE -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%234a2c1a'/%3E%3Ctext x='32' y='46' font-size='40' font-family='Georgia' font-weight='700' text-anchor='middle' fill='%23d19a1e'%3EM%3C/text%3E%3C/svg%3E">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Collections"
+      }
+    ]
+  }
+  </script>
+  <!-- FONTS: Playfair Display (big headings) + Montserrat (menus, buttons, text). Only the weights used are loaded, with display=swap. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap">
+
+  <!-- All colors, fonts and spacing live in style.css (see ":root" at the top) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER (THE SAME ON EVERY PAGE: if you change it, change it in all 6 .html files)
+       ============================================================ -->
+  <!-- ANNOUNCEMENT BAR (top of every page). UPDATE THE MESSAGE HERE. Only promise offers you really give. -->
+  <div class="announce">
+    <div class="container announce-inner">
+      <span><span class="hide-sm">Made-to-order furniture &bull; </span>Get a clear quote on WhatsApp</span>
+      <span class="announce-links"><a href="tel:+923117420474">Call 0311 7420474</a><a href="https://wa.me/923117420474" target="_blank" rel="noopener">WhatsApp</a></span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <!-- Mobile menu toggle button (don't remove, JS uses it) -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- PUT YOUR LOGO HERE. To use a logo image, replace the two <span>s with <img src="logo.png" alt="Muhammad Furnitures" height="44"> -->
+      <a href="index.html" class="logo" aria-label="Muhammad Furnitures, home">
+        <span class="logo-name">Muhammad</span>
+        <span class="logo-sub">Furnitures</span>
+      </a>
+
+      <!-- NAVIGATION LINKS: ADD / REMOVE / RENAME LINKS HERE -->
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="collections.html" aria-current="page">Collections</a></li>
+          <li><a href="custom-furniture.html">Custom Furniture</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+
+        <!-- SEARCH: the magnifier opens the search bar under the header -->
+        <button type="button" class="icon-btn" id="searchToggle" aria-label="Search furniture" aria-expanded="false" aria-controls="searchPanel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+
+        <!-- PHONE: taps to call on a phone. CHANGE THE NUMBER HERE (keep the +92 format in href, no spaces) -->
+        <a class="header-phone" href="tel:+923117420474" aria-label="Call 0311 7420474">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>0311 7420474</span>
+        </a>
+
+        <!-- CART ICON: opens the cart page (cart.html). The badge number updates automatically via script.js -->
+        <a href="cart.html" class="cart-link" id="cartLink" aria-label="View cart">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- SEARCH BAR (hidden until the magnifier is tapped). Searching takes visitors to the Shop page. -->
+    <div class="search-panel" id="searchPanel" hidden>
+      <div class="container">
+        <form class="search-form" id="searchForm" action="shop.html" role="search">
+          <input type="search" id="searchInput" placeholder="Search furniture, for example sofa, bed, wardrobe" aria-label="Search furniture">
+          <button type="submit" class="btn btn-gold btn-sm">Search</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <main data-page="collections">
+
+    <!-- ============================================================
+         PAGE BANNER
+         ============================================================ -->
+    <section class="page-banner">
+      <div class="container">
+        <ul class="breadcrumb" aria-label="Breadcrumb">
+          <li><a href="index.html">Home</a></li>
+          <li aria-current="page">Collections</li>
+        </ul>
+        <h1>Furniture collections for every room in Pakistan</h1>
+        <p>Living room, bedroom, dining room, office and storage furniture, made to your size.</p>
+      </div>
+    </section>
+
+    <section class="quick-answer-wrap"><div class="container"><div class="quick-answer"><span class="qa-label">Quick answer</span><p>Muhammad Furnitures makes furniture for five parts of your space: the living room, bedroom, dining room, office and storage. Every collection is built to your size, with a clear price before we start.</p></div></div></section>
+
+    <!-- ============================================================
+         COLLECTIONS (one block per room; copy a whole .collection-row to add another)
+         ============================================================ -->
+    <section class="collections">
+      <div class="container">
+        <p class="collections-intro">Every collection is made by our craftsmen and can be adjusted to your size and finish. Pick a room to see what we build.</p>
+        <div class="collection-row">
+          <!-- PUT COLLECTION PHOTO HERE (change src and alt) -->
+          <img src="images/roomliving.jpg" width="800" height="600" alt="Living room with a custom sofa set, centre table and TV unit made to order" loading="lazy">
+          <div>
+            <h2>Sofa sets, TV units and centre tables</h2>
+            <!-- UPDATE COLLECTION TEXT HERE -->
+            <p>Sofa sets, TV units and coffee tables built to the size of your room.</p>
+            <p class="coll-extra">Looking for a sofa set design that fits your room? We make 3 + 1 + 1 sofa sets, TV units and centre tables to your size, fabric and finish. See: <a href="sofa-set-5-seater.html">Sofa Set, 5 Seater</a>, <a href="tv-unit-with-shelves.html">TV Unit with Shelves</a>, <a href="coffee-table.html">Coffee Table</a>.</p>
+            <a href="shop.html#living" class="btn btn-navy">View Living Room</a>
+          </div>
+        </div>
+        <div class="collection-row">
+          <!-- PUT COLLECTION PHOTO HERE (change src and alt) -->
+          <img src="images/roombedroom.jpg" width="800" height="600" alt="Bedroom with a double bed with storage and matching side tables made to order" loading="lazy">
+          <div>
+            <h2>Beds and dressing tables</h2>
+            <!-- UPDATE COLLECTION TEXT HERE -->
+            <p>Beds with storage and dressing tables, made to fit your mattress and your space.</p>
+            <p class="coll-extra">Planning a bed set? We build double beds with storage and dressing tables with mirrors, and we can match them to your room. See: <a href="double-bed-with-storage.html">Double Bed with Storage</a>, <a href="dressing-table-with-mirror.html">Dressing Table with Mirror</a>.</p>
+            <a href="shop.html#bedroom" class="btn btn-navy">View Bedroom</a>
+          </div>
+        </div>
+        <div class="collection-row">
+          <!-- PUT COLLECTION PHOTO HERE (change src and alt) -->
+          <img src="images/roomdining.jpg" width="800" height="600" alt="Dining room with a 6 seater dining table and chairs made to order" loading="lazy">
+          <div>
+            <h2>Dining tables</h2>
+            <!-- UPDATE COLLECTION TEXT HERE -->
+            <p>Dining tables for family meals, in the size and finish you choose.</p>
+            <p class="coll-extra">A 6 seater dining table made to the size of your dining room, with matching chairs made to order. See: <a href="dining-table-6-seater.html">Dining Table, 6 Seater</a>.</p>
+            <a href="shop.html#dining" class="btn btn-navy">View Dining Room</a>
+          </div>
+        </div>
+        <div class="collection-row">
+          <!-- PUT COLLECTION PHOTO HERE (change src and alt) -->
+          <img src="images/roomoffice.jpg" width="800" height="600" alt="Home office with a custom office desk and bookshelves made to order" loading="lazy">
+          <div>
+            <h2>Office tables and desks</h2>
+            <!-- UPDATE COLLECTION TEXT HERE -->
+            <p>Work desks made to fit your office or home study.</p>
+            <p class="coll-extra">Office desks and computer tables built to fit your office or home study, with drawers and shelves if you need them. See: <a href="office-desk.html">Office Desk</a>.</p>
+            <a href="shop.html#office" class="btn btn-navy">View Office Furniture</a>
+          </div>
+        </div>
+        <div class="collection-row">
+          <!-- PUT COLLECTION PHOTO HERE (change src and alt) -->
+          <img src="images/roomstorage.jpg" width="800" height="600" alt="Bedroom storage with a 3 door wardrobe, dressing table and bookshelf made to order" loading="lazy">
+          <div>
+            <h2>Wardrobes and bookshelves</h2>
+            <!-- UPDATE COLLECTION TEXT HERE -->
+            <p>Wardrobes and shelves with plenty of space and a clean finish.</p>
+            <p class="coll-extra">3 door wardrobes (almari) and 5 shelf bookshelves made to your wall, with the inside planned to match how you store things. See: <a href="wardrobe-3-door.html">Wardrobe, 3 Door</a>, <a href="bookshelf-5-shelf.html">Bookshelf, 5 Shelf</a>.</p>
+            <a href="shop.html#storage" class="btn btn-navy">View Storage</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CALL TO ACTION BAND (same on most pages)
+         ============================================================ -->
+    <section class="cta-band">
+      <div class="container">
+        <h2>Ready to furnish your home?</h2>
+        <p>Call or message us with your size and style. We will reply with a clear price.</p>
+        <div class="cta-actions">
+          <a href="tel:+923117420474" class="btn btn-gold btn-lg">Call 0311 7420474</a>
+          <a href="https://wa.me/923117420474" class="btn btn-wa btn-lg" target="_blank" rel="noopener">WhatsApp Us</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER (THE SAME ON EVERY PAGE: if you change it, change it in all 6 .html files)
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+
+      <!-- FOOTER COLUMN 1: BRAND + CONTACT -->
+      <div class="footer-col">
+        <a href="index.html" class="logo logo-light" aria-label="Muhammad Furnitures, home">
+          <span class="logo-name">Muhammad</span>
+          <span class="logo-sub">Furnitures</span>
+        </a>
+        <!-- UPDATE SHORT BRAND DESCRIPTION HERE -->
+        <p>Handcrafted furniture for homes, shops and offices. Made to order, built to last.</p>
+        <p class="footer-contact"><a href="tel:+923117420474">0311 7420474</a><br><a href="mailto:mr.genius2474@gmail.com">mr.genius2474@gmail.com</a></p>
+      </div>
+
+      <!-- FOOTER COLUMN 2: QUICK LINKS -->
+      <div class="footer-col">
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="custom-furniture.html">Custom Furniture</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="furniture-buying-guide.html">Furniture Buying Guide</a></li>
+          <li><a href="https://share.google/vqhgRHfPlE7DO94DB" target="_blank" rel="noopener">Find Us on Google</a></li>
+        </ul>
+      </div>
+
+      <!-- FOOTER COLUMN 3: NEWSLETTER + SOCIAL -->
+      <!-- CONNECT TO YOUR EMAIL SERVICE HERE (Mailchimp, Klaviyo, etc.) by editing the form action or the handler in script.js -->
+      <div class="footer-col">
+        <h4>Get offers and new designs</h4>
+        <p>Join our list for new designs, seasonal offers and updates.</p>
+        <form class="newsletter-form" id="newsletterForm" action="#">
+          <input type="email" id="newsletterEmail" placeholder="Your email address" required aria-label="Email address">
+          <button type="submit" class="btn btn-gold">Subscribe</button>
+        </form>
+        <p class="form-message" id="newsletterMessage" aria-live="polite"></p>
+
+        <div class="social-icons">
+          <!-- SOCIAL MEDIA ICONS. Facebook is already linked to your page. FOR EACH OTHER ICON: when you create the account, replace href="#" with your page address and delete data-social-pending="...". To add another network, copy one <a> line. -->
+          <a href="https://www.facebook.com/share/1KevMHNxmj/" aria-label="Muhammad Furnitures on Facebook" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.51 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></a>
+          <!-- PUT YOUR INSTAGRAM LINK HERE -->
+          <a href="#" aria-label="Muhammad Furnitures on Instagram" data-social-pending="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg></a>
+          <!-- PUT YOUR LINKEDIN LINK HERE -->
+          <a href="#" aria-label="Muhammad Furnitures on LinkedIn" data-social-pending="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="8.2" r="1.3" fill="currentColor"/><path d="M8 11v6M12 17v-6M12 13.5c0-1.4 1-2.5 2.5-2.5S17 12 17 13.5V17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+          <!-- PUT YOUR X (TWITTER) LINK HERE -->
+          <a href="#" aria-label="Muhammad Furnitures on X (Twitter)" data-social-pending="X (Twitter)"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h3.5L19 20h-3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M18.5 4 5.5 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a>
+          <!-- PUT YOUR YOUTUBE LINK HERE -->
+          <a href="#" aria-label="Muhammad Furnitures on YouTube" data-social-pending="YouTube"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg></a>
+          <!-- PUT YOUR TIKTOK LINK HERE -->
+          <a href="#" aria-label="Muhammad Furnitures on TikTok" data-social-pending="TikTok"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4v10.2a3.7 3.7 0 1 1-3.7-3.7M14 4c.3 2.4 1.9 4 4.3 4.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- COPYRIGHT LINE (year updates automatically) -->
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span id="year"></span> Muhammad Furnitures. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- STICKY WHATSAPP BUTTON (the only sticky button: stays on screen while scrolling, on phones too). CHANGE THE NUMBER in the href (digits only, country code first, no +) and the message after text= -->
+  <a class="whatsapp-float" href="https://wa.me/923117420474?text=Hello%20Muhammad%20Furnitures%2C%20I%20would%20like%20to%20ask%20about%20your%20furniture." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- CALL POPUP: on computers (no calling app) and as a backup on phones. CHANGE THE NUMBER here and in the links above. Don't remove, JS uses it -->
+  <div class="call-dialog" id="callDialog" role="dialog" aria-modal="true" aria-labelledby="callTitle" hidden>
+    <div class="call-box">
+      <button type="button" class="call-close" id="callClose" aria-label="Close">&times;</button>
+      <h2 id="callTitle">Call Muhammad Furnitures</h2>
+      <p class="call-number">0311 7420474</p>
+      <p class="call-note">On a phone, tap Call now. On a computer, please call this number from your phone, or message us on WhatsApp.</p>
+      <div class="call-actions">
+        <a class="btn btn-gold" href="tel:+923117420474" data-no-dialog>Call now</a>
+        <button type="button" class="btn btn-outline" id="callCopy">Copy number</button>
+        <a class="btn btn-wa" href="https://wa.me/923117420474" target="_blank" rel="noopener" data-no-dialog>WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Small popup message shown when an item is added to the cart (don't remove, JS uses it) -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- All behavior (mobile menu, cart, call popup, search, category filter, quote form, newsletter) lives in script.js -->
+  <script src="script.js"></script>
+</body>
+</html>

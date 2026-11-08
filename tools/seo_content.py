@@ -1,0 +1,236 @@
+# SEO content for Muhammad Furnitures (product pages, guide page, keyword text).
+# Keyword choices come from Pakistan search data (Ubersuggest, Nov 2026): "sofa set", "bed set", "wardrobe design",
+# "furniture in <city>", "<product> price in pakistan", "centre table", "custom furniture".
+# Nothing here claims a specific wood, certification, delivery time or number that the owner has not confirmed.
+
+PRODUCT_SEO = {
+    1: dict(
+        slug="dining-table-6-seater",
+        title="Dining Table 6 Seater Price in Pakistan",
+        meta="Dining table, 6 seater, made to your size and finish by {name}. Starting price {price}. Get a clear quote on WhatsApp {phone}.",
+        h1="Dining Table, 6 Seater",
+        lead="A six seater dining table built for family meals, made to the size of your dining room.",
+        paras=[
+            "A dining table is the piece your family uses every day, so it has to be strong, comfortable and the right size. Our 6 seater dining table starts at 180 × 90 cm with a height of 76 cm, which gives each person room to sit and eat comfortably.",
+            "Because we make it to order, you can change the length and width to suit your room, choose the finish and colour, and decide how many chairs you want. Send us a photo of the space and we will suggest a size that leaves enough room to walk around the table.",
+        ],
+        features=["Made to your size: length, width and height", "Your choice of wood tone, colour and finish", "Matching chairs can be made to order", "Strong joints and a smooth, clean finish", "Delivery and setup can be arranged"],
+        faq=[("What size is a 6 seater dining table?", "A common size is about 180 × 90 cm. We can make it longer, shorter or wider to fit your room."),
+             ("Can you make the chairs as well?", "Yes. Tell us how many chairs you need and the style you like, and we will quote the table and chairs together.")],
+        related=[4, 7, 6],
+    ),
+    2: dict(
+        slug="double-bed-with-storage",
+        title="Double Bed with Storage Price in Pakistan",
+        meta="Double bed with storage, made to fit your mattress and room. Starting price {price}. Order from {name} on WhatsApp {phone}.",
+        h1="Double Bed with Storage",
+        lead="A strong double bed with storage underneath, made to fit your mattress and your bedroom.",
+        paras=[
+            "A bed with storage gives you space for blankets, pillows and clothes without needing more furniture in the room. Our double bed is built to fit a 160 × 200 cm mattress, and we can change the size if your mattress is different.",
+            "Mattress sizes are not the same everywhere, so we always ask you to measure your mattress or send us a photo before we start. You can also choose the headboard style, wood tone and finish. If you want a full bed set, tell us about the dressing table and side tables you need and we will plan them to match.",
+        ],
+        features=["Built to your mattress size", "Storage space under the bed", "Choose the headboard style, wood tone and finish", "Matching dressing table can be planned with it", "Clear price before we start"],
+        faq=[("Can you make a king or single size bed?", "Yes. Send us your mattress size and we will build the bed to fit it."),
+             ("Can I get a matching bed set?", "Yes. Tell us which pieces you want, such as a dressing table and side tables, and we will plan them to match your bed.")],
+        related=[8, 3, 7],
+    ),
+    3: dict(
+        slug="wardrobe-3-door",
+        title="3 Door Wardrobe Price in Pakistan",
+        meta="3 door wardrobe (almari) made to your wall size with plenty of hanging and shelf space. Starting price {price}. {name}.",
+        h1="Wardrobe, 3 Door",
+        lead="A three door wardrobe with room for hanging and folded clothes, made to the size of your wall.",
+        paras=[
+            "A wardrobe works best when it fits your wall and the way you store your clothes. Our 3 door wardrobe starts at 150 cm wide, 60 cm deep and 210 cm tall, with space for hanging clothes and shelves for folded ones.",
+            "Tell us the width and height of your wall and we will plan the inside with you: more hanging space, more shelves, or drawers. You can also choose the door style, the finish and the handles. A depth of about 55 to 60 cm is enough for hanging clothes, and we will make sure the doors can open fully in your room.",
+        ],
+        features=["Made to your wall width and height", "Inside layout planned with you: hanging, shelves, drawers", "Choose the door style, finish and handles", "Clean finish that suits any bedroom", "Delivery and setup can be arranged"],
+        faq=[("Can the wardrobe go up to the ceiling?", "Yes. Send us the height of your room and we will make it to fit."),
+             ("Can you change the inside layout?", "Yes. We can add more hanging space, shelves or drawers to suit how you store your clothes.")],
+        related=[2, 8, 9],
+    ),
+    4: dict(
+        slug="sofa-set-5-seater",
+        title="5 Seater Sofa Set Price in Pakistan",
+        meta="5 seater sofa set (3 + 1 + 1) made to your size, fabric and colour. Starting price {price}. Order from {name} on WhatsApp {phone}.",
+        h1="Sofa Set, 5 Seater",
+        lead="A comfortable 3 + 1 + 1 sofa set for family evenings and guests, in the fabric and colour you choose.",
+        paras=[
+            "A sofa set is usually the biggest piece in the living room, so the size matters. Our 5 seater sofa set has a three seater and two single seaters, and we can change the width, depth and height to fit your room and your family.",
+            "You can choose the fabric and colour, and tell us how firm or soft you like the seats. Please measure the doors and stairs the sofa has to pass through, or send us a photo of the room, and we will plan the set so it fits properly. If you want a centre table to go with it, we can make that to match.",
+        ],
+        features=["3 + 1 + 1 seating, adjustable to your room", "Your choice of fabric and colour", "Seat comfort planned with you", "Matching centre table can be made to order", "Clear price before we start"],
+        faq=[("What is the price of a 5 seater sofa set?", "Our 5 seater sofa set starts at {price}. The final price depends on the size, the fabric and the finish, and we confirm it before we start."),
+             ("Can I choose a different fabric?", "Yes. Tell us the fabric or colour you like, or send a photo, and we will quote it.")],
+        related=[7, 6, 1],
+    ),
+    5: dict(
+        slug="office-desk",
+        title="Office Table & Desk Price in Pakistan",
+        meta="Office desk (computer table) made to your space, with room for a computer and papers. Starting price {price}. {name}.",
+        h1="Office Desk",
+        lead="A sturdy work desk with room for your computer and papers, made to fit your office or home study.",
+        paras=[
+            "A good desk helps you work comfortably for hours. Our office desk starts at 140 × 70 cm with a height of 75 cm, which suits most computers, laptops and paperwork.",
+            "We can make it longer for two screens, add drawers or a keyboard tray, and choose a finish that matches the rest of your office. Tell us the size of your space and how you work, and we will suggest a layout. We can also build matching shelves for files and books.",
+        ],
+        features=["Made to the size of your office or study", "Drawers and keyboard tray can be added", "Choose the finish and colour", "Strong top that handles daily use", "Matching shelves can be made to order"],
+        faq=[("Can you make a bigger desk for two people?", "Yes. Send us the space you have and we will plan a longer desk."),
+             ("Can you add drawers?", "Yes. Tell us how many drawers you want and where, and we will include them in the quote.")],
+        related=[9, 6, 3],
+    ),
+    6: dict(
+        slug="tv-unit-with-shelves",
+        title="TV Unit with Shelves, Made to Size",
+        meta="TV unit with shelves, made to the size of your wall for your TV, decoder and decor. Starting price {price}. {name}.",
+        h1="TV Unit with Shelves",
+        lead="A tidy TV unit with shelves, built to the size of your wall.",
+        paras=[
+            "A TV unit keeps your TV, decoder, speakers and decor in one neat place. Ours starts at 180 cm wide, 40 cm deep and 50 cm high, and we can make it wider or lower to suit your wall and your TV size.",
+            "Tell us the size of your TV and the wall it will stand against, and we will plan the shelves and doors with you. We can leave space for cables and a decoder so everything stays tidy. You can choose the finish to match your sofa set and centre table.",
+        ],
+        features=["Made to your wall and TV size", "Open shelves and closed storage planned with you", "Space for cables and a decoder", "Finish chosen to match your living room", "Delivery and setup can be arranged"],
+        faq=[("Can the TV unit be made for a bigger TV?", "Yes. Send us your TV size and the wall width and we will make the unit to fit."),
+             ("Can you add closed cupboards?", "Yes. Tell us what you want to hide and we will plan doors or drawers for it.")],
+        related=[4, 7, 9],
+    ),
+    7: dict(
+        slug="coffee-table",
+        title="Centre Table (Coffee Table) Price in Pakistan",
+        meta="Centre table (coffee table) made to fit your living room, with space for a tray and books. Starting price {price}. {name}.",
+        h1="Coffee Table (Centre Table)",
+        lead="A low centre table for the middle of your living room, with space for a tray, books and guests.",
+        paras=[
+            "A centre table, also called a coffee table, brings the living room together. Ours starts at 100 × 55 cm with a height of 45 cm, which is a comfortable reach from a sofa.",
+            "We can make it round or rectangular, add a lower shelf, and match the finish to your sofa set and TV unit. Tell us the size of your seating area and we will suggest a size that leaves enough room to walk around it.",
+        ],
+        features=["Round or rectangular, made to your room", "Lower shelf can be added", "Finish matched to your sofa set", "Strong top for trays and daily use", "Clear price before we start"],
+        faq=[("Can you make a round centre table?", "Yes. Tell us the diameter you want and the height, and we will quote it."),
+             ("Can it match my sofa set?", "Yes. Send us a photo of the sofa set and we will match the wood tone or finish where we can.")],
+        related=[4, 6, 1],
+    ),
+    8: dict(
+        slug="dressing-table-with-mirror",
+        title="Dressing Table with Mirror Price in Pakistan",
+        meta="Dressing table with mirror and drawers, made to fit your bedroom. Starting price {price}. Order from {name} on WhatsApp {phone}.",
+        h1="Dressing Table with Mirror",
+        lead="A dressing table with a mirror and drawers for your daily essentials.",
+        paras=[
+            "A dressing table gives you one place for your mirror, jewellery, skincare and daily things. Ours starts at 110 cm wide, 45 cm deep and 140 cm high including the mirror.",
+            "We can change the width, add more drawers, and choose the mirror shape and the finish. If you are planning a full bedroom, we can make the dressing table to match your bed and wardrobe so the room looks complete.",
+        ],
+        features=["Mirror and drawers made to your size", "Choose the mirror shape and the finish", "Can be matched to your bed and wardrobe", "Strong build for daily use", "Delivery and setup can be arranged"],
+        faq=[("Can you add more drawers?", "Yes. Tell us how many drawers you want and we will plan them."),
+             ("Can it match my bed?", "Yes. Send us a photo of your bed and we will match the finish where we can.")],
+        related=[2, 3, 9],
+    ),
+    9: dict(
+        slug="bookshelf-5-shelf",
+        title="5 Shelf Bookshelf Made to Size",
+        meta="Five shelf bookshelf for books, files and decor, made to fit your wall. Starting price {price}. Order from {name} on WhatsApp.",
+        h1="Bookshelf, 5 Shelf",
+        lead="Open shelves for books, files and decor, sized to fit your wall.",
+        paras=[
+            "A bookshelf keeps books, files and decor within reach and makes use of wall space. Ours has five shelves and starts at 90 cm wide, 30 cm deep and 180 cm tall.",
+            "We can change the width and height, space the shelves for large books or files, and choose a finish that matches your room. For a study or office, we can also build shelves to match your desk.",
+        ],
+        features=["Five shelves, spacing planned with you", "Made to your wall width and height", "Finish matched to your room or office", "Strong shelves for heavy books and files", "Clear price before we start"],
+        faq=[("Can the shelves hold heavy books?", "Yes. Tell us what you plan to store and we will build the shelves strong enough."),
+             ("Can you make it wider or taller?", "Yes. Send us the space you have and we will make it to fit.")],
+        related=[5, 3, 6],
+    ),
+}
+
+# Extra keyword text for the collections page (one block per room)
+COLLECTION_EXTRA = {
+    "living": ("Sofa sets, TV units and centre tables", [4, 6, 7],
+               "Looking for a sofa set design that fits your room? We make 3 + 1 + 1 sofa sets, TV units and centre tables to your size, fabric and finish."),
+    "bedroom": ("Beds and dressing tables", [2, 8],
+                "Planning a bed set? We build double beds with storage and dressing tables with mirrors, and we can match them to your room."),
+    "dining": ("Dining tables", [1],
+               "A 6 seater dining table made to the size of your dining room, with matching chairs made to order."),
+    "office": ("Office tables and desks", [5],
+               "Office desks and computer tables built to fit your office or home study, with drawers and shelves if you need them."),
+    "storage": ("Wardrobes and bookshelves", [3, 9],
+                "3 door wardrobes (almari) and 5 shelf bookshelves made to your wall, with the inside planned to match how you store things."),
+}
+
+ROOM_ALT = {
+    "living": "Living room with a custom sofa set, centre table and TV unit made to order",
+    "bedroom": "Bedroom with a double bed with storage and matching side tables made to order",
+    "dining": "Dining room with a 6 seater dining table and chairs made to order",
+    "office": "Home office with a custom office desk and bookshelves made to order",
+    "storage": "Bedroom storage with a 3 door wardrobe, dressing table and bookshelf made to order",
+}
+
+GUIDE_SECTIONS = [
+    ("sofa-set", "How do I choose a sofa set?",
+     ["A sofa set is usually the largest piece in the living room, so start with the room, not the catalogue. Measure the wall and the space in front of it, then leave room to walk around the set. Also measure the doors and stairs the sofa must pass through.",
+      "A 3 + 1 + 1 set suits most family living rooms. If the room is small, a 3 + 2 set or a corner sofa may work better. Ask what the frame is made of, how the seats are padded, and whether the fabric can be changed. Sit on a sample if you can: firm seats keep their shape longer, soft seats feel comfortable at first."],
+     [("sofa set", "Our 5 seater sofa set", 4)]),
+    ("bed-set", "How do I choose a bed and a bed set?",
+     ["Start with your mattress. Mattress sizes are not the same from one brand to the next, so measure your actual mattress and tell the maker before the bed is built. A bed with storage underneath saves space in a small bedroom.",
+      "A bed set usually means a bed with a dressing table and side tables. Decide which pieces you really need, then ask for them in the same wood tone and finish so the room looks complete. Make sure there is enough space to open drawers and walk around the bed."],
+     [("bed", "Our double bed with storage", 2), ("dressing table", "Our dressing table with mirror", 8)]),
+    ("wardrobe", "How do I choose a wardrobe design?",
+     ["Measure the width and height of the wall first. A wardrobe that goes close to the ceiling gives more space and avoids a dust gap on top. For hanging clothes, a depth of about 55 to 60 cm is usually enough.",
+      "Decide how you store things: long hanging space for dresses and coats, short hanging space for shirts, shelves for folded clothes and drawers for small items. Hinged doors need room to open, so check the space in front. Sliding doors save space but give access to only part of the wardrobe at a time."],
+     [("wardrobe", "Our 3 door wardrobe", 3)]),
+    ("dining-table", "What size dining table do I need?",
+     ["Allow about 60 cm of table width for each person. A 6 seater table is often around 180 cm long. Leave about 90 cm between the table edge and the wall or other furniture so chairs can be pulled out and people can pass behind them.",
+      "Think about how you use the table: daily meals, homework, guests. A strong top and a finish that is easy to wipe clean matter more than decoration. Order chairs with the table so the heights match."],
+     [("dining table", "Our 6 seater dining table", 1)]),
+    ("office-desk", "What size office desk do I need?",
+     ["A desk height of about 72 to 76 cm suits most people. Choose a depth of 60 to 70 cm so you can sit back from the screen, and a length that fits your computer and papers. Add drawers or a keyboard tray if you work on the desk every day.",
+      "If two people share the space, plan a longer desk or two desks. Think about cables and sockets before the desk is built so they can be placed neatly."],
+     [("office desk", "Our office desk", 5), ("bookshelf", "Our 5 shelf bookshelf", 9)]),
+    ("wood-and-finish", "What should I ask about wood, board and finish?",
+     ["Furniture in Pakistan is made from solid wood, from engineered boards, or from a mix of both. Solid wood is strong and can be repaired, but it costs more. Boards are lighter on the budget and can look neat, but they need good edges and joints. Neither is always better: it depends on the piece and your budget.",
+      "Ask what the frame is made of, how the parts are joined, and what finish is used. Ask for a clear quote that names the materials. A maker who builds your furniture can adjust the choices to fit your budget, so tell us what matters most to you."],
+     []),
+    ("measure", "How do I measure my space for furniture?",
+     ["Measure the width, depth and height of the place where the furniture will stand, in centimetres. Note the width of doors, corridors and stairs the piece must pass through. Mention sockets, windows and anything on the wall that the furniture has to work around.",
+      "A photo of the space helps a lot. Send the photo and your measurements on WhatsApp and we will suggest a size and a design."],
+     []),
+    ("price", "Why are furniture prices different?",
+     ["Two pieces that look alike can have very different prices. The main reasons are the size, the wood or board used, the fabric and foam in a sofa, the finish, the hardware such as hinges and handles, and the time it takes to build. Delivery distance and setup can also change the final price.",
+      "That is why we give you a clear written quote before we start. The prices on our site are starting prices for the standard size shown. Tell us your size and finish and we will give you the exact price."],
+     []),
+]
+
+GUIDE_FAQ = [
+    ("How do I choose the right size sofa set?",
+     "Measure the wall and the space in front of it, leave room to walk around, and measure the doors and stairs the sofa must pass through. Send us the measurements or a photo and we will suggest a size."),
+    ("What size wardrobe do I need?",
+     "Measure the wall width and the height up to the ceiling. A depth of about 55 to 60 cm is enough for hanging clothes. We plan the inside layout with you."),
+    ("Why do furniture prices differ so much?",
+     "The size, the wood or board, the fabric and foam, the finish and the hardware all change the price. We give a clear written quote before we start."),
+    ("Can I order a bed set made to my size?",
+     "Yes. Send us your mattress size and the pieces you want, such as a dressing table, and we will plan them to match."),
+    ("How do I get an exact price?",
+     "Send your measurements or a photo on WhatsApp. We reply with a clear price and timeline."),
+]
+
+
+# AEO: a one-sentence direct answer placed first under each guide question (AI answers and featured snippets quote these)
+GUIDE_SHORT = {
+    "sofa-set": "Measure your wall, the space in front of it and the doors the sofa must pass through. A 3 + 1 + 1 set suits most family living rooms; a 3 + 2 set or a corner sofa suits a small room.",
+    "bed-set": "Measure your actual mattress first, because sizes vary between brands. A bed set usually means a bed, a dressing table and side tables in the same wood tone and finish.",
+    "wardrobe": "Measure the wall width and height, plan about 55 to 60 cm of depth for hanging clothes, and decide your mix of hanging space, shelves and drawers before you choose the doors.",
+    "dining-table": "Allow about 60 cm of table width for each person, so a 6 seater table is often around 180 cm long, and leave about 90 cm of space around the table.",
+    "office-desk": "Choose a desk height of about 72 to 76 cm and a depth of 60 to 70 cm, with a length that fits your computer and papers.",
+    "wood-and-finish": "Furniture is made from solid wood, engineered boards or a mix of both. Ask what the frame is made of, how the parts are joined and what finish is used, and get the materials named in a written quote.",
+    "measure": "Measure width, depth and height in centimetres, note the width of doors and stairs, and send a photo of the space with your measurements.",
+    "price": "Price depends on the size, the wood or board, the fabric and foam, the finish, the hardware, the build time and the delivery distance. We confirm the exact price before we start.",
+}
+
+# AEO: a short, quotable answer at the top of each page (what the business is, what it makes, how to order)
+QUICK = {
+    "shop": "{name} sells made-to-order sofa sets, beds, wardrobes, dining tables, office desks, TV units, centre tables, dressing tables and bookshelves. Starting prices run from {pmin} to {pmax}, and every piece can be made to your size and finish.",
+    "collections": "{name} makes furniture for five parts of your space: the living room, bedroom, dining room, office and storage. Every collection is built to your size, with a clear price before we start.",
+    "custom": "{name} builds custom furniture to your size. You send your measurements or a photo on WhatsApp, we reply with a clear price, and then we build and finish the piece and can arrange delivery.",
+    "about": "{name} is a furniture maker in {loc}. We build sofa sets, beds, wardrobes, tables and office furniture to order for homes, shops and offices.",
+    "contact": "To get a furniture quote from {name}, call or WhatsApp {phone}, email {email}, or send the quote form on this page. We reply with a clear price.",
+    "guide": "This guide explains how to choose a sofa set, bed, wardrobe, dining table and office desk, what to ask about wood and finish, and how to measure your space. It is written by the team at {name}.",
+    "product": "{name} sells the {item} from {price} for the standard size ({spec}). It is made to order, so the size, colour and finish can be changed, and we confirm the final price before we start.",
+}

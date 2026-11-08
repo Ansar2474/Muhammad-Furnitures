@@ -1,0 +1,64 @@
+# Replace YOUR-DOMAIN with your real website address (or set SITE_URL in build_site.py and rebuild)
+User-agent: *
+Allow: /
+Disallow: /cart.html
+
+# AI search and answer engines are allowed, so your furniture can be found and quoted in AI answers.
+# To stop one of them, change its 'Allow: /' line to 'Disallow: /'.
+
+# ChatGPT search
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /cart.html
+
+# ChatGPT when a person asks it to open a page
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /cart.html
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+Disallow: /cart.html
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+Disallow: /cart.html
+
+# Perplexity when a person asks
+User-agent: Perplexity-User
+Allow: /
+Disallow: /cart.html
+
+# Anthropic Claude
+User-agent: ClaudeBot
+Allow: /
+Disallow: /cart.html
+
+# Claude search
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /cart.html
+
+# Claude when a person asks
+User-agent: Claude-User
+Allow: /
+Disallow: /cart.html
+
+# Google Gemini
+User-agent: Google-Extended
+Allow: /
+Disallow: /cart.html
+
+# Apple
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /cart.html
+
+# Common Crawl, used by many AI tools
+User-agent: CCBot
+Allow: /
+Disallow: /cart.html
+
+Sitemap: https://YOUR-DOMAIN/sitemap.xml
