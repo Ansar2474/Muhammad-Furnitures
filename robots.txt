@@ -61,4 +61,4 @@ User-agent: CCBot
 Allow: /
 Disallow: /cart.html
 
-Sitemap: https://YOUR-DOMAIN/sitemap.xml
+Sitemap: https://ansar2474.github.io/Muhammad-Furnitures/sitemap.xml

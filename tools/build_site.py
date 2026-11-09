@@ -16,7 +16,7 @@ OUT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), 
 
 # ---- SEO SETTINGS (UPDATE THESE TWO LINES WHEN YOU KNOW THEM, THEN REBUILD) ----
 CITY = ""        # PUT YOUR CITY HERE, e.g. "Lahore". It goes into titles, headings and Google business data.
-SITE_URL = ""    # PUT YOUR WEBSITE ADDRESS HERE once it is live, e.g. "https://www.muhammadfurnitures.com" (no slash at the end)
+SITE_URL = "https://ansar2474.github.io/Muhammad-Furnitures"    # PUT YOUR WEBSITE ADDRESS HERE once it is live, e.g. "https://www.muhammadfurnitures.com" (no slash at the end)
 UPDATED_ISO = "2026-11-08"          # UPDATE THIS DATE whenever you change prices or text; it is shown on the page and in the data for Google
 UPDATED_TEXT = "8 November 2026"
 LOC = CITY or "Pakistan"   # used in titles and headings: "... in Pakistan" or "... in Lahore"
@@ -41,14 +41,14 @@ NAV = [
 FONTS = (
     '  <link rel="preconnect" href="https://fonts.googleapis.com">\n'
     '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
-    '  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700'
-    '&family=Playfair+Display:wght@600;700&display=swap">\n'
+    '  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700'
+    '&family=DM+Sans:wght@400;500;600;700&display=swap">\n'
 )
 
 FAVICON = (
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' "
-    "fill='%234a2c1a'/%3E%3Ctext x='32' y='46' font-size='40' font-family='Georgia' font-weight='700' text-anchor='middle' "
-    "fill='%23d19a1e'%3EM%3C/text%3E%3C/svg%3E"
+    "fill='%2312161c'/%3E%3Ctext x='32' y='46' font-size='40' font-family='Arial' font-weight='700' text-anchor='middle' "
+    "fill='%23f6b80a'%3EM%3C/text%3E%3C/svg%3E"
 )
 
 def local_ld():
@@ -144,7 +144,6 @@ def product_card(p, first_comment=False, level=3):
               <!-- UPDATE PRODUCT SIZE HERE (width × depth × height) -->
               <span class="product-spec">{p['spec']}</span>
               <p class="product-desc">{p['desc']}</p>
-              <a class="text-link" href="contact.html">Order a custom size</a>
               <div class="product-bottom">
                 <!-- UPDATE PRODUCT PRICE HERE (in Pakistani rupees; also update data-price above so the cart matches) -->
                 <span class="price">Rs {p['price']:,}</span>
@@ -215,8 +214,9 @@ def header(active):
         <span></span><span></span><span></span>
       </button>
 
-      <!-- PUT YOUR LOGO HERE. To use a logo image, replace the two <span>s with <img src="logo.png" alt="{NAME}" height="44"> -->
+      <!-- PUT YOUR LOGO HERE. To use a logo image, replace the three <span>s with <img src="logo.png" alt="{NAME}" height="44"> -->
       <a href="index.html" class="logo" aria-label="{NAME}, home">
+        <span class="logo-mark" aria-hidden="true">M</span>
         <span class="logo-name">Muhammad</span>
         <span class="logo-sub">Furnitures</span>
       </a>
@@ -269,50 +269,71 @@ def footer():
        FOOTER (THE SAME ON EVERY PAGE: if you change it, change it in all 6 .html files)
        ============================================================ -->
   <footer class="site-footer">
-    <div class="container footer-grid">
+    <div class="container footer-top">
 
-      <!-- FOOTER COLUMN 1: BRAND + CONTACT -->
-      <div class="footer-col">
+      <!-- FOOTER COLUMN 1: BRAND + CALL / WHATSAPP BUTTONS -->
+      <div class="footer-col footer-brand">
         <a href="index.html" class="logo logo-light" aria-label="{NAME}, home">
+          <span class="logo-mark" aria-hidden="true">M</span>
           <span class="logo-name">Muhammad</span>
           <span class="logo-sub">Furnitures</span>
         </a>
         <!-- UPDATE SHORT BRAND DESCRIPTION HERE -->
-        <p>Handcrafted furniture for homes, shops and offices. Made to order, built to last.</p>
-        <p class="footer-contact"><a href="tel:{TEL}">{PHONE}</a><br><a href="mailto:{EMAIL}">{EMAIL}</a></p>
+        <p>Made-to-order furniture for homes, shops and offices in {LOC}. Tell us your size, we send a clear price.</p>
+        <div class="footer-cta">
+          <a class="btn btn-gold btn-sm" href="tel:{TEL}">Call us</a>
+          <a class="btn btn-wa btn-sm" href="https://wa.me/{WA}" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
       </div>
 
-      <!-- FOOTER COLUMN 2: QUICK LINKS -->
+      <!-- FOOTER COLUMN 2: SHOP BY ROOM -->
       <div class="footer-col">
-        <h4>Quick links</h4>
+        <h3>Shop</h3>
         <ul>
-{links}
-          <li><a href="furniture-buying-guide.html">Furniture Buying Guide</a></li>
-          <li><a href="{GOOGLE}" target="_blank" rel="noopener">Find Us on Google</a></li>
+          <li><a href="shop.html">All furniture</a></li>
+          <li><a href="shop.html#living">Living room</a></li>
+          <li><a href="shop.html#bedroom">Bedroom</a></li>
+          <li><a href="shop.html#dining">Dining room</a></li>
+          <li><a href="shop.html#office">Office</a></li>
+          <li><a href="shop.html#storage">Storage</a></li>
         </ul>
       </div>
 
-      <!-- FOOTER COLUMN 3: NEWSLETTER + SOCIAL -->
-      <!-- CONNECT TO YOUR EMAIL SERVICE HERE (Mailchimp, Klaviyo, etc.) by editing the form action or the handler in script.js -->
+      <!-- FOOTER COLUMN 3: COMPANY LINKS -->
       <div class="footer-col">
-        <h4>Get offers and new designs</h4>
-        <p>Join our list for new designs, seasonal offers and updates.</p>
-        <form class="newsletter-form" id="newsletterForm" action="#">
-          <input type="email" id="newsletterEmail" placeholder="Your email address" required aria-label="Email address">
-          <button type="submit" class="btn btn-gold">Subscribe</button>
-        </form>
-        <p class="form-message" id="newsletterMessage" aria-live="polite"></p>
+        <h3>Company</h3>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="custom-furniture.html">Custom furniture</a></li>
+          <li><a href="furniture-buying-guide.html">Buying guide</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="cart.html">Your cart</a></li>
+        </ul>
+      </div>
 
-        <div class="social-icons">
-{social_html("          ")}
-        </div>
+      <!-- FOOTER COLUMN 4: CONTACT DETAILS. PUT YOUR ADDRESS AND HOURS HERE -->
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <ul class="footer-contact">
+          <li><span>Phone and WhatsApp</span><a href="tel:{TEL}">{PHONE}</a></li>
+          <li><span>Email</span><a href="mailto:{EMAIL}">{EMAIL}</a></li>
+          <!-- PUT YOUR ADDRESS HERE (same as your Google listing) -->
+          <li><span>Address</span><em>[Add your address]</em></li>
+          <!-- PUT YOUR OPENING HOURS HERE -->
+          <li><span>Hours</span><em>[Add days and hours]</em></li>
+          <li><a href="{GOOGLE}" target="_blank" rel="noopener">Find us on Google</a></li>
+        </ul>
       </div>
     </div>
 
-    <!-- COPYRIGHT LINE (year updates automatically) -->
+    <!-- BOTTOM BAR: copyright (year updates automatically) + social icons -->
     <div class="footer-bottom">
-      <div class="container">
-        <p>&copy; <span id="year"></span> {NAME}. All rights reserved.</p>
+      <div class="container footer-bottom-inner">
+        <p>&copy; <span id="year"></span> {NAME}. Prices are in Pakistani rupees (Rs).</p>
+        <div class="social-icons">
+{social_html("          ")}
+        </div>
       </div>
     </div>
   </footer>
@@ -426,14 +447,14 @@ def page(filename, key, title, desc, main_html, ld=False, faq=False, noindex=Fal
   {og_url}
   {og_img}
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#4a2c1a">
+  <meta name="theme-color" content="#12161c">
   {robots_meta}
   {canon_tag}
 
   <!-- FAVICON: simple "M" icon, no file needed. REPLACE WITH YOUR OWN favicon.png IF YOU HAVE ONE -->
   <link rel="icon" href="{FAVICON}">
 
-{local_ld() if ld else ''}{faq_ld() if faq else ''}{extra_ld}{'  <meta name="robots" content="noindex">' + chr(10) if noindex else ''}  <!-- FONTS: Playfair Display (big headings) + Montserrat (menus, buttons, text). Only the weights used are loaded, with display=swap. -->
+{local_ld() if ld else ''}{faq_ld() if faq else ''}{extra_ld}{'  <meta name="robots" content="noindex">' + chr(10) if noindex else ''}  <!-- FONTS: Bricolage Grotesque (headings, prices) + DM Sans (menus, buttons, text). Only the weights used are loaded, with display=swap. -->
 {FONTS}
   <!-- All colors, fonts and spacing live in style.css (see ":root" at the top) -->
   <link rel="stylesheet" href="style.css">
@@ -725,7 +746,7 @@ def build():
       <div class="container">
         <div class="hero-text">
           <!-- UPDATE THE THREE WORDS IN THE TAG HERE -->
-          <span class="hero-tag">Handcrafted &bull; Made to order &bull; Built to last</span>
+          <span class="hero-tag">Made to order, built to last</span>
 
           <!-- HERO HEADLINE: the first line is navy, the second is gold -->
           <h1><span class="h1-navy">Muhammad</span> <span class="h1-gold">Furnitures</span> <span class="h1-sub">Custom furniture maker in {LOC}</span></h1>
@@ -1226,7 +1247,7 @@ def build_product_pages():
         title = f"{seo['title']} | {NAME}"
         meta = seo["meta"].replace("{name}", NAME).replace("{price}", money(p["price"])).replace("{phone}", PHONE)
         faq_pairs = [(q, fmt(a, p)) for q, a in seo["faq"]]
-        feats = "\n".join(f"            <li>{f}</li>" for f in seo["features"])
+        feats = "\n".join(f"              <li>{f}</li>" for f in seo["features"])
         paras = "\n".join(f"        <p>{t}</p>" for t in seo["paras"])
         faq_items = "\n".join(
             f'          <details class="faq-item"><summary>{q}</summary><p>{a}</p></details>' for q, a in faq_pairs)
@@ -1237,35 +1258,51 @@ def build_product_pages():
             <span>From {money(PBYID[r]['price'])}</span>
           </a>""" for r in seo["related"])
         wa_msg = quote("Hello %s, I would like to order: %s (Rs %s). Please share the details." % (NAME, p["name"], format(p["price"], ",")))
-        main = f"""{banner(seo['h1'], seo['lead'], p['name'], crumbs=[('Home', 'index.html'), ('Shop', 'shop.html'), (p['name'], None)])}
-{qa_box(QUICK['product'].format(name=NAME, item=p['name'], price=money(p['price']), spec=p['spec']))}
+        main = f"""
     <!-- ============================================================
          PRODUCT PAGE: {p['name']}
+         ORDER: photo, title, description, price + order buttons, key features.
          EDIT THE TEXT BELOW (the details come from the PRODUCTS list in build_site.py and seo_content.py)
          ============================================================ -->
     <section class="pdp">
-      <div class="container pdp-grid">
+      <div class="container pdp-wrap">
+        <ul class="breadcrumb" aria-label="Breadcrumb">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li aria-current="page">{p['name']}</li>
+        </ul>
+
+        <!-- PUT PRODUCT IMAGE HERE (square photo works best; change src and alt) -->
         <div class="pdp-media">
-          <!-- PUT PRODUCT IMAGE HERE (square photo works best; change src and alt) -->
           <img src="images/product{pid}.jpg" width="600" height="600" alt="{p['alt']}, made to order in {LOC} by {NAME}" fetchpriority="high">
         </div>
+
         <article class="product-card pdp-card" data-id="{pid}" data-name="{p['name']}" data-price="{p['price']}" data-category="{p['cat']}">
-          <span class="product-category">{p['catlabel']}</span>
-          <p class="pdp-price"><span class="price">{money(p['price'])}</span> <small>starting price, made to your size</small></p>
-          <span class="product-spec">Standard size: {p['spec']}</span>
+          <span class="pdp-category">{p['catlabel']}</span>
+          <h1 class="pdp-title">{seo['h1']}</h1>
           <p class="pdp-lead">{seo['lead']}</p>
-          <ul class="pdp-features">
-{feats}
-          </ul>
-          <div class="pdp-actions">
-            <button class="btn btn-navy add-to-cart">Add to Cart</button>
-            <a class="btn btn-wa" href="https://wa.me/{WA}?text={wa_msg}" target="_blank" rel="noopener">Order on WhatsApp</a>
+
+          <div class="pdp-buy">
+            <!-- UPDATE PRICE HERE (also update data-price above so the cart matches) -->
+            <p class="pdp-price"><span class="price">{money(p['price'])}</span><small>Starting price, made to your size</small></p>
+            <div class="pdp-actions">
+              <button class="btn btn-navy btn-lg add-to-cart">Add to Cart</button>
+              <a class="btn btn-wa btn-lg" href="https://wa.me/{WA}?text={wa_msg}" target="_blank" rel="noopener">Order on WhatsApp</a>
+            </div>
           </div>
+
+          <div class="pdp-features-wrap">
+            <h2>Key features</h2>
+            <ul class="pdp-features">
+{feats}
+            </ul>
+          </div>
+          <p class="pdp-spec"><strong>Standard size:</strong> {p['spec']}</p>
           <p class="pdp-note">Final price depends on your size, wood or board, fabric and finish. We confirm it with you before we start.</p>
         </article>
       </div>
     </section>
-
+{qa_box(QUICK['product'].format(name=NAME, item=p['name'], price=money(p['price']), spec=p['spec'])).replace('quick-answer-wrap','quick-answer-wrap pdp-qa')}
     <section class="seo-text pdp-long">
       <div class="container seo-inner pdp-inner">
         <h2>About the {p['name'].lower()}</h2>
