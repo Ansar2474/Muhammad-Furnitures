@@ -103,8 +103,46 @@ def ld_script(data):
     return '  <script type="application/ld+json">\n  ' + json.dumps(data, indent=2, ensure_ascii=False).replace("\n", "\n  ") + "\n  </script>\n"
 
 
+def route(fn):
+    """Clean address of a page. about.html -> about/ ; a product -> products/<slug>/ ; the home page -> (empty).
+    Pages are written as folder/index.html so visitors never see .html in the address bar."""
+    if fn == "index.html":
+        return ""
+    if fn == "404.html":
+        return fn
+    if fn in PRODUCT_FILES:
+        return "products/" + fn[:-5] + "/"
+    if fn.endswith(".html"):
+        return fn[:-5] + "/"
+    return fn
+
+
 def absurl(path):
-    return (SITE_URL + "/" + path) if SITE_URL else None
+    if not SITE_URL:
+        return None
+    return SITE_URL + "/" + (route(path) if path.endswith(".html") else path)
+
+
+_ATTR = re.compile(r'\b(href|src|action)="([^"#?]*)([#?][^"]*)?"')
+
+
+def localize(markup, filename):
+    """Points every local link, image, style and script at the right place from this page's folder.
+    The pages are written with simple names (shop.html, images/x.jpg); this turns them into clean, relative addresses."""
+    rt = route(filename)
+    prefix = "" if filename == "404.html" else "../" * rt.count("/")
+
+    def fix(m):
+        attr, target, tail = m.group(1), m.group(2), m.group(3) or ""
+        if not target or re.match(r"^(?:[a-z][a-z0-9+.-]*:|//|/)", target, re.I):
+            return m.group(0)
+        if target.endswith(".html"):
+            r = route(target)
+            new = prefix + r if r else (prefix or "./")
+        else:
+            new = prefix + target
+        return f'{attr}="{new}{tail}"'
+    return _ATTR.sub(fix, markup), prefix
 
 
 def crumb_ld(items):
@@ -150,7 +188,9 @@ def load_products():
         price = int(r["price"])
         products.append(dict(id=pid, name=name, price=price, cat=cat, catlabel=CAT_LABELS.get(cat, _e(cat.title())), spec=spec,
                              desc=_e(r.get("shortDesc") or r.get("description", "")), badge=_e(r.get("badge", "")),
-                             alt=_e(r.get("alt") or r["name"]), image=r.get("image") or f"images/product{pid}.jpg"))
+                             alt=_e(r.get("alt") or r["name"]), image=r.get("image") or f"images/product{pid}.jpg",
+                             show_shop=bool(r.get("showShop", True)), show_home=bool(r.get("showHome", False)),
+                             home_order=float(r.get("homeOrder", r.get("order", 999)))))
         title = _e(r.get("seoTitle") or f"{r['name']} Price in Pakistan")
         meta = _e(r.get("seoDescription") or f"{r['name']} made to order by {{name}}. Starting price {{price}}. Get a clear quote on WhatsApp {{phone}}.")
         paras = [_e(t) for t in r.get("paras", [])] or [
@@ -181,6 +221,9 @@ def load_products():
 
 PRODUCTS, PRODUCT_SEO = load_products()
 PBYID = {p["id"]: p for p in PRODUCTS}
+SHOP_PRODUCTS = [p for p in PRODUCTS if p["show_shop"]]                                  # Shop page, in the order set in the admin page
+HOME_PRODUCTS = sorted([p for p in PRODUCTS if p["show_home"]], key=lambda p: (p["home_order"], p["id"]))   # Home page "Featured products"
+PRODUCT_FILES = {PRODUCT_SEO[p["id"]]["slug"] + ".html" for p in PRODUCTS}
 
 
 def _paren(name):
@@ -269,7 +312,7 @@ def nav_html(active):
 
 def header(active):
     return f"""  <!-- ============================================================
-       HEADER (THE SAME ON EVERY PAGE: if you change it, change it in all 6 .html files)
+       HEADER (THE SAME ON EVERY PAGE: if you change it, it is built once by tools/build_site.py)
        ============================================================ -->
   <!-- ANNOUNCEMENT BAR (top of every page). UPDATE THE MESSAGE HERE. Only promise offers you really give. -->
   <div class="announce">
@@ -314,7 +357,7 @@ def header(active):
           <span>{PHONE}</span>
         </a>
 
-        <!-- CART ICON: opens the cart page (cart.html). The badge number updates automatically via script.js -->
+        <!-- CART ICON: opens the cart page (/cart/). The badge number updates automatically via script.js -->
         <a href="cart.html" class="cart-link" id="cartLink" aria-label="View cart">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           <span class="cart-count" id="cartCount">0</span>
@@ -339,7 +382,7 @@ def footer():
     links = "\n".join(
         f'          <li><a href="{href}">{label}</a></li>' for label, href, _ in NAV)
     return f"""  <!-- ============================================================
-       FOOTER (THE SAME ON EVERY PAGE: if you change it, change it in all 6 .html files)
+       FOOTER (THE SAME ON EVERY PAGE: if you change it, it is built once by tools/build_site.py)
        ============================================================ -->
   <footer class="site-footer">
     <div class="container footer-top">
@@ -493,7 +536,7 @@ def banner(title, text, crumb, crumbs=None):
 
 def page(filename, key, title, desc, main_html, ld=False, faq=False, noindex=False, extra_ld="", og_image="images/hero.jpg"):
     robots_meta = "" if noindex else '<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">'
-    canon = (SITE_URL + "/" + ("" if filename == "index.html" else filename)) if SITE_URL else None
+    canon = absurl(filename) if SITE_URL else None
     canon_tag = (f'<link rel="canonical" href="{canon}">' if canon else
                  f'<!-- CANONICAL: set SITE_URL in build_site.py and this becomes <link rel="canonical" href="https://YOUR-DOMAIN/{filename}"> -->')
     og_url = f'<meta property="og:url" content="{canon}">' if canon else ""
@@ -536,8 +579,16 @@ def page(filename, key, title, desc, main_html, ld=False, faq=False, noindex=Fal
 
 """
     body = header(key) + f'\n  <main data-page="{key}">\n\n' + main_html + "\n  </main>\n\n" + footer()
-    with open(os.path.join(OUT, filename), "w", encoding="utf-8") as f:
-        f.write(head + body)
+    markup, prefix = localize(head + body, filename)
+    markup = markup.replace("<body>", f'<body data-root="{prefix}">', 1)
+    if filename == "404.html" and SITE_URL:    # the 404 page can be opened from any folder, so it needs a fixed base address
+        markup = markup.replace("<head>", f'<head>\n  <base href="{SITE_URL}/">', 1)
+        markup = markup.replace('data-root=""', 'data-root=""', 1)
+    rt = route(filename)
+    outpath = os.path.join(OUT, rt, "index.html") if (rt == "" or rt.endswith("/")) else os.path.join(OUT, rt)
+    os.makedirs(os.path.dirname(outpath), exist_ok=True)
+    with open(outpath, "w", encoding="utf-8") as f:
+        f.write(markup)
 
 
 # --------------------------------------------------------------------------------------------
@@ -808,7 +859,7 @@ def build():
     os.makedirs(OUT, exist_ok=True)
 
     # ---------------- HOME ----------------
-    home_products = "\n".join(product_card(p, first_comment=(i == 0)) for i, p in enumerate(PRODUCTS[:6]))
+    home_products = "\n".join(product_card(p, first_comment=(i == 0)) for i, p in enumerate(HOME_PRODUCTS))
     home = f"""    <!-- ============================================================
          HERO SECTION
          ============================================================ -->
@@ -878,7 +929,7 @@ def build():
 
     <!-- ============================================================
          FEATURED PRODUCTS
-         These are the first 6 products from the Shop page. If you change one here, change it on shop.html too.
+         These are the first 6 products from the Shop page. The admin page controls which products appear here and in what order.
          NOTE: product names, sizes, prices and photos below are EXAMPLES. Replace them with your real pieces.
          ============================================================ -->
     <section class="products" id="featured">
@@ -925,7 +976,7 @@ def build():
          home, ld=True, faq=True)
 
     # ---------------- SHOP ----------------
-    shop_products = "\n".join(product_card(p, first_comment=(i == 0), level=2) for i, p in enumerate(PRODUCTS))
+    shop_products = "\n".join(product_card(p, first_comment=(i == 0), level=2) for i, p in enumerate(SHOP_PRODUCTS))
     shop = f"""{banner(f"Shop furniture online in {LOC}", "Sofa sets, beds, wardrobes, dining tables and office desks. Every piece can be made to your size and finish.", "Shop")}
 {quick("shop")}
     <!-- ============================================================
@@ -1510,14 +1561,14 @@ def build_sitemap():
     pages = [("", "1.0"), ("shop.html", "0.9"), ("collections.html", "0.8"), ("custom-furniture.html", "0.9"),
              ("furniture-buying-guide.html", "0.7"), ("about.html", "0.6"), ("contact.html", "0.7")]
     pages += [(PRODUCT_SEO[p["id"]]["slug"] + ".html", "0.8") for p in PRODUCTS]
-    urls = "\n".join(f"  <url><loc>{base}/{u}</loc><lastmod>{UPDATED_ISO}</lastmod><priority>{pr}</priority></url>" for u, pr in pages)
+    urls = "\n".join(f"  <url><loc>{base}/{u}</loc><lastmod>{UPDATED_ISO}</lastmod><priority>{pr}</priority></url>" for u, pr in [(route(u), pr) for u, pr in pages])
     with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n<!-- Replace https://YOUR-DOMAIN with your real website address (or set SITE_URL in build_site.py and rebuild) -->\n'
                 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "\n</urlset>\n")
-    bots = "\n".join(f"# {why}\nUser-agent: {name}\nAllow: /\nDisallow: /cart.html\nDisallow: /admin/\n" for name, why in AI_BOTS)
+    bots = "\n".join(f"# {why}\nUser-agent: {name}\nAllow: /\nDisallow: /cart/\nDisallow: /admin/\n" for name, why in AI_BOTS)
     with open(os.path.join(OUT, "robots.txt"), "w", encoding="utf-8") as f:
         f.write("# Replace YOUR-DOMAIN with your real website address (or set SITE_URL in build_site.py and rebuild)\n"
-                "User-agent: *\nAllow: /\nDisallow: /cart.html\nDisallow: /admin/\n\n"
+                "User-agent: *\nAllow: /\nDisallow: /cart/\nDisallow: /admin/\n\n"
                 "# AI search and answer engines are allowed, so your furniture can be found and quoted in AI answers.\n"
                 "# To stop one of them, change its 'Allow: /' line to 'Disallow: /'.\n\n"
                 + bots + f"\nSitemap: {base}/sitemap.xml\n")
@@ -1526,33 +1577,57 @@ def build_sitemap():
              f"> {NAME} is a furniture maker in {LOC}. We build sofa sets, beds, wardrobes, dining tables, office desks, TV units, centre tables, dressing tables and bookshelves to order, to your size, colour and finish. Prices are in Pakistani rupees (Rs).", "",
              "## Contact", f"- Phone and WhatsApp: {PHONE}", f"- Email: {EMAIL}", "",
              "## Main pages",
-             f"- [Shop and starting prices]({base}/shop.html): all furniture with starting prices",
-             f"- [Custom furniture]({base}/custom-furniture.html): how made-to-order works",
-             f"- [Furniture buying guide]({base}/furniture-buying-guide.html): how to choose and measure",
-             f"- [Collections]({base}/collections.html): living room, bedroom, dining, office, storage",
-             f"- [About]({base}/about.html) and [Contact]({base}/contact.html)", "", "## Products"]
+             f"- [Shop and starting prices]({base}/shop/): all furniture with starting prices",
+             f"- [Custom furniture]({base}/custom-furniture/): how made-to-order works",
+             f"- [Furniture buying guide]({base}/furniture-buying-guide/): how to choose and measure",
+             f"- [Collections]({base}/collections/): living room, bedroom, dining, office, storage",
+             f"- [About]({base}/about/) and [Contact]({base}/contact/)", "", "## Products"]
     for p in PRODUCTS:
-        lines.append(f"- [{p['name']}]({base}/{PRODUCT_SEO[p['id']]['slug']}.html): from {money(p['price'])}, {p['spec']}")
+        lines.append(f"- [{p['name']}]({base}/{route(PRODUCT_SEO[p['id']]['slug'] + '.html')}): from {money(p['price'])}, {p['spec']}")
     lines += ["", f"Last updated: {UPDATED_ISO}", ""]
     with open(os.path.join(OUT, "llms.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
 
+def build_404_and_redirects():
+    """A friendly 'page not found' page, and /products/ (which has no page of its own) sends people to the shop."""
+    main = f"""    <section class="page-banner">
+      <div class="container">
+        <h1>We could not find that page</h1>
+        <p>The address may have changed. Browse our furniture or message us on WhatsApp and we will help.</p>
+        <p style="margin-top:22px"><a class="btn btn-gold" href="shop.html">Browse Furniture</a> <a class="btn btn-outline" href="contact.html">Contact Us</a></p>
+      </div>
+    </section>
+"""
+    page("404.html", "notfound", f"Page not found | {NAME}", f"This page could not be found. Browse furniture from {NAME} or contact us on WhatsApp.", main, noindex=True)
+    target = absurl("shop.html") or "../shop/"
+    d = os.path.join(OUT, "products")
+    os.makedirs(d, exist_ok=True)
+    with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
+        f.write(f'<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><title>Furniture | {NAME}</title>'
+                f'<meta name="robots" content="noindex"><link rel="canonical" href="{target}">'
+                f'<meta http-equiv="refresh" content="0; url=../shop/"></head><body><p><a href="../shop/">Go to the shop</a></p></body></html>\n')
+
+
 def remove_orphan_pages():
-    """A product hidden or deleted in the admin page must not leave its old page online."""
-    keep = {PRODUCT_SEO[p["id"]]["slug"] + ".html" for p in PRODUCTS}
+    """Keeps the folder tidy: old .html pages from before the clean addresses, and any product hidden or deleted in the admin page."""
+    import shutil
     for fn in os.listdir(OUT):
-        if not fn.endswith(".html") or fn in keep:
-            continue
-        with open(os.path.join(OUT, fn), encoding="utf-8") as f:
-            head = f.read()
-        if "<!-- GENERATED PRODUCT PAGE -->" in head:
+        if fn.endswith(".html") and fn not in ("index.html", "404.html"):
             os.remove(os.path.join(OUT, fn))
-            print("removed old product page", fn)
+            print("removed old page", fn)
+    keep = {PRODUCT_SEO[p["id"]]["slug"] for p in PRODUCTS}
+    pd = os.path.join(OUT, "products")
+    for name in os.listdir(pd) if os.path.isdir(pd) else []:
+        full = os.path.join(pd, name)
+        if os.path.isdir(full) and name not in keep:
+            shutil.rmtree(full)
+            print("removed old product page", name)
 
 
 if __name__ == "__main__":
     build()
+    build_404_and_redirects()
     remove_orphan_pages()
     print("pages written to", OUT)
-    print(sorted(f for f in os.listdir(OUT) if f.endswith(".html")))
+    print(sorted(d for d in os.listdir(OUT) if os.path.isdir(os.path.join(OUT, d)) and not d.startswith(".")))

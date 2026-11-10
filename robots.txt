@@ -1,7 +1,7 @@
 # Replace YOUR-DOMAIN with your real website address (or set SITE_URL in build_site.py and rebuild)
 User-agent: *
 Allow: /
-Disallow: /cart.html
+Disallow: /cart/
 Disallow: /admin/
 
 # AI search and answer engines are allowed, so your furniture can be found and quoted in AI answers.
@@ -10,67 +10,67 @@ Disallow: /admin/
 # ChatGPT search
 User-agent: OAI-SearchBot
 Allow: /
-Disallow: /cart.html
+Disallow: /cart/
 Disallow: /admin/
 
 # ChatGPT when a person asks it to open a page
 User-agent: ChatGPT-User
 Allow: /
-Disallow: /cart.html
+Disallow: /cart/
 Disallow: /admin/
 
 # OpenAI
 User-agent: GPTBot
 Allow: /
-Disallow: /cart.html
+Disallow: /cart/
 Disallow: /admin/
 
 # Perplexity
 User-agent: PerplexityBot
 Allow: /
-Disallow: /cart.html
+Disallow: /cart/
 Disallow: /admin/
 
 # Perplexity when a person asks
 User-agent: Perplexity-User
 Allow: /
-Disallow: /cart.html
+Disallow: /cart/
 Disallow: /admin/
 
 # Anthropic Claude
 User-agent: ClaudeBot
 Allow: /
-Disallow: /cart.html
+Disallow: /cart/
 Disallow: /admin/
 
 # Claude search
 User-agent: Claude-SearchBot
 Allow: /
-Disallow: /cart.html
+Disallow: /cart/
 Disallow: /admin/
 
 # Claude when a person asks
 User-agent: Claude-User
 Allow: /
-Disallow: /cart.html
+Disallow: /cart/
 Disallow: /admin/
 
 # Google Gemini
 User-agent: Google-Extended
 Allow: /
-Disallow: /cart.html
+Disallow: /cart/
 Disallow: /admin/
 
 # Apple
 User-agent: Applebot-Extended
 Allow: /
-Disallow: /cart.html
+Disallow: /cart/
 Disallow: /admin/
 
 # Common Crawl, used by many AI tools
 User-agent: CCBot
 Allow: /
-Disallow: /cart.html
+Disallow: /cart/
 Disallow: /admin/
 
 Sitemap: https://ansar2474.github.io/Muhammad-Furnitures/sitemap.xml

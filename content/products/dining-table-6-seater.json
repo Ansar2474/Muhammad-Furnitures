@@ -40,5 +40,8 @@
     "sofa-set-5-seater",
     "coffee-table",
     "tv-unit-with-shelves"
-  ]
+  ],
+  "showShop": true,
+  "showHome": true,
+  "homeOrder": 1
 }

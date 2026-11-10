@@ -162,6 +162,19 @@ button { cursor: pointer; }
 @keyframes pulse { 50% { opacity: .35; } }
 .thumb img.broken { display: none; }
 .hint.warn { color: var(--sun-deep); }
+/* Which page, and where on it */
+.seg { display: inline-flex; padding: 4px; gap: 4px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); margin-bottom: 16px; }
+.seg button { padding: 8px 18px; border: 0; border-radius: 999px; background: transparent; font-weight: 600; font-size: .9rem; color: var(--text); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.where { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px 16px; padding: 12px 0; border-top: 1px solid var(--line); }
+.where:first-of-type { border-top: 0; padding-top: 0; }
+.where .toggle { margin: 0; }
+.where .pos { display: flex; align-items: center; gap: 8px; font-size: .88rem; color: var(--muted); }
+.where .pos input { width: 74px; padding: 8px 10px; border: 1.5px solid var(--line); border-radius: 10px; background: var(--bg); }
+.where .pos input:disabled { opacity: .45; }
+.where small { grid-column: 1 / -1; color: var(--muted); font-size: .82rem; margin-top: -4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 2px; }
+.chip.pos { background: var(--bg); color: var(--ink); border: 1px solid var(--line); }
 details.adv summary { cursor: pointer; font-weight: 600; color: var(--ink); font-family: var(--font-display); font-size: 1.15rem; }
 details.adv[open] summary { margin-bottom: 14px; }
 a.btn { text-decoration: none; }
@@ -198,7 +211,7 @@ a.btn { text-decoration: none; }
   var catLabel = function (k) { var c = CATS.filter(function (x) { return x[0] === k; })[0]; return c ? c[1] : k; };
 
   var token = ls(TOKEN_KEY);
-  var S = { products: null, view: "list", draft: null, isNew: false, confirmDelete: false, saving: false, run: null, writeAt: 0, localImg: {}, pollTimer: null, noWorkflow: false };
+  var S = { products: null, listPage: "shop", view: "list", draft: null, isNew: false, confirmDelete: false, saving: false, run: null, writeAt: 0, localImg: {}, pollTimer: null, noWorkflow: false };
 
   var $app = document.getElementById("app"), $top = document.getElementById("topActions"), $status = document.getElementById("statusBar"), $toast = document.getElementById("toast");
   var toastTimer;
@@ -221,6 +234,23 @@ a.btn { text-decoration: none; }
   function slugify(s) { return String(s).toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "product"; }
   function b64(str) { var b = new TextEncoder().encode(str), s = ""; for (var i = 0; i < b.length; i++) s += String.fromCharCode(b[i]); return btoa(s); }
   function sorted() { return (S.products || []).slice().sort(function (a, b) { return (a.order || 0) - (b.order || 0) || (a.id || 0) - (b.id || 0); }); }
+  /* Which page a product shows on, and in what order. Lower number = earlier on the page. */
+  function onShop(p) { return p.showShop !== false; }
+  function onHome(p) { return !!p.showHome; }
+  function ordOf(p, page) { return page === "home" ? (p.homeOrder != null ? p.homeOrder : (p.order || 0)) : (p.order || 0); }
+  function pageList(page, exceptSlug) {
+    return (S.products || []).filter(function (p) { return p.slug !== exceptSlug && p.published !== false && (page === "home" ? onHome(p) : onShop(p)); })
+      .sort(function (a, b) { return ordOf(a, page) - ordOf(b, page) || (a.id || 0) - (b.id || 0); });
+  }
+  function posOf(p, page) { var l = pageList(page, null), i = l.map(function (x) { return x.slug; }).indexOf(p.slug); return i < 0 ? 0 : i + 1; }
+  /* The order value that puts a product at position n (1 = first) among the others on that page */
+  function valueForPos(page, n, slug) {
+    var l = pageList(page, slug); if (!l.length) return 1;
+    n = Math.max(1, Math.min(l.length + 1, Math.round(n) || 1));
+    if (n === 1) return ordOf(l[0], page) - 1;
+    if (n > l.length) return ordOf(l[l.length - 1], page) + 1;
+    return (ordOf(l[n - 2], page) + ordOf(l[n - 1], page)) / 2;
+  }
   function imgSrc(p) {
     if (!p.image) return "";
     if (S.localImg[p.image]) return S.localImg[p.image];
@@ -356,7 +386,12 @@ a.btn { text-decoration: none; }
       el("button", { class: "btn btn-ghost btn-sm", type: "button", onclick: signOut, text: "Sign out" }),
       el("button", { class: "btn btn-primary", type: "button", onclick: startNew, text: "Add product" })
     );
-    var list = sorted(), grid = el("div", { class: "grid" });
+    var page = S.listPage;
+    var list = page === "home" ? pageList("home", null) : sorted(), grid = el("div", { class: "grid" });
+    var seg = el("div", { class: "seg", role: "group", "aria-label": "Order products on" }, [
+      el("button", { type: "button", "aria-pressed": String(page === "shop"), onclick: function () { S.listPage = "shop"; renderList(); }, text: "Shop page order" }),
+      el("button", { type: "button", "aria-pressed": String(page === "home"), onclick: function () { S.listPage = "home"; renderList(); }, text: "Home page order" })
+    ]);
     list.forEach(function (p, i) {
       var chip = p.published === false ? ["off", "Hidden"] : ["live", "On website"];
       var img = p.image ? el("img", { src: imgSrc(p), alt: p.name, loading: "lazy" }) : el("div", { class: "none", text: "No photo" });
@@ -369,6 +404,10 @@ a.btn { text-decoration: none; }
           el("span", { class: "card-cat", text: catLabel(p.category) }),
           el("h2", { class: "card-name", text: p.name }),
           el("span", { class: "card-price", text: money(p.price) }),
+          el("div", { class: "chips" }, [
+            el("span", { class: "chip pos", text: onShop(p) ? "Shop #" + posOf(p, "shop") : "Not in shop" }),
+            el("span", { class: "chip pos", text: onHome(p) ? "Home #" + posOf(p, "home") : "Not on home page" })
+          ]),
           el("div", { class: "card-actions" }, [
             el("button", { class: "btn btn-ghost btn-sm", type: "button", onclick: function () { startEdit(p.slug); }, text: "Edit" }),
             el("span", { class: "spacer" }),
@@ -378,12 +417,14 @@ a.btn { text-decoration: none; }
       ]));
     });
     grid.appendChild(el("button", { class: "add-tile", type: "button", onclick: startNew }, [el("span", { class: "plus", "aria-hidden": "true", text: "+" }), el("span", { text: "Add a new product" })]));
-    $app.replaceChildren(list.length ? grid : el("div", { class: "empty" }, [el("p", { text: "No products yet." }), grid]));
+    var note = page === "home" ? el("p", { class: "hint", style: "margin:-6px 0 14px", text: "Only products shown on the home page are listed here. Open a product and tick “Home page” to add it." }) : null;
+    $app.replaceChildren(seg, note, list.length ? grid : el("div", { class: "empty" }, [el("p", { text: "No products here yet." }), grid]));
   }
   function move(list, i, dir) {
     var a = list[i], b = list[i + dir]; if (!a || !b) return;
-    var ao = a.order || 0, bo = b.order || 0; if (ao === bo) bo = ao + dir * 0.5;
-    a.order = bo; b.order = ao;
+    var pg = S.listPage, key = pg === "home" ? "homeOrder" : "order";
+    var ao = ordOf(a, pg), bo = ordOf(b, pg); if (ao === bo) bo = ao + dir * 0.5;
+    a[key] = bo; b[key] = ao;
     renderList();
     saveProduct(a, "Reorder: " + a.name).then(function () { return saveProduct(b, "Reorder: " + b.name); })
       .then(function () { toast("Order saved"); schedulePoll(5000); })
@@ -392,14 +433,15 @@ a.btn { text-decoration: none; }
 
   /* ---------- editor ---------- */
   function startNew() {
-    var maxOrder = 0, maxId = 0;
-    (S.products || []).forEach(function (p) { maxOrder = Math.max(maxOrder, p.order || 0); maxId = Math.max(maxId, Number(p.id) || 0); });
-    S.draft = { id: maxId + 1, slug: "", name: "", headline: "", category: "living", price: "", spec: "", badge: "", shortDesc: "", description: "", features: [], image: "", alt: "", published: true, order: maxOrder + 1 };
-    S.isNew = true; S.confirmDelete = false; S.pending = null; S.view = "edit"; location.hash = "new"; renderEditor();
+    var maxOrder = 0, maxId = 0, maxHome = 0;
+    (S.products || []).forEach(function (p) { maxOrder = Math.max(maxOrder, p.order || 0); maxHome = Math.max(maxHome, ordOf(p, "home")); maxId = Math.max(maxId, Number(p.id) || 0); });
+    S.draft = { id: maxId + 1, slug: "", name: "", headline: "", category: "living", price: "", spec: "", badge: "", shortDesc: "", description: "", features: [], image: "", alt: "", published: true, order: maxOrder + 1, showShop: true, showHome: false, homeOrder: maxHome + 1 };
+    S.orig = null; S.isNew = true; S.confirmDelete = false; S.pending = null; S.view = "edit"; location.hash = "new"; renderEditor();
   }
   function startEdit(slug) {
     var p = (S.products || []).filter(function (x) { return x.slug === slug; })[0]; if (!p) return;
     S.draft = JSON.parse(JSON.stringify(p)); S.draft.features = (S.draft.features || []).slice();
+    S.orig = JSON.parse(JSON.stringify(p));
     S.isNew = false; S.confirmDelete = false; S.pending = null; S.view = "edit"; location.hash = "edit-" + slug; renderEditor();
   }
   function backToList() { S.view = "list"; S.draft = null; S.pending = null; if (location.hash) history.replaceState(null, "", location.pathname + location.search); renderList(); }
@@ -422,6 +464,14 @@ a.btn { text-decoration: none; }
     var tFeat = el("textarea", { id: "f-feat", rows: "7", placeholder: "Made to your size\nYour choice of wood and finish\nDelivery can be arranged" }); tFeat.value = (d.features || []).join("\n");
     var iSeoT = el("input", { type: "text", id: "f-seot", maxlength: "75", value: d.seoTitle || "", placeholder: "Leave empty and the website writes one" });
     var tSeoD = el("textarea", { id: "f-seod", maxlength: "160", rows: "3", placeholder: "Leave empty and the website writes one" }); tSeoD.value = d.seoDescription || "";
+    var cShop = el("input", { type: "checkbox", id: "f-shop" }); cShop.checked = onShop(d);
+    var cHome = el("input", { type: "checkbox", id: "f-home" }); cHome.checked = onHome(d);
+    var shopCount = pageList("shop", d.slug).length + 1, homeCount = pageList("home", d.slug).length + 1;
+    var pShop = el("input", { type: "number", id: "f-pshop", min: "1", max: String(shopCount), step: "1", value: S.isNew ? shopCount : (posOf(d, "shop") || shopCount), "aria-label": "Position on the shop page" });
+    var pHome = el("input", { type: "number", id: "f-phome", min: "1", max: String(homeCount), step: "1", value: S.isNew ? homeCount : (posOf(d, "home") || homeCount), "aria-label": "Position on the home page" });
+    var pShop0 = pShop.value, pHome0 = pHome.value;
+    function syncPos() { pShop.disabled = !cShop.checked; pHome.disabled = !cHome.checked; }
+    cShop.addEventListener("change", syncPos); cHome.addEventListener("change", syncPos); syncPos();
     var cPub = el("input", { type: "checkbox", id: "f-pub" }); cPub.checked = d.published !== false;
 
     var photoThumb = el("div", { class: "thumb" });
@@ -463,6 +513,9 @@ a.btn { text-decoration: none; }
       d.price = Math.round(Number(iPrice.value)); d.spec = iSpec.value.trim(); d.badge = iBadge.value.trim();
       d.shortDesc = tShort.value.trim(); d.description = tDesc.value.trim(); d.features = featuresFromText(tFeat.value);
       d.published = cPub.checked; d.alt = d.alt || d.name;
+      d.showShop = cShop.checked; d.showHome = cHome.checked;
+      if (cShop.checked && (S.isNew || pShop.value !== pShop0 || !onShop(S.orig || {}))) d.order = valueForPos("shop", Number(pShop.value), d.slug);
+      if (cHome.checked && (S.isNew || pHome.value !== pHome0 || !onHome(S.orig || {}))) d.homeOrder = valueForPos("home", Number(pHome.value), d.slug);
       var st = iSeoT.value.trim(), sd = tSeoD.value.trim();
       if (st) d.seoTitle = st; else delete d.seoTitle;
       if (sd) d.seoDescription = sd; else delete d.seoDescription;
@@ -532,6 +585,19 @@ a.btn { text-decoration: none; }
         el("h2", { text: "Key features" }),
         el("div", { class: "field" }, [el("label", { for: "f-feat", text: "One feature per line" }), tFeat, el("span", { class: "hint", text: "Up to 12 lines. Each line becomes a tick on the product page." })]),
         el("div", { class: "field" }, [el("label", { class: "toggle", for: "f-pub" }, [cPub, document.createTextNode("Show this product on the website")])])
+      ]),
+      el("section", { class: "panel" }, [
+        el("h2", { text: "Where it shows on the website" }),
+        el("div", { class: "where" }, [
+          el("label", { class: "toggle", for: "f-shop" }, [cShop, document.createTextNode("Shop page")]),
+          el("label", { class: "pos", for: "f-pshop" }, [document.createTextNode("Position"), pShop, document.createTextNode("of " + shopCount)]),
+          el("small", { text: "Position 1 is the first product. It also appears under its room filter on the shop page." })
+        ]),
+        el("div", { class: "where" }, [
+          el("label", { class: "toggle", for: "f-home" }, [cHome, document.createTextNode("Home page (Featured products)")]),
+          el("label", { class: "pos", for: "f-phome" }, [document.createTextNode("Position"), pHome, document.createTextNode("of " + homeCount)]),
+          el("small", { text: "Six or four products look best here. The product's own page is always available when it is shown on the website." })
+        ])
       ]),
       el("details", { class: "panel adv" }, [
         el("summary", { text: "How it appears on Google (optional)" }),

@@ -40,5 +40,8 @@
     "office-desk",
     "wardrobe-3-door",
     "tv-unit-with-shelves"
-  ]
+  ],
+  "showShop": true,
+  "showHome": false,
+  "homeOrder": 9
 }

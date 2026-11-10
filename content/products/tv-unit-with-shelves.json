@@ -40,5 +40,8 @@
     "sofa-set-5-seater",
     "coffee-table",
     "bookshelf-5-shelf"
-  ]
+  ],
+  "showShop": true,
+  "showHome": true,
+  "homeOrder": 6
 }

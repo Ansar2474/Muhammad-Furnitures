@@ -1,3 +1,4 @@
+const SITE_ROOT = document.body.dataset.root || "";   // "" on the home page, "../" one folder down, "../../" on product pages
 /* ==========================================================================
    SCRIPT.JS - basic behavior for the Muhammad Furnitures site
    Each feature is its own small function (module) so you can edit or remove it easily.
@@ -119,7 +120,7 @@ function addToCart(product) {
   }
   saveCart();
   updateCartCount();
-  showToast(product.name + SETTINGS.addedMessage, "cart.html", "View cart");
+  showToast(product.name + SETTINGS.addedMessage, SITE_ROOT + "cart/", "View cart");
 }
 
 function initCart() {
@@ -174,7 +175,7 @@ function renderCartPage() {
         '</div>' +
         '<strong class="cart-line-total"></strong>' +
         '<button type="button" class="cart-remove" data-act="remove" aria-label="Remove item">&times;</button>';
-      li.querySelector("img").src = item.image || ("images/product" + encodeURIComponent(item.id) + ".jpg");
+      li.querySelector("img").src = SITE_ROOT + (item.image || ("images/product" + encodeURIComponent(item.id) + ".jpg"));
       li.querySelector(".cart-item-info strong").textContent = item.name;
       li.querySelector(".cart-item-price").textContent = formatPrice(item.price) + " each";
       li.querySelector(".qty-num").textContent = item.qty;
@@ -342,7 +343,7 @@ function initSearch() {
     if (!onShop) {
       // On other pages: remember the words and open the Shop page, which applies them
       try { sessionStorage.setItem("searchQuery", input.value.trim()); } catch (e) { /* ignore */ }
-      window.location.href = "shop.html";
+      window.location.href = SITE_ROOT + "shop/";
       return;
     }
     const visible = filterProducts();

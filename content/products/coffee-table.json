@@ -40,5 +40,8 @@
     "sofa-set-5-seater",
     "tv-unit-with-shelves",
     "dining-table-6-seater"
-  ]
+  ],
+  "showShop": true,
+  "showHome": false,
+  "homeOrder": 7
 }

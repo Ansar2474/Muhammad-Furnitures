@@ -16,13 +16,13 @@
   <meta property="og:locale" content="en_PK">
   <meta property="og:title" content="Furniture Buying Guide: Sofa Set, Bed, Wardrobe | Muhammad Furnitures">
   <meta property="og:description" content="How to choose a sofa set, bed, wardrobe, dining table and office desk, plus wood, finish and measuring tips from Muhammad Furnitures.">
-  <meta property="og:url" content="https://ansar2474.github.io/Muhammad-Furnitures/furniture-buying-guide.html">
+  <meta property="og:url" content="https://ansar2474.github.io/Muhammad-Furnitures/furniture-buying-guide/">
   <meta property="og:image" content="https://ansar2474.github.io/Muhammad-Furnitures/images/hero.jpg">
   <meta name="twitter:image" content="https://ansar2474.github.io/Muhammad-Furnitures/images/hero.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#12161c">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  <link rel="canonical" href="https://ansar2474.github.io/Muhammad-Furnitures/furniture-buying-guide.html">
+  <link rel="canonical" href="https://ansar2474.github.io/Muhammad-Furnitures/furniture-buying-guide/">
 
   <!-- FAVICON: simple "M" icon, no file needed. REPLACE WITH YOUR OWN favicon.png IF YOU HAVE ONE -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2312161c'/%3E%3Ctext x='32' y='46' font-size='40' font-family='Arial' font-weight='700' text-anchor='middle' fill='%23f6b80a'%3EM%3C/text%3E%3C/svg%3E">
@@ -42,7 +42,7 @@
         "@type": "ListItem",
         "position": 2,
         "name": "Furniture Guide",
-        "item": "https://ansar2474.github.io/Muhammad-Furnitures/furniture-buying-guide.html"
+        "item": "https://ansar2474.github.io/Muhammad-Furnitures/furniture-buying-guide/"
       }
     ]
   }
@@ -64,7 +64,7 @@
       "@type": "Organization",
       "name": "Muhammad Furnitures"
     },
-    "mainEntityOfPage": "https://ansar2474.github.io/Muhammad-Furnitures/furniture-buying-guide.html"
+    "mainEntityOfPage": "https://ansar2474.github.io/Muhammad-Furnitures/furniture-buying-guide/"
   }
   </script>
   <script type="application/ld+json">
@@ -121,12 +121,12 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=DM+Sans:wght@400;500;600;700&display=swap">
 
   <!-- All colors, fonts and spacing live in style.css (see ":root" at the top) -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../style.css">
 </head>
-<body>
+<body data-root="../">
 
   <!-- ============================================================
-       HEADER (THE SAME ON EVERY PAGE: if you change it, change it in all 6 .html files)
+       HEADER (THE SAME ON EVERY PAGE: if you change it, it is built once by tools/build_site.py)
        ============================================================ -->
   <!-- ANNOUNCEMENT BAR (top of every page). UPDATE THE MESSAGE HERE. Only promise offers you really give. -->
   <div class="announce">
@@ -144,8 +144,8 @@
         <span></span><span></span><span></span>
       </button>
 
-      <!-- PUT YOUR LOGO HERE. To use a logo image, replace the three <span>s with <img src="logo.png" alt="Muhammad Furnitures" height="44"> -->
-      <a href="index.html" class="logo" aria-label="Muhammad Furnitures, home">
+      <!-- PUT YOUR LOGO HERE. To use a logo image, replace the three <span>s with <img src="../logo.png" alt="Muhammad Furnitures" height="44"> -->
+      <a href="../" class="logo" aria-label="Muhammad Furnitures, home">
         <span class="logo-mark" aria-hidden="true">M</span>
         <span class="logo-name">Muhammad</span>
         <span class="logo-sub">Furnitures</span>
@@ -154,12 +154,12 @@
       <!-- NAVIGATION LINKS: ADD / REMOVE / RENAME LINKS HERE -->
       <nav class="main-nav" id="mainNav" aria-label="Main navigation">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="collections.html">Collections</a></li>
-          <li><a href="custom-furniture.html">Custom Furniture</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="../">Home</a></li>
+          <li><a href="../about/">About Us</a></li>
+          <li><a href="../shop/">Shop</a></li>
+          <li><a href="../collections/">Collections</a></li>
+          <li><a href="../custom-furniture/">Custom Furniture</a></li>
+          <li><a href="../contact/">Contact</a></li>
         </ul>
       </nav>
 
@@ -176,8 +176,8 @@
           <span>0311 7420474</span>
         </a>
 
-        <!-- CART ICON: opens the cart page (cart.html). The badge number updates automatically via script.js -->
-        <a href="cart.html" class="cart-link" id="cartLink" aria-label="View cart">
+        <!-- CART ICON: opens the cart page (/cart/). The badge number updates automatically via script.js -->
+        <a href="../cart/" class="cart-link" id="cartLink" aria-label="View cart">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           <span class="cart-count" id="cartCount">0</span>
         </a>
@@ -187,7 +187,7 @@
     <!-- SEARCH BAR (hidden until the magnifier is tapped). Searching takes visitors to the Shop page. -->
     <div class="search-panel" id="searchPanel" hidden>
       <div class="container">
-        <form class="search-form" id="searchForm" action="shop.html" role="search">
+        <form class="search-form" id="searchForm" action="../shop/" role="search">
           <input type="search" id="searchInput" placeholder="Search furniture, for example sofa, bed, wardrobe" aria-label="Search furniture">
           <button type="submit" class="btn btn-gold btn-sm">Search</button>
         </form>
@@ -203,7 +203,7 @@
     <section class="page-banner">
       <div class="container">
         <ul class="breadcrumb" aria-label="Breadcrumb">
-          <li><a href="index.html">Home</a></li>
+          <li><a href="../">Home</a></li>
           <li aria-current="page">Furniture Guide</li>
         </ul>
         <h1>Furniture buying guide for Pakistan</h1>
@@ -237,35 +237,35 @@
           <p class="short-answer"><strong>Short answer:</strong> Measure your wall, the space in front of it and the doors the sofa must pass through. A 3 + 1 + 1 set suits most family living rooms; a 3 + 2 set or a corner sofa suits a small room.</p>
           <p>A sofa set is usually the largest piece in the living room, so start with the room, not the catalogue. Measure the wall and the space in front of it, then leave room to walk around the set. Also measure the doors and stairs the sofa must pass through.</p>
           <p>A 3 + 1 + 1 set suits most family living rooms. If the room is small, a 3 + 2 set or a corner sofa may work better. Ask what the frame is made of, how the seats are padded, and whether the fabric can be changed. Sit on a sample if you can: firm seats keep their shape longer, soft seats feel comfortable at first.</p>
-          <p class="guide-links">See: <a href="sofa-set-5-seater.html">Our 5 seater sofa set</a>.</p>
+          <p class="guide-links">See: <a href="../products/sofa-set-5-seater/">Our 5 seater sofa set</a>.</p>
         </section>
         <section class="guide-section" id="bed-set">
           <h2>How do I choose a bed and a bed set?</h2>
           <p class="short-answer"><strong>Short answer:</strong> Measure your actual mattress first, because sizes vary between brands. A bed set usually means a bed, a dressing table and side tables in the same wood tone and finish.</p>
           <p>Start with your mattress. Mattress sizes are not the same from one brand to the next, so measure your actual mattress and tell the maker before the bed is built. A bed with storage underneath saves space in a small bedroom.</p>
           <p>A bed set usually means a bed with a dressing table and side tables. Decide which pieces you really need, then ask for them in the same wood tone and finish so the room looks complete. Make sure there is enough space to open drawers and walk around the bed.</p>
-          <p class="guide-links">See: <a href="double-bed-with-storage.html">Our double bed with storage</a>, <a href="dressing-table-with-mirror.html">Our dressing table with mirror</a>.</p>
+          <p class="guide-links">See: <a href="../products/double-bed-with-storage/">Our double bed with storage</a>, <a href="../products/dressing-table-with-mirror/">Our dressing table with mirror</a>.</p>
         </section>
         <section class="guide-section" id="wardrobe">
           <h2>How do I choose a wardrobe design?</h2>
           <p class="short-answer"><strong>Short answer:</strong> Measure the wall width and height, plan about 55 to 60 cm of depth for hanging clothes, and decide your mix of hanging space, shelves and drawers before you choose the doors.</p>
           <p>Measure the width and height of the wall first. A wardrobe that goes close to the ceiling gives more space and avoids a dust gap on top. For hanging clothes, a depth of about 55 to 60 cm is usually enough.</p>
           <p>Decide how you store things: long hanging space for dresses and coats, short hanging space for shirts, shelves for folded clothes and drawers for small items. Hinged doors need room to open, so check the space in front. Sliding doors save space but give access to only part of the wardrobe at a time.</p>
-          <p class="guide-links">See: <a href="wardrobe-3-door.html">Our 3 door wardrobe</a>.</p>
+          <p class="guide-links">See: <a href="../products/wardrobe-3-door/">Our 3 door wardrobe</a>.</p>
         </section>
         <section class="guide-section" id="dining-table">
           <h2>What size dining table do I need?</h2>
           <p class="short-answer"><strong>Short answer:</strong> Allow about 60 cm of table width for each person, so a 6 seater table is often around 180 cm long, and leave about 90 cm of space around the table.</p>
           <p>Allow about 60 cm of table width for each person. A 6 seater table is often around 180 cm long. Leave about 90 cm between the table edge and the wall or other furniture so chairs can be pulled out and people can pass behind them.</p>
           <p>Think about how you use the table: daily meals, homework, guests. A strong top and a finish that is easy to wipe clean matter more than decoration. Order chairs with the table so the heights match.</p>
-          <p class="guide-links">See: <a href="dining-table-6-seater.html">Our 6 seater dining table</a>.</p>
+          <p class="guide-links">See: <a href="../products/dining-table-6-seater/">Our 6 seater dining table</a>.</p>
         </section>
         <section class="guide-section" id="office-desk">
           <h2>What size office desk do I need?</h2>
           <p class="short-answer"><strong>Short answer:</strong> Choose a desk height of about 72 to 76 cm and a depth of 60 to 70 cm, with a length that fits your computer and papers.</p>
           <p>A desk height of about 72 to 76 cm suits most people. Choose a depth of 60 to 70 cm so you can sit back from the screen, and a length that fits your computer and papers. Add drawers or a keyboard tray if you work on the desk every day.</p>
           <p>If two people share the space, plan a longer desk or two desks. Think about cables and sockets before the desk is built so they can be placed neatly.</p>
-          <p class="guide-links">See: <a href="office-desk.html">Our office desk</a>, <a href="bookshelf-5-shelf.html">Our 5 shelf bookshelf</a>.</p>
+          <p class="guide-links">See: <a href="../products/office-desk/">Our office desk</a>, <a href="../products/bookshelf-5-shelf/">Our 5 shelf bookshelf</a>.</p>
         </section>
         <section class="guide-section" id="wood-and-finish">
           <h2>What should I ask about wood, board and finish?</h2>
@@ -315,14 +315,14 @@
   </main>
 
   <!-- ============================================================
-       FOOTER (THE SAME ON EVERY PAGE: if you change it, change it in all 6 .html files)
+       FOOTER (THE SAME ON EVERY PAGE: if you change it, it is built once by tools/build_site.py)
        ============================================================ -->
   <footer class="site-footer">
     <div class="container footer-top">
 
       <!-- FOOTER COLUMN 1: BRAND + CALL / WHATSAPP BUTTONS -->
       <div class="footer-col footer-brand">
-        <a href="index.html" class="logo logo-light" aria-label="Muhammad Furnitures, home">
+        <a href="../" class="logo logo-light" aria-label="Muhammad Furnitures, home">
           <span class="logo-mark" aria-hidden="true">M</span>
           <span class="logo-name">Muhammad</span>
           <span class="logo-sub">Furnitures</span>
@@ -339,12 +339,12 @@
       <div class="footer-col">
         <h3>Shop</h3>
         <ul>
-          <li><a href="shop.html">All furniture</a></li>
-          <li><a href="shop.html#living">Living room</a></li>
-          <li><a href="shop.html#bedroom">Bedroom</a></li>
-          <li><a href="shop.html#dining">Dining room</a></li>
-          <li><a href="shop.html#office">Office</a></li>
-          <li><a href="shop.html#storage">Storage</a></li>
+          <li><a href="../shop/">All furniture</a></li>
+          <li><a href="../shop/#living">Living room</a></li>
+          <li><a href="../shop/#bedroom">Bedroom</a></li>
+          <li><a href="../shop/#dining">Dining room</a></li>
+          <li><a href="../shop/#office">Office</a></li>
+          <li><a href="../shop/#storage">Storage</a></li>
         </ul>
       </div>
 
@@ -352,12 +352,12 @@
       <div class="footer-col">
         <h3>Company</h3>
         <ul>
-          <li><a href="about.html">About us</a></li>
-          <li><a href="collections.html">Collections</a></li>
-          <li><a href="custom-furniture.html">Custom furniture</a></li>
-          <li><a href="furniture-buying-guide.html">Buying guide</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="cart.html">Your cart</a></li>
+          <li><a href="../about/">About us</a></li>
+          <li><a href="../collections/">Collections</a></li>
+          <li><a href="../custom-furniture/">Custom furniture</a></li>
+          <li><a href="../furniture-buying-guide/">Buying guide</a></li>
+          <li><a href="../contact/">Contact</a></li>
+          <li><a href="../cart/">Your cart</a></li>
         </ul>
       </div>
 
@@ -422,6 +422,6 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <!-- All behavior (mobile menu, cart, call popup, search, category filter, quote form, newsletter) lives in script.js -->
-  <script src="script.js"></script>
+  <script src="../script.js"></script>
 </body>
 </html>

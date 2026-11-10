@@ -40,5 +40,8 @@
     "double-bed-with-storage",
     "dressing-table-with-mirror",
     "bookshelf-5-shelf"
-  ]
+  ],
+  "showShop": true,
+  "showHome": true,
+  "homeOrder": 3
 }

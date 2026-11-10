@@ -40,5 +40,8 @@
     "coffee-table",
     "tv-unit-with-shelves",
     "dining-table-6-seater"
-  ]
+  ],
+  "showShop": true,
+  "showHome": true,
+  "homeOrder": 4
 }

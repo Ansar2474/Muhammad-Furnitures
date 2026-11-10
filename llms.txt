@@ -7,21 +7,21 @@
 - Email: mr.genius2474@gmail.com
 
 ## Main pages
-- [Shop and starting prices](https://ansar2474.github.io/Muhammad-Furnitures/shop.html): all furniture with starting prices
-- [Custom furniture](https://ansar2474.github.io/Muhammad-Furnitures/custom-furniture.html): how made-to-order works
-- [Furniture buying guide](https://ansar2474.github.io/Muhammad-Furnitures/furniture-buying-guide.html): how to choose and measure
-- [Collections](https://ansar2474.github.io/Muhammad-Furnitures/collections.html): living room, bedroom, dining, office, storage
-- [About](https://ansar2474.github.io/Muhammad-Furnitures/about.html) and [Contact](https://ansar2474.github.io/Muhammad-Furnitures/contact.html)
+- [Shop and starting prices](https://ansar2474.github.io/Muhammad-Furnitures/shop/): all furniture with starting prices
+- [Custom furniture](https://ansar2474.github.io/Muhammad-Furnitures/custom-furniture/): how made-to-order works
+- [Furniture buying guide](https://ansar2474.github.io/Muhammad-Furnitures/furniture-buying-guide/): how to choose and measure
+- [Collections](https://ansar2474.github.io/Muhammad-Furnitures/collections/): living room, bedroom, dining, office, storage
+- [About](https://ansar2474.github.io/Muhammad-Furnitures/about/) and [Contact](https://ansar2474.github.io/Muhammad-Furnitures/contact/)
 
 ## Products
-- [Dining Table, 6 Seater](https://ansar2474.github.io/Muhammad-Furnitures/dining-table-6-seater.html): from Rs 75,000, 180 × 90 × 76 cm
-- [Double Bed with Storage](https://ansar2474.github.io/Muhammad-Furnitures/double-bed-with-storage.html): from Rs 95,000, Fits a 160 × 200 cm mattress
-- [Wardrobe, 3 Door](https://ansar2474.github.io/Muhammad-Furnitures/wardrobe-3-door.html): from Rs 85,000, 150 × 60 × 210 cm
-- [Sofa Set, 5 Seater](https://ansar2474.github.io/Muhammad-Furnitures/sofa-set-5-seater.html): from Rs 120,000, 3 + 1 + 1 seats, your choice of fabric
-- [Office Desk](https://ansar2474.github.io/Muhammad-Furnitures/office-desk.html): from Rs 35,000, 140 × 70 × 75 cm
-- [TV Unit with Shelves](https://ansar2474.github.io/Muhammad-Furnitures/tv-unit-with-shelves.html): from Rs 45,000, 180 × 40 × 50 cm
-- [Coffee Table](https://ansar2474.github.io/Muhammad-Furnitures/coffee-table.html): from Rs 22,000, 100 × 55 × 45 cm
-- [Dressing Table with Mirror](https://ansar2474.github.io/Muhammad-Furnitures/dressing-table-with-mirror.html): from Rs 55,000, 110 × 45 × 140 cm
-- [Bookshelf, 5 Shelf](https://ansar2474.github.io/Muhammad-Furnitures/bookshelf-5-shelf.html): from Rs 30,000, 90 × 30 × 180 cm
+- [Dining Table, 6 Seater](https://ansar2474.github.io/Muhammad-Furnitures/products/dining-table-6-seater/): from Rs 75,000, 180 × 90 × 76 cm
+- [Double Bed with Storage](https://ansar2474.github.io/Muhammad-Furnitures/products/double-bed-with-storage/): from Rs 95,000, Fits a 160 × 200 cm mattress
+- [Wardrobe, 3 Door](https://ansar2474.github.io/Muhammad-Furnitures/products/wardrobe-3-door/): from Rs 85,000, 150 × 60 × 210 cm
+- [Sofa Set, 5 Seater](https://ansar2474.github.io/Muhammad-Furnitures/products/sofa-set-5-seater/): from Rs 120,000, 3 + 1 + 1 seats, your choice of fabric
+- [Office Desk](https://ansar2474.github.io/Muhammad-Furnitures/products/office-desk/): from Rs 35,000, 140 × 70 × 75 cm
+- [TV Unit with Shelves](https://ansar2474.github.io/Muhammad-Furnitures/products/tv-unit-with-shelves/): from Rs 45,000, 180 × 40 × 50 cm
+- [Coffee Table](https://ansar2474.github.io/Muhammad-Furnitures/products/coffee-table/): from Rs 22,000, 100 × 55 × 45 cm
+- [Dressing Table with Mirror](https://ansar2474.github.io/Muhammad-Furnitures/products/dressing-table-with-mirror/): from Rs 55,000, 110 × 45 × 140 cm
+- [Bookshelf, 5 Shelf](https://ansar2474.github.io/Muhammad-Furnitures/products/bookshelf-5-shelf/): from Rs 30,000, 90 × 30 × 180 cm
 
 Last updated: 2026-11-10

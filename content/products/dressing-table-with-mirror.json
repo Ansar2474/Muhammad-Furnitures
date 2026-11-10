@@ -40,5 +40,8 @@
     "double-bed-with-storage",
     "wardrobe-3-door",
     "bookshelf-5-shelf"
-  ]
+  ],
+  "showShop": true,
+  "showHome": false,
+  "homeOrder": 8
 }

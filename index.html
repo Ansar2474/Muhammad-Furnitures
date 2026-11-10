@@ -157,10 +157,10 @@
   <!-- All colors, fonts and spacing live in style.css (see ":root" at the top) -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-root="">
 
   <!-- ============================================================
-       HEADER (THE SAME ON EVERY PAGE: if you change it, change it in all 6 .html files)
+       HEADER (THE SAME ON EVERY PAGE: if you change it, it is built once by tools/build_site.py)
        ============================================================ -->
   <!-- ANNOUNCEMENT BAR (top of every page). UPDATE THE MESSAGE HERE. Only promise offers you really give. -->
   <div class="announce">
@@ -179,7 +179,7 @@
       </button>
 
       <!-- PUT YOUR LOGO HERE. To use a logo image, replace the three <span>s with <img src="logo.png" alt="Muhammad Furnitures" height="44"> -->
-      <a href="index.html" class="logo" aria-label="Muhammad Furnitures, home">
+      <a href="./" class="logo" aria-label="Muhammad Furnitures, home">
         <span class="logo-mark" aria-hidden="true">M</span>
         <span class="logo-name">Muhammad</span>
         <span class="logo-sub">Furnitures</span>
@@ -188,12 +188,12 @@
       <!-- NAVIGATION LINKS: ADD / REMOVE / RENAME LINKS HERE -->
       <nav class="main-nav" id="mainNav" aria-label="Main navigation">
         <ul>
-          <li><a href="index.html" aria-current="page">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="collections.html">Collections</a></li>
-          <li><a href="custom-furniture.html">Custom Furniture</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="./" aria-current="page">Home</a></li>
+          <li><a href="about/">About Us</a></li>
+          <li><a href="shop/">Shop</a></li>
+          <li><a href="collections/">Collections</a></li>
+          <li><a href="custom-furniture/">Custom Furniture</a></li>
+          <li><a href="contact/">Contact</a></li>
         </ul>
       </nav>
 
@@ -210,8 +210,8 @@
           <span>0311 7420474</span>
         </a>
 
-        <!-- CART ICON: opens the cart page (cart.html). The badge number updates automatically via script.js -->
-        <a href="cart.html" class="cart-link" id="cartLink" aria-label="View cart">
+        <!-- CART ICON: opens the cart page (/cart/). The badge number updates automatically via script.js -->
+        <a href="cart/" class="cart-link" id="cartLink" aria-label="View cart">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           <span class="cart-count" id="cartCount">0</span>
         </a>
@@ -221,7 +221,7 @@
     <!-- SEARCH BAR (hidden until the magnifier is tapped). Searching takes visitors to the Shop page. -->
     <div class="search-panel" id="searchPanel" hidden>
       <div class="container">
-        <form class="search-form" id="searchForm" action="shop.html" role="search">
+        <form class="search-form" id="searchForm" action="shop/" role="search">
           <input type="search" id="searchInput" placeholder="Search furniture, for example sofa, bed, wardrobe" aria-label="Search furniture">
           <button type="submit" class="btn btn-gold btn-sm">Search</button>
         </form>
@@ -250,9 +250,9 @@
           <p class="hero-sub">Made-to-order sofa sets, beds, wardrobes, dining tables and office furniture in Pakistan. Choose a ready design or tell us your size, style and budget, and our craftsmen will build it for you.</p>
 
           <div class="hero-actions">
-            <a href="shop.html" class="btn btn-gold btn-lg">Shop Now</a>
+            <a href="shop/" class="btn btn-gold btn-lg">Shop Now</a>
             <a href="https://wa.me/923117420474?text=Hello%20Muhammad%20Furnitures%2C%20I%20would%20like%20a%20quote." class="btn btn-wa btn-lg" target="_blank" rel="noopener">Get a Quote</a>
-            <a href="collections.html" class="link-explore">Explore Collections</a>
+            <a href="collections/" class="link-explore">Explore Collections</a>
           </div>
 
           <ul class="hero-points">
@@ -299,31 +299,31 @@
 
         <div class="cat-grid">
           <!-- PUT CATEGORY PHOTOS HERE (change src and alt on each card) -->
-          <a href="shop.html#living" class="cat-card">
+          <a href="shop/#living" class="cat-card">
             <span class="cat-image"><img src="images/roomliving.jpg" width="480" height="360" alt="Living room with a custom sofa set, centre table and TV unit made to order" loading="lazy"></span>
             <span class="cat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11V8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3"/><path d="M2 13a2 2 0 0 1 4 0v2h12v-2a2 2 0 0 1 4 0v5H2z"/><path d="M5 18v2M19 18v2"/></svg></span>
             <strong class="cat-name">Living Room</strong>
             <span class="cat-link">Explore now</span>
           </a>
-          <a href="shop.html#bedroom" class="cat-card">
+          <a href="shop/#bedroom" class="cat-card">
             <span class="cat-image"><img src="images/roombedroom.jpg" width="480" height="360" alt="Bedroom with a double bed with storage and matching side tables made to order" loading="lazy"></span>
             <span class="cat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20V6"/><path d="M3 15h18v5"/><path d="M21 15v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11.5" r="1.8"/></svg></span>
             <strong class="cat-name">Bedroom</strong>
             <span class="cat-link">Explore now</span>
           </a>
-          <a href="shop.html#dining" class="cat-card">
+          <a href="shop/#dining" class="cat-card">
             <span class="cat-image"><img src="images/roomdining.jpg" width="480" height="360" alt="Dining room with a 6 seater dining table and chairs made to order" loading="lazy"></span>
             <span class="cat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10h18"/><path d="M5 10v10M19 10v10"/><path d="M9 10V6h6v4"/></svg></span>
             <strong class="cat-name">Dining Room</strong>
             <span class="cat-link">Explore now</span>
           </a>
-          <a href="shop.html#office" class="cat-card">
+          <a href="shop/#office" class="cat-card">
             <span class="cat-image"><img src="images/roomoffice.jpg" width="480" height="360" alt="Home office with a custom office desk and bookshelves made to order" loading="lazy"></span>
             <span class="cat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg></span>
             <strong class="cat-name">Office Furniture</strong>
             <span class="cat-link">Explore now</span>
           </a>
-          <a href="shop.html#storage" class="cat-card">
+          <a href="shop/#storage" class="cat-card">
             <span class="cat-image"><img src="images/roomstorage.jpg" width="480" height="360" alt="Bedroom storage with a 3 door wardrobe, dressing table and bookshelf made to order" loading="lazy"></span>
             <span class="cat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M12 3v18M9.5 12h.01M14.5 12h.01"/></svg></span>
             <strong class="cat-name">Storage</strong>
@@ -389,13 +389,13 @@
         <span class="promo-label">Custom orders welcome</span>
         <h2>Built to <span>your size</span></h2>
         <p>In your choice of finish.</p>
-        <a href="contact.html" class="btn btn-navy">Request a Quote</a>
+        <a href="contact/" class="btn btn-navy">Request a Quote</a>
       </div>
     </section>
 
     <!-- ============================================================
          FEATURED PRODUCTS
-         These are the first 6 products from the Shop page. If you change one here, change it on shop.html too.
+         These are the first 6 products from the Shop page. The admin page controls which products appear here and in what order.
          NOTE: product names, sizes, prices and photos below are EXAMPLES. Replace them with your real pieces.
          ============================================================ -->
     <section class="products" id="featured">
@@ -414,11 +414,11 @@
             <div class="product-image">
               <span class="badge">Custom size</span>
               <!-- PUT PRODUCT IMAGE HERE (square photo works best; change src and alt) -->
-              <a href="dining-table-6-seater.html" aria-label="Dining Table, 6 Seater: details and price"><img src="images/product1.jpg" width="600" height="600" alt="Dining table, 6 seater, made to order in Pakistan by Muhammad Furnitures" loading="lazy"></a>
+              <a href="products/dining-table-6-seater/" aria-label="Dining Table, 6 Seater: details and price"><img src="images/product1.jpg" width="600" height="600" alt="Dining table, 6 seater, made to order in Pakistan by Muhammad Furnitures" loading="lazy"></a>
             </div>
             <div class="product-info">
               <span class="product-category">Dining Room</span>
-              <h3 class="product-title"><a href="dining-table-6-seater.html">Dining Table, 6 Seater</a></h3>
+              <h3 class="product-title"><a href="products/dining-table-6-seater/">Dining Table, 6 Seater</a></h3>
               <!-- UPDATE PRODUCT SIZE HERE (width × depth × height) -->
               <span class="product-spec">180 × 90 × 76 cm</span>
               <p class="product-desc">Gather the whole family around a table built to last. Sturdy construction, smooth finish, and sizes to suit your dining room.</p>
@@ -438,11 +438,11 @@
           <article class="product-card" data-id="2" data-name="Double Bed with Storage" data-price="95000" data-category="bedroom" data-image="images/product2.jpg">
             <div class="product-image">
               <!-- PUT PRODUCT IMAGE HERE (square photo works best; change src and alt) -->
-              <a href="double-bed-with-storage.html" aria-label="Double Bed with Storage: details and price"><img src="images/product2.jpg" width="600" height="600" alt="Double bed with storage, made to order in Pakistan by Muhammad Furnitures" loading="lazy"></a>
+              <a href="products/double-bed-with-storage/" aria-label="Double Bed with Storage: details and price"><img src="images/product2.jpg" width="600" height="600" alt="Double bed with storage, made to order in Pakistan by Muhammad Furnitures" loading="lazy"></a>
             </div>
             <div class="product-info">
               <span class="product-category">Bedroom</span>
-              <h3 class="product-title"><a href="double-bed-with-storage.html">Double Bed with Storage</a></h3>
+              <h3 class="product-title"><a href="products/double-bed-with-storage/">Double Bed with Storage</a></h3>
               <!-- UPDATE PRODUCT SIZE HERE (width × depth × height) -->
               <span class="product-spec">Fits a 160 × 200 cm mattress</span>
               <p class="product-desc">A strong bed frame with practical storage underneath, made to fit your mattress and room size.</p>
@@ -462,11 +462,11 @@
           <article class="product-card" data-id="3" data-name="Wardrobe, 3 Door" data-price="85000" data-category="storage" data-image="images/product3.jpg">
             <div class="product-image">
               <!-- PUT PRODUCT IMAGE HERE (square photo works best; change src and alt) -->
-              <a href="wardrobe-3-door.html" aria-label="Wardrobe, 3 Door: details and price"><img src="images/product3.jpg" width="600" height="600" alt="Three door wardrobe, made to order in Pakistan by Muhammad Furnitures" loading="lazy"></a>
+              <a href="products/wardrobe-3-door/" aria-label="Wardrobe, 3 Door: details and price"><img src="images/product3.jpg" width="600" height="600" alt="Three door wardrobe, made to order in Pakistan by Muhammad Furnitures" loading="lazy"></a>
             </div>
             <div class="product-info">
               <span class="product-category">Storage</span>
-              <h3 class="product-title"><a href="wardrobe-3-door.html">Wardrobe, 3 Door</a></h3>
+              <h3 class="product-title"><a href="products/wardrobe-3-door/">Wardrobe, 3 Door</a></h3>
               <!-- UPDATE PRODUCT SIZE HERE (width × depth × height) -->
               <span class="product-spec">150 × 60 × 210 cm</span>
               <p class="product-desc">Plenty of space for hanging and folded clothes, with a clean finish that suits any bedroom.</p>
@@ -486,11 +486,11 @@
           <article class="product-card" data-id="4" data-name="Sofa Set, 5 Seater" data-price="120000" data-category="living" data-image="images/product4.jpg">
             <div class="product-image">
               <!-- PUT PRODUCT IMAGE HERE (square photo works best; change src and alt) -->
-              <a href="sofa-set-5-seater.html" aria-label="Sofa Set, 5 Seater: details and price"><img src="images/product4.jpg" width="600" height="600" alt="Five seater sofa set, made to order in Pakistan by Muhammad Furnitures" loading="lazy"></a>
+              <a href="products/sofa-set-5-seater/" aria-label="Sofa Set, 5 Seater: details and price"><img src="images/product4.jpg" width="600" height="600" alt="Five seater sofa set, made to order in Pakistan by Muhammad Furnitures" loading="lazy"></a>
             </div>
             <div class="product-info">
               <span class="product-category">Living Room</span>
-              <h3 class="product-title"><a href="sofa-set-5-seater.html">Sofa Set, 5 Seater</a></h3>
+              <h3 class="product-title"><a href="products/sofa-set-5-seater/">Sofa Set, 5 Seater</a></h3>
               <!-- UPDATE PRODUCT SIZE HERE (width × depth × height) -->
               <span class="product-spec">3 + 1 + 1 seats, your choice of fabric</span>
               <p class="product-desc">A comfortable, well-built sofa set for family evenings and guests. Choose your fabric and colour.</p>
@@ -510,11 +510,11 @@
           <article class="product-card" data-id="5" data-name="Office Desk" data-price="35000" data-category="office" data-image="images/product5.jpg">
             <div class="product-image">
               <!-- PUT PRODUCT IMAGE HERE (square photo works best; change src and alt) -->
-              <a href="office-desk.html" aria-label="Office Desk: details and price"><img src="images/product5.jpg" width="600" height="600" alt="Office desk, made to order in Pakistan by Muhammad Furnitures" loading="lazy"></a>
+              <a href="products/office-desk/" aria-label="Office Desk: details and price"><img src="images/product5.jpg" width="600" height="600" alt="Office desk, made to order in Pakistan by Muhammad Furnitures" loading="lazy"></a>
             </div>
             <div class="product-info">
               <span class="product-category">Office</span>
-              <h3 class="product-title"><a href="office-desk.html">Office Desk</a></h3>
+              <h3 class="product-title"><a href="products/office-desk/">Office Desk</a></h3>
               <!-- UPDATE PRODUCT SIZE HERE (width × depth × height) -->
               <span class="product-spec">140 × 70 × 75 cm</span>
               <p class="product-desc">A sturdy work desk with room for your computer and papers, made to fit your space.</p>
@@ -534,11 +534,11 @@
           <article class="product-card" data-id="6" data-name="TV Unit with Shelves" data-price="45000" data-category="living" data-image="images/product6.jpg">
             <div class="product-image">
               <!-- PUT PRODUCT IMAGE HERE (square photo works best; change src and alt) -->
-              <a href="tv-unit-with-shelves.html" aria-label="TV Unit with Shelves: details and price"><img src="images/product6.jpg" width="600" height="600" alt="TV unit with shelves, made to order in Pakistan by Muhammad Furnitures" loading="lazy"></a>
+              <a href="products/tv-unit-with-shelves/" aria-label="TV Unit with Shelves: details and price"><img src="images/product6.jpg" width="600" height="600" alt="TV unit with shelves, made to order in Pakistan by Muhammad Furnitures" loading="lazy"></a>
             </div>
             <div class="product-info">
               <span class="product-category">Living Room</span>
-              <h3 class="product-title"><a href="tv-unit-with-shelves.html">TV Unit with Shelves</a></h3>
+              <h3 class="product-title"><a href="products/tv-unit-with-shelves/">TV Unit with Shelves</a></h3>
               <!-- UPDATE PRODUCT SIZE HERE (width × depth × height) -->
               <span class="product-spec">180 × 40 × 50 cm</span>
               <p class="product-desc">A tidy home for your TV, decoder and decor, built to the size of your wall.</p>
@@ -556,7 +556,7 @@
 
         </div><!-- /.product-grid -->
 
-        <div class="view-all"><a href="shop.html" class="btn btn-outline btn-lg">View All Products</a></div>
+        <div class="view-all"><a href="shop/" class="btn btn-outline btn-lg">View All Products</a></div>
       </div>
     </section>
 
@@ -576,7 +576,7 @@
         </ol>
         <div class="how-cta">
           <a class="btn btn-wa btn-lg" href="https://wa.me/923117420474?text=Hello%20Muhammad%20Furnitures%2C%20I%20would%20like%20a%20quote." target="_blank" rel="noopener">Get a Quote on WhatsApp</a>
-          <a class="btn btn-outline btn-lg" href="custom-furniture.html">How custom orders work</a>
+          <a class="btn btn-outline btn-lg" href="custom-furniture/">How custom orders work</a>
         </div>
       </div>
     </section>
@@ -590,7 +590,7 @@
           <div>
             <h2>Built, not just assembled</h2>
             <p>Strong joints, clean finishing and furniture that is checked before it leaves. Every piece is planned with you, so it fits your room and your budget.</p>
-            <a href="about.html" class="btn btn-gold" style="margin-top:26px">About Us</a>
+            <a href="about/" class="btn btn-gold" style="margin-top:26px">About Us</a>
           </div>
           <!-- PUT A WORKSHOP PHOTO HERE (craftsmen at work, a joint, a finish close-up) -->
           <img src="images/craft.jpg" width="900" height="675" alt="Furniture being built by hand at Muhammad Furnitures" loading="lazy">
@@ -622,8 +622,8 @@
       <div class="container seo-inner">
         <h2>Made-to-order furniture in Pakistan</h2>
         <p>Muhammad Furnitures makes sofa sets, beds, wardrobes, dining tables, office desks, TV units and centre tables for homes, shops and offices in Pakistan. Every piece is built to your size, in the wood tone, fabric and finish you choose, and you get a clear price before we start.</p>
-        <p>Popular pieces: <a href="sofa-set-5-seater.html">5 seater sofa set</a>, <a href="double-bed-with-storage.html">double bed with storage</a>, <a href="wardrobe-3-door.html">3 door wardrobe</a>, <a href="dining-table-6-seater.html">6 seater dining table</a>, <a href="office-desk.html">office desk</a>, <a href="tv-unit-with-shelves.html">TV unit</a>, <a href="coffee-table.html">centre table</a> and <a href="dressing-table-with-mirror.html">dressing table with mirror</a>.</p>
-        <p>Not sure what size or style to choose? Read our <a href="furniture-buying-guide.html">furniture buying guide</a>, or send your measurements on WhatsApp and we will suggest a design.</p>
+        <p>Popular pieces: <a href="products/sofa-set-5-seater/">5 seater sofa set</a>, <a href="products/double-bed-with-storage/">double bed with storage</a>, <a href="products/wardrobe-3-door/">3 door wardrobe</a>, <a href="products/dining-table-6-seater/">6 seater dining table</a>, <a href="products/office-desk/">office desk</a>, <a href="products/tv-unit-with-shelves/">TV unit</a>, <a href="products/coffee-table/">centre table</a> and <a href="products/dressing-table-with-mirror/">dressing table with mirror</a>.</p>
+        <p>Not sure what size or style to choose? Read our <a href="furniture-buying-guide/">furniture buying guide</a>, or send your measurements on WhatsApp and we will suggest a design.</p>
       </div>
     </section>
 
@@ -666,14 +666,14 @@
   </main>
 
   <!-- ============================================================
-       FOOTER (THE SAME ON EVERY PAGE: if you change it, change it in all 6 .html files)
+       FOOTER (THE SAME ON EVERY PAGE: if you change it, it is built once by tools/build_site.py)
        ============================================================ -->
   <footer class="site-footer">
     <div class="container footer-top">
 
       <!-- FOOTER COLUMN 1: BRAND + CALL / WHATSAPP BUTTONS -->
       <div class="footer-col footer-brand">
-        <a href="index.html" class="logo logo-light" aria-label="Muhammad Furnitures, home">
+        <a href="./" class="logo logo-light" aria-label="Muhammad Furnitures, home">
           <span class="logo-mark" aria-hidden="true">M</span>
           <span class="logo-name">Muhammad</span>
           <span class="logo-sub">Furnitures</span>
@@ -690,12 +690,12 @@
       <div class="footer-col">
         <h3>Shop</h3>
         <ul>
-          <li><a href="shop.html">All furniture</a></li>
-          <li><a href="shop.html#living">Living room</a></li>
-          <li><a href="shop.html#bedroom">Bedroom</a></li>
-          <li><a href="shop.html#dining">Dining room</a></li>
-          <li><a href="shop.html#office">Office</a></li>
-          <li><a href="shop.html#storage">Storage</a></li>
+          <li><a href="shop/">All furniture</a></li>
+          <li><a href="shop/#living">Living room</a></li>
+          <li><a href="shop/#bedroom">Bedroom</a></li>
+          <li><a href="shop/#dining">Dining room</a></li>
+          <li><a href="shop/#office">Office</a></li>
+          <li><a href="shop/#storage">Storage</a></li>
         </ul>
       </div>
 
@@ -703,12 +703,12 @@
       <div class="footer-col">
         <h3>Company</h3>
         <ul>
-          <li><a href="about.html">About us</a></li>
-          <li><a href="collections.html">Collections</a></li>
-          <li><a href="custom-furniture.html">Custom furniture</a></li>
-          <li><a href="furniture-buying-guide.html">Buying guide</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="cart.html">Your cart</a></li>
+          <li><a href="about/">About us</a></li>
+          <li><a href="collections/">Collections</a></li>
+          <li><a href="custom-furniture/">Custom furniture</a></li>
+          <li><a href="furniture-buying-guide/">Buying guide</a></li>
+          <li><a href="contact/">Contact</a></li>
+          <li><a href="cart/">Your cart</a></li>
         </ul>
       </div>
 

@@ -40,5 +40,8 @@
     "dressing-table-with-mirror",
     "wardrobe-3-door",
     "coffee-table"
-  ]
+  ],
+  "showShop": true,
+  "showHome": true,
+  "homeOrder": 2
 }
