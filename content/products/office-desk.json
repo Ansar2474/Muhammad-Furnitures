@@ -1,0 +1,44 @@
+{
+  "id": 5,
+  "slug": "office-desk",
+  "name": "Office Desk",
+  "headline": "Office Desk",
+  "category": "office",
+  "price": 35000,
+  "spec": "140 × 70 × 75 cm",
+  "badge": "",
+  "shortDesc": "A sturdy work desk with room for your computer and papers, made to fit your space.",
+  "description": "A sturdy work desk with room for your computer and papers, made to fit your office or home study.",
+  "features": [
+    "Made to the size of your office or study",
+    "Drawers and keyboard tray can be added",
+    "Choose the finish and colour",
+    "Strong top that handles daily use",
+    "Matching shelves can be made to order"
+  ],
+  "image": "images/product5.jpg",
+  "alt": "Office desk",
+  "published": true,
+  "order": 5,
+  "seoTitle": "Office Table & Desk Price in Pakistan",
+  "seoDescription": "Office desk (computer table) made to your space, with room for a computer and papers. Starting price {price}. {name}.",
+  "paras": [
+    "A good desk helps you work comfortably for hours. Our office desk starts at 140 × 70 cm with a height of 75 cm, which suits most computers, laptops and paperwork.",
+    "We can make it longer for two screens, add drawers or a keyboard tray, and choose a finish that matches the rest of your office. Tell us the size of your space and how you work, and we will suggest a layout. We can also build matching shelves for files and books."
+  ],
+  "faq": [
+    [
+      "Can you make a bigger desk for two people?",
+      "Yes. Send us the space you have and we will plan a longer desk."
+    ],
+    [
+      "Can you add drawers?",
+      "Yes. Tell us how many drawers you want and where, and we will include them in the quote."
+    ]
+  ],
+  "related": [
+    "bookshelf-5-shelf",
+    "tv-unit-with-shelves",
+    "wardrobe-3-door"
+  ]
+}

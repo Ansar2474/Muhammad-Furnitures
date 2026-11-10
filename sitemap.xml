@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Replace https://YOUR-DOMAIN with your real website address (or set SITE_URL in build_site.py and rebuild) -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/</loc><lastmod>2026-11-08</lastmod><priority>1.0</priority></url>
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/shop.html</loc><lastmod>2026-11-08</lastmod><priority>0.9</priority></url>
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/collections.html</loc><lastmod>2026-11-08</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/custom-furniture.html</loc><lastmod>2026-11-08</lastmod><priority>0.9</priority></url>
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/furniture-buying-guide.html</loc><lastmod>2026-11-08</lastmod><priority>0.7</priority></url>
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/about.html</loc><lastmod>2026-11-08</lastmod><priority>0.6</priority></url>
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/contact.html</loc><lastmod>2026-11-08</lastmod><priority>0.7</priority></url>
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/dining-table-6-seater.html</loc><lastmod>2026-11-08</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/double-bed-with-storage.html</loc><lastmod>2026-11-08</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/wardrobe-3-door.html</loc><lastmod>2026-11-08</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/sofa-set-5-seater.html</loc><lastmod>2026-11-08</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/office-desk.html</loc><lastmod>2026-11-08</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/tv-unit-with-shelves.html</loc><lastmod>2026-11-08</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/coffee-table.html</loc><lastmod>2026-11-08</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/dressing-table-with-mirror.html</loc><lastmod>2026-11-08</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/bookshelf-5-shelf.html</loc><lastmod>2026-11-08</lastmod><priority>0.8</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/</loc><lastmod>2026-11-10</lastmod><priority>1.0</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/shop.html</loc><lastmod>2026-11-10</lastmod><priority>0.9</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/collections.html</loc><lastmod>2026-11-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/custom-furniture.html</loc><lastmod>2026-11-10</lastmod><priority>0.9</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/furniture-buying-guide.html</loc><lastmod>2026-11-10</lastmod><priority>0.7</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/about.html</loc><lastmod>2026-11-10</lastmod><priority>0.6</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/contact.html</loc><lastmod>2026-11-10</lastmod><priority>0.7</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/dining-table-6-seater.html</loc><lastmod>2026-11-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/double-bed-with-storage.html</loc><lastmod>2026-11-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/wardrobe-3-door.html</loc><lastmod>2026-11-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/sofa-set-5-seater.html</loc><lastmod>2026-11-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/office-desk.html</loc><lastmod>2026-11-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/tv-unit-with-shelves.html</loc><lastmod>2026-11-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/coffee-table.html</loc><lastmod>2026-11-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/dressing-table-with-mirror.html</loc><lastmod>2026-11-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://ansar2474.github.io/Muhammad-Furnitures/bookshelf-5-shelf.html</loc><lastmod>2026-11-10</lastmod><priority>0.8</priority></url>
 </urlset>

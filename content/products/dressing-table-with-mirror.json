@@ -1,0 +1,44 @@
+{
+  "id": 8,
+  "slug": "dressing-table-with-mirror",
+  "name": "Dressing Table with Mirror",
+  "headline": "Dressing Table with Mirror",
+  "category": "bedroom",
+  "price": 55000,
+  "spec": "110 × 45 × 140 cm",
+  "badge": "",
+  "shortDesc": "A dressing table with a mirror and drawers for your daily essentials.",
+  "description": "A dressing table with a mirror and drawers for your daily essentials.",
+  "features": [
+    "Mirror and drawers made to your size",
+    "Choose the mirror shape and the finish",
+    "Can be matched to your bed and wardrobe",
+    "Strong build for daily use",
+    "Delivery and setup can be arranged"
+  ],
+  "image": "images/product8.jpg",
+  "alt": "Dressing table with mirror",
+  "published": true,
+  "order": 8,
+  "seoTitle": "Dressing Table with Mirror Price in Pakistan",
+  "seoDescription": "Dressing table with mirror and drawers, made to fit your bedroom. Starting price {price}. Order from {name} on WhatsApp {phone}.",
+  "paras": [
+    "A dressing table gives you one place for your mirror, jewellery, skincare and daily things. Ours starts at 110 cm wide, 45 cm deep and 140 cm high including the mirror.",
+    "We can change the width, add more drawers, and choose the mirror shape and the finish. If you are planning a full bedroom, we can make the dressing table to match your bed and wardrobe so the room looks complete."
+  ],
+  "faq": [
+    [
+      "Can you add more drawers?",
+      "Yes. Tell us how many drawers you want and we will plan them."
+    ],
+    [
+      "Can it match my bed?",
+      "Yes. Send us a photo of your bed and we will match the finish where we can."
+    ]
+  ],
+  "related": [
+    "double-bed-with-storage",
+    "wardrobe-3-door",
+    "bookshelf-5-shelf"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": 3,
+  "slug": "wardrobe-3-door",
+  "name": "Wardrobe, 3 Door",
+  "headline": "Wardrobe, 3 Door",
+  "category": "storage",
+  "price": 85000,
+  "spec": "150 × 60 × 210 cm",
+  "badge": "",
+  "shortDesc": "Plenty of space for hanging and folded clothes, with a clean finish that suits any bedroom.",
+  "description": "A three door wardrobe with room for hanging and folded clothes, made to the size of your wall.",
+  "features": [
+    "Made to your wall width and height",
+    "Inside layout planned with you: hanging, shelves, drawers",
+    "Choose the door style, finish and handles",
+    "Clean finish that suits any bedroom",
+    "Delivery and setup can be arranged"
+  ],
+  "image": "images/product3.jpg",
+  "alt": "Three door wardrobe",
+  "published": true,
+  "order": 3,
+  "seoTitle": "3 Door Wardrobe Price in Pakistan",
+  "seoDescription": "3 door wardrobe (almari) made to your wall size with plenty of hanging and shelf space. Starting price {price}. {name}.",
+  "paras": [
+    "A wardrobe works best when it fits your wall and the way you store your clothes. Our 3 door wardrobe starts at 150 cm wide, 60 cm deep and 210 cm tall, with space for hanging clothes and shelves for folded ones.",
+    "Tell us the width and height of your wall and we will plan the inside with you: more hanging space, more shelves, or drawers. You can also choose the door style, the finish and the handles. A depth of about 55 to 60 cm is enough for hanging clothes, and we will make sure the doors can open fully in your room."
+  ],
+  "faq": [
+    [
+      "Can the wardrobe go up to the ceiling?",
+      "Yes. Send us the height of your room and we will make it to fit."
+    ],
+    [
+      "Can you change the inside layout?",
+      "Yes. We can add more hanging space, shelves or drawers to suit how you store your clothes."
+    ]
+  ],
+  "related": [
+    "double-bed-with-storage",
+    "dressing-table-with-mirror",
+    "bookshelf-5-shelf"
+  ]
+}

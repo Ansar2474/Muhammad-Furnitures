@@ -1,0 +1,44 @@
+{
+  "id": 4,
+  "slug": "sofa-set-5-seater",
+  "name": "Sofa Set, 5 Seater",
+  "headline": "Sofa Set, 5 Seater",
+  "category": "living",
+  "price": 120000,
+  "spec": "3 + 1 + 1 seats, your choice of fabric",
+  "badge": "",
+  "shortDesc": "A comfortable, well-built sofa set for family evenings and guests. Choose your fabric and colour.",
+  "description": "A comfortable 3 + 1 + 1 sofa set for family evenings and guests, in the fabric and colour you choose.",
+  "features": [
+    "3 + 1 + 1 seating, adjustable to your room",
+    "Your choice of fabric and colour",
+    "Seat comfort planned with you",
+    "Matching centre table can be made to order",
+    "Clear price before we start"
+  ],
+  "image": "images/product4.jpg",
+  "alt": "Five seater sofa set",
+  "published": true,
+  "order": 4,
+  "seoTitle": "5 Seater Sofa Set Price in Pakistan",
+  "seoDescription": "5 seater sofa set (3 + 1 + 1) made to your size, fabric and colour. Starting price {price}. Order from {name} on WhatsApp {phone}.",
+  "paras": [
+    "A sofa set is usually the biggest piece in the living room, so the size matters. Our 5 seater sofa set has a three seater and two single seaters, and we can change the width, depth and height to fit your room and your family.",
+    "You can choose the fabric and colour, and tell us how firm or soft you like the seats. Please measure the doors and stairs the sofa has to pass through, or send us a photo of the room, and we will plan the set so it fits properly. If you want a centre table to go with it, we can make that to match."
+  ],
+  "faq": [
+    [
+      "What is the price of a 5 seater sofa set?",
+      "Our 5 seater sofa set starts at {price}. The final price depends on the size, the fabric and the finish, and we confirm it before we start."
+    ],
+    [
+      "Can I choose a different fabric?",
+      "Yes. Tell us the fabric or colour you like, or send a photo, and we will quote it."
+    ]
+  ],
+  "related": [
+    "coffee-table",
+    "tv-unit-with-shelves",
+    "dining-table-6-seater"
+  ]
+}

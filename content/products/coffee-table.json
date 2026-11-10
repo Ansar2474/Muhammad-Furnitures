@@ -1,0 +1,44 @@
+{
+  "id": 7,
+  "slug": "coffee-table",
+  "name": "Coffee Table",
+  "headline": "Coffee Table (Centre Table)",
+  "category": "living",
+  "price": 22000,
+  "spec": "100 × 55 × 45 cm",
+  "badge": "",
+  "shortDesc": "A low table for the middle of your living room, with space for books, a tray and guests.",
+  "description": "A low centre table for the middle of your living room, with space for a tray, books and guests.",
+  "features": [
+    "Round or rectangular, made to your room",
+    "Lower shelf can be added",
+    "Finish matched to your sofa set",
+    "Strong top for trays and daily use",
+    "Clear price before we start"
+  ],
+  "image": "images/product7.jpg",
+  "alt": "Coffee table",
+  "published": true,
+  "order": 7,
+  "seoTitle": "Centre Table (Coffee Table) Price in Pakistan",
+  "seoDescription": "Centre table (coffee table) made to fit your living room, with space for a tray and books. Starting price {price}. {name}.",
+  "paras": [
+    "A centre table, also called a coffee table, brings the living room together. Ours starts at 100 × 55 cm with a height of 45 cm, which is a comfortable reach from a sofa.",
+    "We can make it round or rectangular, add a lower shelf, and match the finish to your sofa set and TV unit. Tell us the size of your seating area and we will suggest a size that leaves enough room to walk around it."
+  ],
+  "faq": [
+    [
+      "Can you make a round centre table?",
+      "Yes. Tell us the diameter you want and the height, and we will quote it."
+    ],
+    [
+      "Can it match my sofa set?",
+      "Yes. Send us a photo of the sofa set and we will match the wood tone or finish where we can."
+    ]
+  ],
+  "related": [
+    "sofa-set-5-seater",
+    "tv-unit-with-shelves",
+    "dining-table-6-seater"
+  ]
+}

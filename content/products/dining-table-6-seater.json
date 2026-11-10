@@ -1,0 +1,44 @@
+{
+  "id": 1,
+  "slug": "dining-table-6-seater",
+  "name": "Dining Table, 6 Seater",
+  "headline": "Dining Table, 6 Seater",
+  "category": "dining",
+  "price": 75000,
+  "spec": "180 × 90 × 76 cm",
+  "badge": "Custom size",
+  "shortDesc": "Gather the whole family around a table built to last. Sturdy construction, smooth finish, and sizes to suit your dining room.",
+  "description": "A six seater dining table built for family meals, made to the size of your dining room.",
+  "features": [
+    "Made to your size: length, width and height",
+    "Your choice of wood tone, colour and finish",
+    "Matching chairs can be made to order",
+    "Strong joints and a smooth, clean finish",
+    "Delivery and setup can be arranged"
+  ],
+  "image": "images/product1.jpg",
+  "alt": "Dining table, 6 seater",
+  "published": true,
+  "order": 1,
+  "seoTitle": "Dining Table 6 Seater Price in Pakistan",
+  "seoDescription": "Dining table, 6 seater, made to your size and finish by {name}. Starting price {price}. Get a clear quote on WhatsApp {phone}.",
+  "paras": [
+    "A dining table is the piece your family uses every day, so it has to be strong, comfortable and the right size. Our 6 seater dining table starts at 180 × 90 cm with a height of 76 cm, which gives each person room to sit and eat comfortably.",
+    "Because we make it to order, you can change the length and width to suit your room, choose the finish and colour, and decide how many chairs you want. Send us a photo of the space and we will suggest a size that leaves enough room to walk around the table."
+  ],
+  "faq": [
+    [
+      "What size is a 6 seater dining table?",
+      "A common size is about 180 × 90 cm. We can make it longer, shorter or wider to fit your room."
+    ],
+    [
+      "Can you make the chairs as well?",
+      "Yes. Tell us how many chairs you need and the style you like, and we will quote the table and chairs together."
+    ]
+  ],
+  "related": [
+    "sofa-set-5-seater",
+    "coffee-table",
+    "tv-unit-with-shelves"
+  ]
+}

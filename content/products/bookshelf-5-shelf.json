@@ -1,0 +1,44 @@
+{
+  "id": 9,
+  "slug": "bookshelf-5-shelf",
+  "name": "Bookshelf, 5 Shelf",
+  "headline": "Bookshelf, 5 Shelf",
+  "category": "storage",
+  "price": 30000,
+  "spec": "90 × 30 × 180 cm",
+  "badge": "",
+  "shortDesc": "Open shelves for books, files and decor, sized to fit your wall.",
+  "description": "Open shelves for books, files and decor, sized to fit your wall.",
+  "features": [
+    "Five shelves, spacing planned with you",
+    "Made to your wall width and height",
+    "Finish matched to your room or office",
+    "Strong shelves for heavy books and files",
+    "Clear price before we start"
+  ],
+  "image": "images/product9.jpg",
+  "alt": "Five shelf bookshelf",
+  "published": true,
+  "order": 9,
+  "seoTitle": "5 Shelf Bookshelf Made to Size",
+  "seoDescription": "Five shelf bookshelf for books, files and decor, made to fit your wall. Starting price {price}. Order from {name} on WhatsApp.",
+  "paras": [
+    "A bookshelf keeps books, files and decor within reach and makes use of wall space. Ours has five shelves and starts at 90 cm wide, 30 cm deep and 180 cm tall.",
+    "We can change the width and height, space the shelves for large books or files, and choose a finish that matches your room. For a study or office, we can also build shelves to match your desk."
+  ],
+  "faq": [
+    [
+      "Can the shelves hold heavy books?",
+      "Yes. Tell us what you plan to store and we will build the shelves strong enough."
+    ],
+    [
+      "Can you make it wider or taller?",
+      "Yes. Send us the space you have and we will make it to fit."
+    ]
+  ],
+  "related": [
+    "office-desk",
+    "wardrobe-3-door",
+    "tv-unit-with-shelves"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": 2,
+  "slug": "double-bed-with-storage",
+  "name": "Double Bed with Storage",
+  "headline": "Double Bed with Storage",
+  "category": "bedroom",
+  "price": 95000,
+  "spec": "Fits a 160 × 200 cm mattress",
+  "badge": "",
+  "shortDesc": "A strong bed frame with practical storage underneath, made to fit your mattress and room size.",
+  "description": "A strong double bed with storage underneath, made to fit your mattress and your bedroom.",
+  "features": [
+    "Built to your mattress size",
+    "Storage space under the bed",
+    "Choose the headboard style, wood tone and finish",
+    "Matching dressing table can be planned with it",
+    "Clear price before we start"
+  ],
+  "image": "images/product2.jpg",
+  "alt": "Double bed with storage",
+  "published": true,
+  "order": 2,
+  "seoTitle": "Double Bed with Storage Price in Pakistan",
+  "seoDescription": "Double bed with storage, made to fit your mattress and room. Starting price {price}. Order from {name} on WhatsApp {phone}.",
+  "paras": [
+    "A bed with storage gives you space for blankets, pillows and clothes without needing more furniture in the room. Our double bed is built to fit a 160 × 200 cm mattress, and we can change the size if your mattress is different.",
+    "Mattress sizes are not the same everywhere, so we always ask you to measure your mattress or send us a photo before we start. You can also choose the headboard style, wood tone and finish. If you want a full bed set, tell us about the dressing table and side tables you need and we will plan them to match."
+  ],
+  "faq": [
+    [
+      "Can you make a king or single size bed?",
+      "Yes. Send us your mattress size and we will build the bed to fit it."
+    ],
+    [
+      "Can I get a matching bed set?",
+      "Yes. Tell us which pieces you want, such as a dressing table and side tables, and we will plan them to match your bed."
+    ]
+  ],
+  "related": [
+    "dressing-table-with-mirror",
+    "wardrobe-3-door",
+    "coffee-table"
+  ]
+}

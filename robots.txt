@@ -2,6 +2,7 @@
 User-agent: *
 Allow: /
 Disallow: /cart.html
+Disallow: /admin/
 
 # AI search and answer engines are allowed, so your furniture can be found and quoted in AI answers.
 # To stop one of them, change its 'Allow: /' line to 'Disallow: /'.
@@ -10,55 +11,66 @@ Disallow: /cart.html
 User-agent: OAI-SearchBot
 Allow: /
 Disallow: /cart.html
+Disallow: /admin/
 
 # ChatGPT when a person asks it to open a page
 User-agent: ChatGPT-User
 Allow: /
 Disallow: /cart.html
+Disallow: /admin/
 
 # OpenAI
 User-agent: GPTBot
 Allow: /
 Disallow: /cart.html
+Disallow: /admin/
 
 # Perplexity
 User-agent: PerplexityBot
 Allow: /
 Disallow: /cart.html
+Disallow: /admin/
 
 # Perplexity when a person asks
 User-agent: Perplexity-User
 Allow: /
 Disallow: /cart.html
+Disallow: /admin/
 
 # Anthropic Claude
 User-agent: ClaudeBot
 Allow: /
 Disallow: /cart.html
+Disallow: /admin/
 
 # Claude search
 User-agent: Claude-SearchBot
 Allow: /
 Disallow: /cart.html
+Disallow: /admin/
 
 # Claude when a person asks
 User-agent: Claude-User
 Allow: /
 Disallow: /cart.html
+Disallow: /admin/
 
 # Google Gemini
 User-agent: Google-Extended
 Allow: /
 Disallow: /cart.html
+Disallow: /admin/
 
 # Apple
 User-agent: Applebot-Extended
 Allow: /
 Disallow: /cart.html
+Disallow: /admin/
 
 # Common Crawl, used by many AI tools
 User-agent: CCBot
 Allow: /
 Disallow: /cart.html
+Disallow: /admin/
 
 Sitemap: https://ansar2474.github.io/Muhammad-Furnitures/sitemap.xml

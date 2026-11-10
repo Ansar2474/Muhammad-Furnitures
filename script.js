@@ -133,7 +133,8 @@ function initCart() {
       addToCart({
         id: card.dataset.id,
         name: card.dataset.name,
-        price: parseFloat(card.dataset.price)
+        price: parseFloat(card.dataset.price),
+        image: card.dataset.image || ""
       });
     });
   });
@@ -162,9 +163,9 @@ function renderCartPage() {
     cart.forEach(item => {
       const li = document.createElement("li");
       li.className = "cart-item";
-      // Product photo: images/product<ID>.jpg (CHANGE the path if your photos are named differently)
+      // Product photo: saved with the item when it was added (older carts fall back to images/product<ID>.jpg)
       li.innerHTML =
-        '<img src="images/product' + encodeURIComponent(item.id) + '.jpg" alt="" width="96" height="96">' +
+        '<img alt="" width="96" height="96">' +
         '<div class="cart-item-info"><strong></strong><span class="cart-item-price"></span></div>' +
         '<div class="qty" role="group" aria-label="Quantity">' +
           '<button type="button" data-act="minus" aria-label="Decrease quantity">&minus;</button>' +
@@ -173,6 +174,7 @@ function renderCartPage() {
         '</div>' +
         '<strong class="cart-line-total"></strong>' +
         '<button type="button" class="cart-remove" data-act="remove" aria-label="Remove item">&times;</button>';
+      li.querySelector("img").src = item.image || ("images/product" + encodeURIComponent(item.id) + ".jpg");
       li.querySelector(".cart-item-info strong").textContent = item.name;
       li.querySelector(".cart-item-price").textContent = formatPrice(item.price) + " each";
       li.querySelector(".qty-num").textContent = item.qty;

@@ -6,19 +6,22 @@ where it should. The output is plain HTML (no build step needed by the owner).
 """
 import os
 import json
+import html
+import re
+import datetime
 from urllib.parse import quote
 
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from seo_content import PRODUCT_SEO, COLLECTION_EXTRA, ROOM_ALT, GUIDE_SECTIONS, GUIDE_FAQ, GUIDE_SHORT, QUICK
+from seo_content import COLLECTION_EXTRA, ROOM_ALT, GUIDE_SECTIONS, GUIDE_FAQ, GUIDE_SHORT, QUICK
 
 OUT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))   # the website folder (one level up)
 
 # ---- SEO SETTINGS (UPDATE THESE TWO LINES WHEN YOU KNOW THEM, THEN REBUILD) ----
 CITY = ""        # PUT YOUR CITY HERE, e.g. "Lahore". It goes into titles, headings and Google business data.
 SITE_URL = "https://ansar2474.github.io/Muhammad-Furnitures"    # PUT YOUR WEBSITE ADDRESS HERE once it is live, e.g. "https://www.muhammadfurnitures.com" (no slash at the end)
-UPDATED_ISO = "2026-11-08"          # UPDATE THIS DATE whenever you change prices or text; it is shown on the page and in the data for Google
-UPDATED_TEXT = "8 November 2026"
+UPDATED_ISO = datetime.date.today().isoformat()          # UPDATE THIS DATE whenever you change prices or text; it is shown on the page and in the data for Google
+UPDATED_TEXT = f"{datetime.date.today().day} {datetime.date.today():%B %Y}"
 LOC = CITY or "Pakistan"   # used in titles and headings: "... in Pakistan" or "... in Lahore"
 NAME = "Muhammad Furnitures"
 PHONE = "0311 7420474"
@@ -60,7 +63,7 @@ def local_ld():
         "description": "Handcrafted, made-to-order furniture for homes, shops and offices: sofa sets, beds, wardrobes, dining tables and office desks.",
         "telephone": "+923117420474",
         "email": "mr.genius2474@gmail.com",
-        "priceRange": "Rs 22,000 - Rs 120,000",
+        "priceRange": f"Rs {min(p['price'] for p in PRODUCTS):,} - Rs {max(p['price'] for p in PRODUCTS):,}",
         "currenciesAccepted": "PKR",
         "address": {"@type": "PostalAddress", "addressCountry": "PK"},
         "areaServed": {"@type": "Country", "name": "Pakistan"},
@@ -84,7 +87,19 @@ def local_ld():
             + ld_script(biz) + ld_script(site))
 
 
+def _unesc(o):
+    """Product text is stored HTML-escaped; structured data wants plain text."""
+    if isinstance(o, str):
+        return html.unescape(o)
+    if isinstance(o, list):
+        return [_unesc(x) for x in o]
+    if isinstance(o, dict):
+        return {k: _unesc(v) for k, v in o.items()}
+    return o
+
+
 def ld_script(data):
+    data = _unesc(data)
     return '  <script type="application/ld+json">\n  ' + json.dumps(data, indent=2, ensure_ascii=False).replace("\n", "\n  ") + "\n  </script>\n"
 
 
@@ -105,27 +120,85 @@ def crumb_ld(items):
 # --------------------------------------------------------------------------------------------
 # PRODUCTS (shared by the Home page, which shows the first 6, and the Shop page, which shows all)
 # --------------------------------------------------------------------------------------------
-PRODUCTS = [
-    dict(id=1, name="Dining Table, 6 Seater", price=75000, cat="dining", catlabel="Dining Room", spec="180 × 90 × 76 cm",
-         desc="Gather the whole family around a table built to last. Sturdy construction, smooth finish, and sizes to suit your dining room.",
-         badge="Custom size", alt="Dining table, 6 seater"),
-    dict(id=2, name="Double Bed with Storage", price=95000, cat="bedroom", catlabel="Bedroom", spec="Fits a 160 × 200 cm mattress",
-         desc="A strong bed frame with practical storage underneath, made to fit your mattress and room size.", alt="Double bed with storage"),
-    dict(id=3, name="Wardrobe, 3 Door", price=85000, cat="storage", catlabel="Storage", spec="150 × 60 × 210 cm",
-         desc="Plenty of space for hanging and folded clothes, with a clean finish that suits any bedroom.", alt="Three door wardrobe"),
-    dict(id=4, name="Sofa Set, 5 Seater", price=120000, cat="living", catlabel="Living Room", spec="3 + 1 + 1 seats, your choice of fabric",
-         desc="A comfortable, well-built sofa set for family evenings and guests. Choose your fabric and colour.", alt="Five seater sofa set"),
-    dict(id=5, name="Office Desk", price=35000, cat="office", catlabel="Office", spec="140 × 70 × 75 cm",
-         desc="A sturdy work desk with room for your computer and papers, made to fit your space.", alt="Office desk"),
-    dict(id=6, name="TV Unit with Shelves", price=45000, cat="living", catlabel="Living Room", spec="180 × 40 × 50 cm",
-         desc="A tidy home for your TV, decoder and decor, built to the size of your wall.", alt="TV unit with shelves"),
-    dict(id=7, name="Coffee Table", price=22000, cat="living", catlabel="Living Room", spec="100 × 55 × 45 cm",
-         desc="A low table for the middle of your living room, with space for books, a tray and guests.", alt="Coffee table"),
-    dict(id=8, name="Dressing Table with Mirror", price=55000, cat="bedroom", catlabel="Bedroom", spec="110 × 45 × 140 cm",
-         desc="A dressing table with a mirror and drawers for your daily essentials.", alt="Dressing table with mirror"),
-    dict(id=9, name="Bookshelf, 5 Shelf", price=30000, cat="storage", catlabel="Storage", spec="90 × 30 × 180 cm",
-         desc="Open shelves for books, files and decor, sized to fit your wall.", alt="Five shelf bookshelf"),
-]
+CAT_LABELS = {"living": "Living Room", "bedroom": "Bedroom", "dining": "Dining Room", "office": "Office", "storage": "Storage"}
+PRODUCT_DIR = os.path.join(OUT, "content", "products")
+
+
+def _e(t):
+    """Make text safe to place inside HTML."""
+    return html.escape(str(t), quote=True)
+
+
+def load_products():
+    """Reads every file in content/products/*.json (the admin page at /admin/ writes these files).
+    Returns (PRODUCTS, PRODUCT_SEO). Products with published=false are skipped."""
+    raw = []
+    for f in sorted(os.listdir(PRODUCT_DIR)):
+        if f.endswith(".json"):
+            with open(os.path.join(PRODUCT_DIR, f), encoding="utf-8") as fh:
+                raw.append(json.load(fh))
+    raw = [r for r in raw if r.get("published", True)]
+    raw.sort(key=lambda r: (r.get("order", 999), r["id"]))
+    slug_to_id = {r["slug"]: r["id"] for r in raw}
+    products, seo = [], {}
+    for r in raw:
+        pid = int(r["id"])
+        name = _e(r["name"])
+        cat = r.get("category", "living")
+        spec = _e(r.get("spec", ""))
+        lead = _e(r.get("description", ""))
+        price = int(r["price"])
+        products.append(dict(id=pid, name=name, price=price, cat=cat, catlabel=CAT_LABELS.get(cat, _e(cat.title())), spec=spec,
+                             desc=_e(r.get("shortDesc") or r.get("description", "")), badge=_e(r.get("badge", "")),
+                             alt=_e(r.get("alt") or r["name"]), image=r.get("image") or f"images/product{pid}.jpg"))
+        title = _e(r.get("seoTitle") or f"{r['name']} Price in Pakistan")
+        meta = _e(r.get("seoDescription") or f"{r['name']} made to order by {{name}}. Starting price {{price}}. Get a clear quote on WhatsApp {{phone}}.")
+        paras = [_e(t) for t in r.get("paras", [])] or [
+            lead,
+            _e(f"We build the {r['name'].lower()} to order, so you can change the size, colour and finish. The standard size is {r.get('spec', '')}. "
+               "Send a photo of your space or your measurements on WhatsApp and we reply with a clear price before we start.")]
+        faq = [(_e(q), _e(a)) for q, a in r.get("faq", [])] or [
+            (_e(f"How much is the {r['name'].lower()}?"), "It starts at {price} for the standard size. The final price depends on your size, material and finish, and we confirm it before we start."),
+            ("Can I order it in a different size?", "Yes. Send your measurements on WhatsApp and we make it to fit your space.")]
+        seo[pid] = dict(slug=r["slug"], title=title, meta=meta, h1=_e(r.get("headline") or r["name"]), lead=lead,
+                        paras=paras, features=[_e(x) for x in r.get("features", [])], faq=faq, related_slugs=r.get("related", []))
+    for r in raw:  # related products: the chosen ones if still on the site, else other products from the same room
+        pid = int(r["id"])
+        rel = [slug_to_id[x] for x in seo[pid]["related_slugs"] if x in slug_to_id and slug_to_id[x] != pid]
+        for p in products:
+            if len(rel) >= 3:
+                break
+            if p["id"] != pid and p["id"] not in rel and p["cat"] == next(x["cat"] for x in products if x["id"] == pid):
+                rel.append(p["id"])
+        for p in products:
+            if len(rel) >= 3:
+                break
+            if p["id"] != pid and p["id"] not in rel:
+                rel.append(p["id"])
+        seo[pid]["related"] = rel[:3]
+    return products, seo
+
+
+PRODUCTS, PRODUCT_SEO = load_products()
+PBYID = {p["id"]: p for p in PRODUCTS}
+
+
+def _paren(name):
+    """'Sofa Set, 5 Seater' -> 'Sofa Set (5 Seater)'"""
+    a, sep, b = name.partition(", ")
+    return f"{a} ({b})" if sep else name
+
+
+def _example_prices():
+    ex = [PBYID[i] for i in (4, 3) if i in PBYID] or PRODUCTS[:2]
+    ex = [f"the {_paren(p['name'])} starts at {money(p['price'])}" for p in ex]
+    return ("For example, " + " and ".join(ex) + ". ") if ex else ""
+
+
+def money(n):
+    return f"Rs {n:,}"
+
+
 
 
 def product_card(p, first_comment=False, level=3):
@@ -133,10 +206,10 @@ def product_card(p, first_comment=False, level=3):
     c1 = ("          <!-- data-id must be UNIQUE. data-name and data-price feed the cart (script.js). "
           "data-category = living, bedroom, dining, office or storage -->\n") if first_comment else ""
     return f"""          <!-- ================= PRODUCT {p['id']}: {p['name']} ================= -->
-{c1}          <article class="product-card" data-id="{p['id']}" data-name="{p['name']}" data-price="{p['price']}" data-category="{p['cat']}">
+{c1}          <article class="product-card" data-id="{p['id']}" data-name="{p['name']}" data-price="{p['price']}" data-category="{p['cat']}" data-image="{p['image']}">
             <div class="product-image">
 {badge}              <!-- PUT PRODUCT IMAGE HERE (square photo works best; change src and alt) -->
-              <a href="{PRODUCT_SEO[p['id']]['slug']}.html" aria-label="{p['name']}: details and price"><img src="images/product{p['id']}.jpg" width="600" height="600" alt="{p['alt']}, made to order in {LOC} by {NAME}" loading="lazy"></a>
+              <a href="{PRODUCT_SEO[p['id']]['slug']}.html" aria-label="{p['name']}: details and price"><img src="{p['image']}" width="600" height="600" alt="{p['alt']}, made to order in {LOC} by {NAME}" loading="lazy"></a>
             </div>
             <div class="product-info">
               <span class="product-category">{p['catlabel']}</span>
@@ -690,7 +763,7 @@ FAQS = [
     ("Can I choose the finish and colour?",
      "Yes. Pick a wood tone or colour, or send us a photo of the look you want and we will match it where we can."),
     ("What is the price of a sofa set, bed or wardrobe?",
-     f"Prices start at Rs {min(p['price'] for p in PRODUCTS):,} and depend on the size, wood or board, fabric and finish. For example, our 5 seater sofa set starts at Rs 120,000 and our 3 door wardrobe at Rs 85,000. Send us your size and we give you the exact price before we start."),
+     f"Prices start at Rs {min(p['price'] for p in PRODUCTS):,} and depend on the size, wood or board, fabric and finish. " + _example_prices() + "Send us your size and we give you the exact price before we start."),
     ("Can you make a full bed set?",
      "Yes. We build beds with storage and dressing tables, and we can plan them to match each other. Tell us which pieces you need and your mattress size."),
     ("Do you deliver?",
@@ -1148,14 +1221,9 @@ def build():
 # --------------------------------------------------------------------------------------------
 # SEO PIECES: home keyword text, price table, product pages, buying guide, sitemap
 # --------------------------------------------------------------------------------------------
-PBYID = {p["id"]: p for p in PRODUCTS}
-
-
-def money(n):
-    return f"Rs {n:,}"
-
-
 def plink(pid, text=None):
+    if pid not in PBYID:       # product was hidden or removed in the admin page: show plain text, no link
+        return text or ""
     return f'<a href="{PRODUCT_SEO[pid]["slug"]}.html">{text or PBYID[pid]["name"]}</a>'
 
 
@@ -1206,7 +1274,7 @@ def product_ld(p, full=False):
          "offers": {"@type": "Offer", "price": str(p["price"]), "priceCurrency": "PKR",
                     "availability": "https://schema.org/MadeToOrder"}}
     if SITE_URL:
-        d["image"] = absurl(f"images/product{p['id']}.jpg")
+        d["image"] = absurl(p["image"])
         d["offers"]["url"] = absurl(seo["slug"] + ".html")
     if full:
         d = {"@context": "https://schema.org", **d}
@@ -1226,7 +1294,7 @@ def shop_ld():
 
 def collection_extra(key):
     _, ids, text = COLLECTION_EXTRA[key]
-    links = ", ".join(plink(i) for i in ids)
+    links = ", ".join(plink(i) for i in ids if i in PBYID)
     return f'<p class="coll-extra">{text} See: {links}.</p>'
 
 
@@ -1253,7 +1321,7 @@ def build_product_pages():
             f'          <details class="faq-item"><summary>{q}</summary><p>{a}</p></details>' for q, a in faq_pairs)
         related = "\n".join(
             f"""          <a class="related-card" href="{PRODUCT_SEO[r]['slug']}.html">
-            <img src="images/product{r}.jpg" width="600" height="600" alt="{PBYID[r]['alt']}, made to order by {NAME}" loading="lazy">
+            <img src="{PBYID[r]['image']}" width="600" height="600" alt="{PBYID[r]['alt']}, made to order by {NAME}" loading="lazy">
             <strong>{PBYID[r]['name']}</strong>
             <span>From {money(PBYID[r]['price'])}</span>
           </a>""" for r in seo["related"])
@@ -1274,10 +1342,11 @@ def build_product_pages():
 
         <!-- PUT PRODUCT IMAGE HERE (square photo works best; change src and alt) -->
         <div class="pdp-media">
-          <img src="images/product{pid}.jpg" width="600" height="600" alt="{p['alt']}, made to order in {LOC} by {NAME}" fetchpriority="high">
+          <img src="{p['image']}" width="600" height="600" alt="{p['alt']}, made to order in {LOC} by {NAME}" fetchpriority="high">
         </div>
 
-        <article class="product-card pdp-card" data-id="{pid}" data-name="{p['name']}" data-price="{p['price']}" data-category="{p['cat']}">
+        <!-- GENERATED PRODUCT PAGE -->
+        <article class="product-card pdp-card" data-id="{pid}" data-name="{p['name']}" data-price="{p['price']}" data-category="{p['cat']}" data-image="{p['image']}">
           <span class="pdp-category">{p['catlabel']}</span>
           <h1 class="pdp-title">{seo['h1']}</h1>
           <p class="pdp-lead">{seo['lead']}</p>
@@ -1342,7 +1411,7 @@ def build_product_pages():
 {cta_band("Want this " + p['name'].lower() + " in your size?", "Send your measurements or a photo on WhatsApp, or call us. We will reply with a clear quote.")}"""
         ld = crumb_ld([("Home", "index.html"), ("Shop", "shop.html"), (p["name"], seo["slug"] + ".html")]) \
             + ld_script(product_ld(p, full=True)) + faq_ld_for(faq_pairs)
-        page(seo["slug"] + ".html", "shop", title, meta, main, extra_ld=ld, og_image=f"images/product{pid}.jpg")
+        page(seo["slug"] + ".html", "shop", title, meta, main, extra_ld=ld, og_image=p["image"])
 
 
 def build_guide():
@@ -1445,10 +1514,10 @@ def build_sitemap():
     with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n<!-- Replace https://YOUR-DOMAIN with your real website address (or set SITE_URL in build_site.py and rebuild) -->\n'
                 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "\n</urlset>\n")
-    bots = "\n".join(f"# {why}\nUser-agent: {name}\nAllow: /\nDisallow: /cart.html\n" for name, why in AI_BOTS)
+    bots = "\n".join(f"# {why}\nUser-agent: {name}\nAllow: /\nDisallow: /cart.html\nDisallow: /admin/\n" for name, why in AI_BOTS)
     with open(os.path.join(OUT, "robots.txt"), "w", encoding="utf-8") as f:
         f.write("# Replace YOUR-DOMAIN with your real website address (or set SITE_URL in build_site.py and rebuild)\n"
-                "User-agent: *\nAllow: /\nDisallow: /cart.html\n\n"
+                "User-agent: *\nAllow: /\nDisallow: /cart.html\nDisallow: /admin/\n\n"
                 "# AI search and answer engines are allowed, so your furniture can be found and quoted in AI answers.\n"
                 "# To stop one of them, change its 'Allow: /' line to 'Disallow: /'.\n\n"
                 + bots + f"\nSitemap: {base}/sitemap.xml\n")
@@ -1469,7 +1538,21 @@ def build_sitemap():
         f.write("\n".join(lines))
 
 
+def remove_orphan_pages():
+    """A product hidden or deleted in the admin page must not leave its old page online."""
+    keep = {PRODUCT_SEO[p["id"]]["slug"] + ".html" for p in PRODUCTS}
+    for fn in os.listdir(OUT):
+        if not fn.endswith(".html") or fn in keep:
+            continue
+        with open(os.path.join(OUT, fn), encoding="utf-8") as f:
+            head = f.read()
+        if "<!-- GENERATED PRODUCT PAGE -->" in head:
+            os.remove(os.path.join(OUT, fn))
+            print("removed old product page", fn)
+
+
 if __name__ == "__main__":
     build()
+    remove_orphan_pages()
     print("pages written to", OUT)
     print(sorted(f for f in os.listdir(OUT) if f.endswith(".html")))

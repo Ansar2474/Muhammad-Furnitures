@@ -1,0 +1,44 @@
+{
+  "id": 6,
+  "slug": "tv-unit-with-shelves",
+  "name": "TV Unit with Shelves",
+  "headline": "TV Unit with Shelves",
+  "category": "living",
+  "price": 45000,
+  "spec": "180 × 40 × 50 cm",
+  "badge": "",
+  "shortDesc": "A tidy home for your TV, decoder and decor, built to the size of your wall.",
+  "description": "A tidy TV unit with shelves, built to the size of your wall.",
+  "features": [
+    "Made to your wall and TV size",
+    "Open shelves and closed storage planned with you",
+    "Space for cables and a decoder",
+    "Finish chosen to match your living room",
+    "Delivery and setup can be arranged"
+  ],
+  "image": "images/product6.jpg",
+  "alt": "TV unit with shelves",
+  "published": true,
+  "order": 6,
+  "seoTitle": "TV Unit with Shelves, Made to Size",
+  "seoDescription": "TV unit with shelves, made to the size of your wall for your TV, decoder and decor. Starting price {price}. {name}.",
+  "paras": [
+    "A TV unit keeps your TV, decoder, speakers and decor in one neat place. Ours starts at 180 cm wide, 40 cm deep and 50 cm high, and we can make it wider or lower to suit your wall and your TV size.",
+    "Tell us the size of your TV and the wall it will stand against, and we will plan the shelves and doors with you. We can leave space for cables and a decoder so everything stays tidy. You can choose the finish to match your sofa set and centre table."
+  ],
+  "faq": [
+    [
+      "Can the TV unit be made for a bigger TV?",
+      "Yes. Send us your TV size and the wall width and we will make the unit to fit."
+    ],
+    [
+      "Can you add closed cupboards?",
+      "Yes. Tell us what you want to hide and we will plan doors or drawers for it."
+    ]
+  ],
+  "related": [
+    "sofa-set-5-seater",
+    "coffee-table",
+    "bookshelf-5-shelf"
+  ]
+}
