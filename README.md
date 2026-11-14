@@ -14,6 +14,6 @@ Multi-page website for **Muhammad Furnitures** (made-to-order furniture). Plain 
 - The "last updated" date (`UPDATED_ISO` and `UPDATED_TEXT` in `tools/build_site.py`) whenever you change prices or text.
 
 ## Notes
-- Contact: 0311 7420474 (call and WhatsApp), mr.genius2474@gmail.com.
-- `sitemap.xml`, `robots.txt` and `llms.txt` contain `YOUR-DOMAIN` until `SITE_URL` is set. Rebuild before uploading them.
+- Contact: 0311 7420474 (call and WhatsApp). Email, address, hours, social links, homepage text and FAQs are edited on the admin page (Site settings) and saved in `content/site.json`.
+- The website address used in `sitemap.xml`, `robots.txt` and `llms.txt` is the "Website address" field in Site settings.
 - `style.css` holds the colours at the top (`:root`), `script.js` holds the cart, call popup and forms.

@@ -230,7 +230,7 @@ QUICK = {
     "collections": "{name} makes furniture for five parts of your space: the living room, bedroom, dining room, office and storage. Every collection is built to your size, with a clear price before we start.",
     "custom": "{name} builds custom furniture to your size. You send your measurements or a photo on WhatsApp, we reply with a clear price, and then we build and finish the piece and can arrange delivery.",
     "about": "{name} is a furniture maker in {loc}. We build sofa sets, beds, wardrobes, tables and office furniture to order for homes, shops and offices.",
-    "contact": "To get a furniture quote from {name}, call or WhatsApp {phone}, email {email}, or send the quote form on this page. We reply with a clear price.",
+    "contact": "To get a furniture quote from {name}, call or WhatsApp {phone}, or send the quote form on this page. We reply with a clear price.",
     "guide": "This guide explains how to choose a sofa set, bed, wardrobe, dining table and office desk, what to ask about wood and finish, and how to measure your space. It is written by the team at {name}.",
     "product": "{name} sells the {item} from {price} for the standard size ({spec}). It is made to order, so the size, colour and finish can be changed, and we confirm the final price before we start.",
 }

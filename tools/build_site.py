@@ -17,20 +17,137 @@ from seo_content import COLLECTION_EXTRA, ROOM_ALT, GUIDE_SECTIONS, GUIDE_FAQ, G
 
 OUT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))   # the website folder (one level up)
 
-# ---- SEO SETTINGS (UPDATE THESE TWO LINES WHEN YOU KNOW THEM, THEN REBUILD) ----
-CITY = ""        # PUT YOUR CITY HERE, e.g. "Lahore". It goes into titles, headings and Google business data.
-SITE_URL = "https://ansar2474.github.io/Muhammad-Furnitures"    # PUT YOUR WEBSITE ADDRESS HERE once it is live, e.g. "https://www.muhammadfurnitures.com" (no slash at the end)
-UPDATED_ISO = datetime.date.today().isoformat()          # UPDATE THIS DATE whenever you change prices or text; it is shown on the page and in the data for Google
+# ---- SITE SETTINGS: everything below is edited from the admin page (Site settings) and saved in content/site.json ----
+# Anything left empty there falls back to the wording in SITE_DEFAULTS. Use {city}, {phone}, {from} and {examples} inside texts.
+SITE_FILE = os.path.join(OUT, "content", "site.json")
+SITE_DEFAULTS = {
+    "business": {
+        "name": "Muhammad Furnitures", "city": "", "phone": "0311 7420474", "email": "",
+        "address": "", "hours": "", "googleUrl": "https://share.google/vqhgRHfPlE7DO94DB",
+        "siteUrl": "https://ansar2474.github.io/Muhammad-Furnitures",
+    },
+    "socials": {"facebook": "https://www.facebook.com/share/1KevMHNxmj/", "instagram": "", "linkedin": "", "x": "", "youtube": "", "tiktok": ""},
+    "announcement": {"lead": "Made-to-order furniture", "text": "Get a clear quote on WhatsApp"},
+    "hero": {
+        "tag": "Made to order, built to last", "line1": "Muhammad", "line2": "Furnitures", "sub": "Custom furniture maker in {city}",
+        "text": "Made-to-order sofa sets, beds, wardrobes, dining tables and office furniture in {city}. Choose a ready design or tell us your size, style and budget, and our craftsmen will build it for you.",
+        "points": ["Made to your size", "Clear price before we start", "Quick replies on WhatsApp"],
+    },
+    "promo": {"label": "Custom orders welcome", "headline": "Built to", "highlight": "your size", "text": "In your choice of finish.", "button": "Request a Quote"},
+    "footer": {"about": "Made-to-order furniture for homes, shops and offices in {city}. Tell us your size, we send a clear price.",
+               "note": "Prices are in Pakistani rupees (Rs)."},
+    "faqs": [
+        {"q": "Can you make furniture to my size?", "a": "Yes. We build beds, wardrobes, sofas, tables and more to your measurements, so the piece fits your room properly."},
+        {"q": "How do I get a price?", "a": "Send us a photo, your measurements or an idea on WhatsApp ({phone}). We reply with a clear price and timeline."},
+        {"q": "Can I choose the finish and colour?", "a": "Yes. Pick a wood tone or colour, or send us a photo of the look you want and we will match it where we can."},
+        {"q": "What is the price of a sofa set, bed or wardrobe?", "a": "Prices start at {from} and depend on the size, wood or board, fabric and finish. {examples} Send us your size and we give you the exact price before we start."},
+        {"q": "Can you make a full bed set?", "a": "Yes. We build beds with storage and dressing tables, and we can plan them to match each other. Tell us which pieces you need and your mattress size."},
+        {"q": "Do you deliver?", "a": "We can deliver and help with setup in {city}. Tell us your area when you ask for a quote and we will confirm the details."},
+        {"q": "Can I see examples of your work?", "a": "Yes. You can see our latest pieces and customer reviews on our Facebook page and our Google page."},
+    ],
+}
+
+
+def _load_site():
+    try:
+        with open(SITE_FILE, encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+SITEJ = _load_site()
+
+
+def _dig(root, keys):
+    cur = root
+    for k in keys:
+        if not isinstance(cur, dict) or k not in cur:
+            return None
+        cur = cur[k]
+    return cur
+
+
+def sv(path):
+    """Setting by dotted name, e.g. sv("business.phone"). Empty or missing values fall back to the default wording
+    (except city, address, hours, email and social links, which may be left empty on purpose)."""
+    keys = path.split(".")
+    v = _dig(SITEJ, keys)
+    if isinstance(v, str):
+        v = v.strip()
+    optional = path in ("business.address", "business.hours", "business.city", "business.email") or path.startswith("socials.")
+    if v in (None, "", []) and not (optional and v is not None):
+        v = _dig(SITE_DEFAULTS, keys)
+    return v
+
+
+def _plain(t):
+    return str(t).replace("<", "").replace(">", "").replace('"', "")
+
+
+UPDATED_ISO = datetime.date.today().isoformat()          # shown on the page and in the data for Google
 UPDATED_TEXT = f"{datetime.date.today().day} {datetime.date.today():%B %Y}"
+CITY = _plain(sv("business.city") or "")
 LOC = CITY or "Pakistan"   # used in titles and headings: "... in Pakistan" or "... in Lahore"
-NAME = "Muhammad Furnitures"
-PHONE = "0311 7420474"
-TEL = "+923117420474"
-WA = "923117420474"
-EMAIL = "mr.genius2474@gmail.com"
+SITE_URL = (sv("business.siteUrl") or "").rstrip("/")
+NAME = _plain(sv("business.name"))
+PHONE = _plain(sv("business.phone"))
+_digits = re.sub(r"\D", "", PHONE)
+_digits = ("92" + _digits[1:]) if _digits.startswith("0") else _digits      # 0311 7420474 -> 923117420474
+WA = _digits
+TEL = "+" + _digits
+EMAIL = _plain(sv("business.email") or "")      # empty = no email is shown on the site
+ADDRESS = _plain(sv("business.address") or "")
+HOURS = _plain(sv("business.hours") or "")
+
+
+def tok(text):
+    """Fills in {city}, {phone}, {from} (lowest price) and {examples} inside a text."""
+    t = str(text).replace("{city}", LOC).replace("{phone}", PHONE)
+    if "{from}" in t:
+        t = t.replace("{from}", f"Rs {min(p['price'] for p in PRODUCTS):,}" if PRODUCTS else "a fair price")
+    if "{examples}" in t:
+        t = t.replace("{examples}", _example_prices().strip() if PRODUCTS else "")
+    return re.sub(r"[ \t]{2,}", " ", t)
+
+
+def T(path):
+    """A setting as safe HTML text."""
+    return html.escape(tok(sv(path)), quote=False)
+
+
+def hero_points():
+    pts = [str(x).strip() for x in (sv("hero.points") or []) if str(x).strip()][:4]
+    return "\n".join(f"            <li>{html.escape(tok(x), quote=False)}</li>" for x in pts)
+
+
+def footer_rows():
+    """Email, address and hours in the footer: a row is shown only when you filled it in on the admin page."""
+    rows = []
+    if EMAIL:
+        rows.append(f'          <li><span>Email</span><a href="mailto:{EMAIL}">{html.escape(EMAIL, quote=False)}</a></li>')
+    if ADDRESS:
+        rows.append(f"          <li><span>Address</span><em>{html.escape(ADDRESS, quote=False)}</em></li>")
+    if HOURS:
+        rows.append(f"          <li><span>Hours</span><em>{html.escape(HOURS, quote=False)}</em></li>")
+    return "\n".join(rows)
+
+
+def contact_rows():
+    rows = []
+    if EMAIL:
+        rows.append(f'            <div><dt>Email</dt><dd><a href="mailto:{EMAIL}">{html.escape(EMAIL, quote=False)}</a></dd></div>')
+    if ADDRESS:
+        rows.append(f"            <div><dt>Address</dt><dd>{html.escape(ADDRESS, quote=False)}</dd></div>")
+    if HOURS:
+        rows.append(f"            <div><dt>Hours</dt><dd>{html.escape(HOURS, quote=False)}</dd></div>")
+    return "\n".join(rows)
+
+
 WA_PATH = '<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>'
-FB = "https://www.facebook.com/share/1KevMHNxmj/"
-GOOGLE = "https://share.google/vqhgRHfPlE7DO94DB"
+FB = sv("socials.facebook") or ""
+GOOGLE = sv("business.googleUrl")
 
 NAV = [
     ("Home", "index.html", "home"),
@@ -59,26 +176,29 @@ def local_ld():
         "@context": "https://schema.org",
         "@type": "FurnitureStore",
         "@id": (SITE_URL + "/#business") if SITE_URL else "#business",
-        "name": "Muhammad Furnitures",
+        "name": NAME,
         "description": "Handcrafted, made-to-order furniture for homes, shops and offices: sofa sets, beds, wardrobes, dining tables and office desks.",
-        "telephone": "+923117420474",
-        "email": "mr.genius2474@gmail.com",
+        "telephone": TEL,
         "priceRange": f"Rs {min(p['price'] for p in PRODUCTS):,} - Rs {max(p['price'] for p in PRODUCTS):,}",
         "currenciesAccepted": "PKR",
         "address": {"@type": "PostalAddress", "addressCountry": "PK"},
         "areaServed": {"@type": "Country", "name": "Pakistan"},
-        "sameAs": ["https://www.facebook.com/share/1KevMHNxmj/", "https://share.google/vqhgRHfPlE7DO94DB"],
+        "sameAs": [u for u in [FB, GOOGLE, sv("socials.instagram"), sv("socials.linkedin"), sv("socials.x"), sv("socials.youtube"), sv("socials.tiktok")] if u],
         "slogan": "Handcrafted. Made to order. Built to last.",
         "knowsAbout": ["Custom furniture", "Sofa sets", "Bed sets", "Wardrobes", "Dining tables", "Office desks", "TV units", "Wooden furniture"],
         "makesOffer": {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Made-to-order furniture"}},
     }
+    if EMAIL:
+        biz["email"] = EMAIL
+    if ADDRESS:
+        biz["address"]["streetAddress"] = ADDRESS
     if CITY:
         biz["address"]["addressLocality"] = CITY
         biz["areaServed"] = {"@type": "City", "name": CITY}
     if SITE_URL:
         biz["url"] = SITE_URL + "/"
         biz["image"] = SITE_URL + "/images/hero.jpg"
-    site = {"@context": "https://schema.org", "@type": "WebSite", "name": "Muhammad Furnitures", "inLanguage": "en-PK"}
+    site = {"@context": "https://schema.org", "@type": "WebSite", "name": NAME, "inLanguage": "en-PK"}
     if SITE_URL:
         site["url"] = SITE_URL + "/"
     return ("  <!-- GOOGLE STRUCTURED DATA (helps your business show up in local search).\n"
@@ -287,6 +407,9 @@ SOCIALS = [
     ("YouTube", "#", '<rect x="2.5" y="5.5" width="19" height="13" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/>', False),
     ("TikTok", "#", '<path d="M14 4v10.2a3.7 3.7 0 1 1-3.7-3.7M14 4c.3 2.4 1.9 4 4.3 4.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>', False),
 ]
+# The links come from the admin page (Site settings). An icon with no link is simply left out.
+_SOCIAL_KEYS = {"Facebook": "facebook", "Instagram": "instagram", "LinkedIn": "linkedin", "X (Twitter)": "x", "YouTube": "youtube", "TikTok": "tiktok"}
+SOCIALS = [(n, html.escape(sv("socials." + _SOCIAL_KEYS[n]) or "#", quote=True), svg, bool(sv("socials." + _SOCIAL_KEYS[n]))) for n, _u, svg, _r in SOCIALS]
 
 
 def social_html(indent="        "):
@@ -317,7 +440,7 @@ def header(active):
   <!-- ANNOUNCEMENT BAR (top of every page). UPDATE THE MESSAGE HERE. Only promise offers you really give. -->
   <div class="announce">
     <div class="container announce-inner">
-      <span><span class="hide-sm">Made-to-order furniture &bull; </span>Get a clear quote on WhatsApp</span>
+      <span><span class="hide-sm">{T("announcement.lead")} &bull; </span>{T("announcement.text")}</span>
       <span class="announce-links"><a href="tel:{TEL}">Call {PHONE}</a><a href="https://wa.me/{WA}" target="_blank" rel="noopener">WhatsApp</a></span>
     </div>
   </div>
@@ -394,8 +517,7 @@ def footer():
           <span class="logo-name">Muhammad</span>
           <span class="logo-sub">Furnitures</span>
         </a>
-        <!-- UPDATE SHORT BRAND DESCRIPTION HERE -->
-        <p>Made-to-order furniture for homes, shops and offices in {LOC}. Tell us your size, we send a clear price.</p>
+        <p>{T("footer.about")}</p>
         <div class="footer-cta">
           <a class="btn btn-gold btn-sm" href="tel:{TEL}">Call us</a>
           <a class="btn btn-wa btn-sm" href="https://wa.me/{WA}" target="_blank" rel="noopener">WhatsApp</a>
@@ -433,11 +555,7 @@ def footer():
         <h3>Contact</h3>
         <ul class="footer-contact">
           <li><span>Phone and WhatsApp</span><a href="tel:{TEL}">{PHONE}</a></li>
-          <li><span>Email</span><a href="mailto:{EMAIL}">{EMAIL}</a></li>
-          <!-- PUT YOUR ADDRESS HERE (same as your Google listing) -->
-          <li><span>Address</span><em>[Add your address]</em></li>
-          <!-- PUT YOUR OPENING HOURS HERE -->
-          <li><span>Hours</span><em>[Add days and hours]</em></li>
+{footer_rows()}
           <li><a href="{GOOGLE}" target="_blank" rel="noopener">Find us on Google</a></li>
         </ul>
       </div>
@@ -446,7 +564,7 @@ def footer():
     <!-- BOTTOM BAR: copyright (year updates automatically) + social icons -->
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
-        <p>&copy; <span id="year"></span> {NAME}. Prices are in Pakistani rupees (Rs).</p>
+        <p>&copy; <span id="year"></span> {NAME}. {T("footer.note")}</p>
         <div class="social-icons">
 {social_html("          ")}
         </div>
@@ -806,22 +924,8 @@ HOW = f"""    <!-- ============================================================
 """
 
 # FAQ: shown on the page AND sent to Google as structured data (they must match). EDIT ANSWERS TO MATCH YOUR BUSINESS.
-FAQS = [
-    ("Can you make furniture to my size?",
-     "Yes. We build beds, wardrobes, sofas, tables and more to your measurements, so the piece fits your room properly."),
-    ("How do I get a price?",
-     f"Send us a photo, your measurements or an idea on WhatsApp ({PHONE}). We reply with a clear price and timeline."),
-    ("Can I choose the finish and colour?",
-     "Yes. Pick a wood tone or colour, or send us a photo of the look you want and we will match it where we can."),
-    ("What is the price of a sofa set, bed or wardrobe?",
-     f"Prices start at Rs {min(p['price'] for p in PRODUCTS):,} and depend on the size, wood or board, fabric and finish. " + _example_prices() + "Send us your size and we give you the exact price before we start."),
-    ("Can you make a full bed set?",
-     "Yes. We build beds with storage and dressing tables, and we can plan them to match each other. Tell us which pieces you need and your mattress size."),
-    ("Do you deliver?",
-     f"We can deliver and help with setup in {LOC}. Tell us your area when you ask for a quote and we will confirm the details."),
-    ("Can I see examples of your work?",
-     "Yes. You can see our latest pieces and customer reviews on our Facebook page and our Google page."),
-]
+FAQS = [(html.escape(tok(f["q"]), quote=False), html.escape(tok(f["a"]), quote=False))
+        for f in (sv("faqs") or []) if isinstance(f, dict) and f.get("q") and f.get("a")]     # edited on the admin page
 
 
 def faq_html():
@@ -870,13 +974,13 @@ def build():
       <div class="container">
         <div class="hero-text">
           <!-- UPDATE THE THREE WORDS IN THE TAG HERE -->
-          <span class="hero-tag">Made to order, built to last</span>
+          <span class="hero-tag">{T("hero.tag")}</span>
 
           <!-- HERO HEADLINE: the first line is navy, the second is gold -->
-          <h1><span class="h1-navy">Muhammad</span> <span class="h1-gold">Furnitures</span> <span class="h1-sub">Custom furniture maker in {LOC}</span></h1>
+          <h1><span class="h1-navy">{T("hero.line1")}</span> <span class="h1-gold">{T("hero.line2")}</span> <span class="h1-sub">{T("hero.sub")}</span></h1>
 
           <!-- UPDATE HERO TEXT HERE. TIP: add your city, e.g. "...made in Lahore" -->
-          <p class="hero-sub">Made-to-order sofa sets, beds, wardrobes, dining tables and office furniture in {LOC}. Choose a ready design or tell us your size, style and budget, and our craftsmen will build it for you.</p>
+          <p class="hero-sub">{T("hero.text")}</p>
 
           <div class="hero-actions">
             <a href="shop.html" class="btn btn-gold btn-lg">Shop Now</a>
@@ -885,9 +989,7 @@ def build():
           </div>
 
           <ul class="hero-points">
-            <li>Made to your size</li>
-            <li>Clear price before we start</li>
-            <li>Quick replies on WhatsApp</li>
+{hero_points()}
           </ul>
         </div>
       </div>
@@ -920,10 +1022,10 @@ def build():
       <!-- PUT BANNER PHOTO HERE (a bedroom or living room photo, about 900 wide by 700 tall) -->
       <img src="images/promo.jpg" width="900" height="700" alt="Custom made wardrobe with measurement lines: furniture built to your size in {LOC}" loading="lazy">
       <div class="promo-text">
-        <span class="promo-label">Custom orders welcome</span>
-        <h2>Built to <span>your size</span></h2>
-        <p>In your choice of finish.</p>
-        <a href="contact.html" class="btn btn-navy">Request a Quote</a>
+        <span class="promo-label">{T("promo.label")}</span>
+        <h2>{T("promo.headline")} <span>{T("promo.highlight")}</span></h2>
+        <p>{T("promo.text")}</p>
+        <a href="contact.html" class="btn btn-navy">{T("promo.button")}</a>
       </div>
     </section>
 
@@ -1177,9 +1279,7 @@ def build():
           <dl class="contact-list">
             <div><dt>Phone</dt><dd><a href="tel:{TEL}">{PHONE}</a></dd></div>
             <div><dt>WhatsApp</dt><dd><a href="https://wa.me/{WA}" target="_blank" rel="noopener">{PHONE}</a></dd></div>
-            <div><dt>Email</dt><dd><a href="mailto:{EMAIL}">{EMAIL}</a></dd></div>
-            <div><dt>Address</dt><dd><!-- PUT YOUR ADDRESS HERE (copy it exactly as on your Google listing) -->[Add your address]</dd></div>
-            <div><dt>Hours</dt><dd><!-- PUT YOUR OPENING HOURS HERE -->[Add days and hours]</dd></div>
+{contact_rows()}
           </dl>
 
           <div class="contact-quick">
@@ -1227,7 +1327,7 @@ def build():
 
 {PROOF}"""
     page("contact.html", "contact", f"Contact {NAME} | Get a Furniture Quote in {LOC}",
-         f"Call or WhatsApp {PHONE}, email {EMAIL}, or send a quote request to {NAME}. Custom furniture made to your size in {LOC}.", contact,
+         f"Call or WhatsApp {PHONE}, or send a quote request to {NAME}. Custom furniture made to your size in {LOC}.", contact,
          extra_ld=crumb_ld([("Home", "index.html"), ("Contact", "contact.html")]) + page_ld("ContactPage", "Contact " + NAME, "contact.html"))
 
     # ---------------- CART ----------------
@@ -1537,9 +1637,8 @@ def facts_block():
           <div><dt>What we make</dt><dd>Sofa sets, beds, wardrobes, dining tables, office desks, TV units, centre tables, dressing tables, bookshelves</dd></div>
           <div><dt>How we work</dt><dd>Made to order, to your size, colour and finish</dd></div>
           <div><dt>Where</dt><dd>{where}</dd></div>
-          <!-- ADD YOUR STREET ADDRESS AND OPENING HOURS HERE -->
           <div><dt>Phone and WhatsApp</dt><dd><a href="tel:{TEL}">{PHONE}</a></dd></div>
-          <div><dt>Email</dt><dd><a href="mailto:{EMAIL}">{EMAIL}</a></dd></div>
+{contact_rows()}
           <div><dt>Prices</dt><dd>In Pakistani rupees (Rs). Clear price confirmed before we start.</dd></div>
           <div><dt>Last updated</dt><dd><time datetime="{UPDATED_ISO}">{UPDATED_TEXT}</time></dd></div>
         </dl>
@@ -1575,7 +1674,7 @@ def build_sitemap():
     # llms.txt: an optional plain-text summary for AI tools (Google says it does not need it; other tools may read it)
     lines = [f"# {NAME}", "",
              f"> {NAME} is a furniture maker in {LOC}. We build sofa sets, beds, wardrobes, dining tables, office desks, TV units, centre tables, dressing tables and bookshelves to order, to your size, colour and finish. Prices are in Pakistani rupees (Rs).", "",
-             "## Contact", f"- Phone and WhatsApp: {PHONE}", f"- Email: {EMAIL}", "",
+             "## Contact", f"- Phone and WhatsApp: {PHONE}", *([f"- Email: {EMAIL}"] if EMAIL else []), "",
              "## Main pages",
              f"- [Shop and starting prices]({base}/shop/): all furniture with starting prices",
              f"- [Custom furniture]({base}/custom-furniture/): how made-to-order works",

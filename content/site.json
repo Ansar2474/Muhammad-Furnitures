@@ -1,0 +1,77 @@
+{
+  "business": {
+    "name": "Muhammad Furnitures",
+    "city": "",
+    "phone": "0311 7420474",
+    "email": "",
+    "address": "",
+    "hours": "",
+    "googleUrl": "https://share.google/vqhgRHfPlE7DO94DB",
+    "siteUrl": "https://ansar2474.github.io/Muhammad-Furnitures"
+  },
+  "socials": {
+    "facebook": "https://www.facebook.com/share/1KevMHNxmj/",
+    "instagram": "",
+    "linkedin": "",
+    "x": "",
+    "youtube": "",
+    "tiktok": ""
+  },
+  "announcement": {
+    "lead": "Made-to-order furniture",
+    "text": "Get a clear quote on WhatsApp"
+  },
+  "hero": {
+    "tag": "Made to order, built to last",
+    "line1": "Muhammad",
+    "line2": "Furnitures",
+    "sub": "Custom furniture maker in {city}",
+    "text": "Made-to-order sofa sets, beds, wardrobes, dining tables and office furniture in {city}. Choose a ready design or tell us your size, style and budget, and our craftsmen will build it for you.",
+    "points": [
+      "Made to your size",
+      "Clear price before we start",
+      "Quick replies on WhatsApp"
+    ]
+  },
+  "promo": {
+    "label": "Custom orders welcome",
+    "headline": "Built to",
+    "highlight": "your size",
+    "text": "In your choice of finish.",
+    "button": "Request a Quote"
+  },
+  "footer": {
+    "about": "Made-to-order furniture for homes, shops and offices in {city}. Tell us your size, we send a clear price.",
+    "note": "Prices are in Pakistani rupees (Rs)."
+  },
+  "faqs": [
+    {
+      "q": "Can you make furniture to my size?",
+      "a": "Yes. We build beds, wardrobes, sofas, tables and more to your measurements, so the piece fits your room properly."
+    },
+    {
+      "q": "How do I get a price?",
+      "a": "Send us a photo, your measurements or an idea on WhatsApp ({phone}). We reply with a clear price and timeline."
+    },
+    {
+      "q": "Can I choose the finish and colour?",
+      "a": "Yes. Pick a wood tone or colour, or send us a photo of the look you want and we will match it where we can."
+    },
+    {
+      "q": "What is the price of a sofa set, bed or wardrobe?",
+      "a": "Prices start at {from} and depend on the size, wood or board, fabric and finish. {examples} Send us your size and we give you the exact price before we start."
+    },
+    {
+      "q": "Can you make a full bed set?",
+      "a": "Yes. We build beds with storage and dressing tables, and we can plan them to match each other. Tell us which pieces you need and your mattress size."
+    },
+    {
+      "q": "Do you deliver?",
+      "a": "We can deliver and help with setup in {city}. Tell us your area when you ask for a quote and we will confirm the details."
+    },
+    {
+      "q": "Can I see examples of your work?",
+      "a": "Yes. You can see our latest pieces and customer reviews on our Facebook page and our Google page."
+    }
+  ]
+}

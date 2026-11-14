@@ -98,9 +98,9 @@ button { cursor: pointer; }
 .field:last-child { margin-bottom: 0; }
 .field label, .field .lbl { font-weight: 600; color: var(--ink); font-size: .92rem; }
 .hint { font-size: .82rem; color: var(--muted); }
-.field input[type=text], .field input[type=number], .field select, .field textarea { width: 100%; padding: 11px 14px; border: 1.5px solid var(--line); border-radius: 10px; background: var(--bg); }
+.field input[type=text], .field input[type=number], .field input[type=url], .field input[type=email], .field input[type=password], .field select, .field textarea { width: 100%; padding: 11px 14px; border: 1.5px solid var(--line); border-radius: 10px; background: var(--bg); }
 .field input:focus, .field select:focus, .field textarea:focus { outline: 0; border-color: var(--ink); background: var(--surface); box-shadow: 0 0 0 3px var(--sun-tint); }
-.field textarea { min-height: 110px; resize: vertical; }
+.field textarea { min-height: 72px; resize: vertical; }
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .price-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .price-row input { flex: 1 1 140px; }
@@ -175,6 +175,12 @@ button { cursor: pointer; }
 .where small { grid-column: 1 / -1; color: var(--muted); font-size: .82rem; margin-top: -4px; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 2px; }
 .chip.pos { background: var(--bg); color: var(--ink); border: 1px solid var(--line); }
+.settings { display: grid; gap: 0; max-width: 820px; }
+.faq-row { display: grid; gap: 8px; padding: 14px 0; border-top: 1px solid var(--line); }
+.faq-row:first-child { border-top: 0; padding-top: 0; }
+.faq-row input, .faq-row textarea { width: 100%; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--bg); color: var(--text); font: inherit; }
+.faq-tools { display: flex; gap: 8px; align-items: center; }
+.faq-edit { margin-bottom: 12px; }
 details.adv summary { cursor: pointer; font-weight: 600; color: var(--ink); font-family: var(--font-display); font-size: 1.15rem; }
 details.adv[open] summary { margin-bottom: 14px; }
 a.btn { text-decoration: none; }
@@ -211,7 +217,7 @@ a.btn { text-decoration: none; }
   var catLabel = function (k) { var c = CATS.filter(function (x) { return x[0] === k; })[0]; return c ? c[1] : k; };
 
   var token = ls(TOKEN_KEY);
-  var S = { products: null, listPage: "shop", view: "list", draft: null, isNew: false, confirmDelete: false, saving: false, run: null, writeAt: 0, localImg: {}, pollTimer: null, noWorkflow: false };
+  var S = { products: null, site: null, siteSha: "", tab: "products", listPage: "shop", view: "list", draft: null, isNew: false, confirmDelete: false, saving: false, run: null, writeAt: 0, localImg: {}, pollTimer: null, noWorkflow: false };
 
   var $app = document.getElementById("app"), $top = document.getElementById("topActions"), $status = document.getElementById("statusBar"), $toast = document.getElementById("toast");
   var toastTimer;
@@ -379,7 +385,156 @@ a.btn { text-decoration: none; }
   function signOut() { token = ""; ls(TOKEN_KEY, null); clearTimeout(S.pollTimer); S.products = null; renderLogin(); }
 
   /* ---------- list ---------- */
-  function renderList() {
+  /* ---------- site settings (content/site.json) ---------- */
+  function loadSite() {
+    return gh(contents("content/site.json") + "?ref=" + BRANCH).then(function (f) {
+      S.siteSha = f.sha;
+      return gh(contents("content/site.json") + "?ref=" + BRANCH, { raw: true });
+    }).then(function (t) { S.site = JSON.parse(t); }).catch(function (e) {
+      if (e.status === 404) { S.site = {}; S.siteSha = ""; return; }
+      throw e;
+    });
+  }
+  function sget(path, fallback) {
+    var cur = S.site || {}, keys = path.split(".");
+    for (var i = 0; i < keys.length; i++) { if (cur == null || typeof cur !== "object") return fallback; cur = cur[keys[i]]; }
+    return cur == null ? fallback : cur;
+  }
+  function waDigits(phone) { var d = String(phone || "").replace(/\D/g, ""); return d.charAt(0) === "0" ? "92" + d.slice(1) : d; }
+  function tabs() {
+    function tab(id, label) { return el("button", { type: "button", "aria-pressed": String(S.tab === id), onclick: function () { S.tab = id; S.listPage = S.listPage || "shop"; renderList(); }, text: label }); }
+    return el("div", { class: "seg", role: "group", "aria-label": "Section" }, [tab("products", "Products"), tab("settings", "Site settings")]);
+  }
+  function topActions(extra) {
+    return [
+      el("button", { class: "btn btn-ghost btn-sm", type: "button", onclick: rebuild, text: "Update website now" }),
+      el("a", { class: "btn btn-ghost btn-sm", href: "../", target: "_blank", rel: "noopener", text: "View website" }),
+      el("button", { class: "btn btn-ghost btn-sm", type: "button", onclick: signOut, text: "Sign out" })
+    ].concat(extra || []);
+  }
+
+  function renderSettings() {
+    $top.replaceChildren.apply($top, topActions());
+    var $err = el("p", { class: "err", hidden: true, role: "alert" });
+    var inputs = {};
+    function text(path, opts) {
+      opts = opts || {};
+      var n = el(opts.area ? "textarea" : "input", { id: "s-" + path.replace(/\./g, "-"), type: opts.area ? undefined : (opts.type || "text"), rows: opts.rows, maxlength: opts.max, placeholder: opts.ph || "", autocomplete: "off" });
+      n.value = opts.lines ? (sget(path, []) || []).join("\n") : String(sget(path, "") || "");
+      inputs[path] = { node: n, lines: !!opts.lines };
+      return n;
+    }
+    function field(label, node, hint) { return el("div", { class: "field" }, [el("label", { for: node.id, text: label }), node, hint ? el("span", { class: "hint", text: hint }) : null]); }
+    var tokens = "You can type {city} and it fills in your city.";
+
+    var phone = text("business.phone", { max: 30, ph: "0311 7420474" });
+    var waNote = el("span", { class: "hint" });
+    function waPaint() { var d = waDigits(phone.value); waNote.textContent = d.length >= 11 ? "WhatsApp and the call button will use +" + d + "." : "Enter the full number, for example 0311 7420474."; }
+    phone.addEventListener("input", waPaint); waPaint();
+
+    /* FAQs: a list of question and answer rows */
+    var faqs = (sget("faqs", []) || []).map(function (f) { return { q: f.q || "", a: f.a || "" }; });
+    var faqBox = el("div", { class: "faq-edit" });
+    function paintFaqs() {
+      faqBox.replaceChildren();
+      faqs.forEach(function (f, i) {
+        var q = el("input", { type: "text", maxlength: "160", placeholder: "Question", "aria-label": "Question " + (i + 1) }); q.value = f.q; q.addEventListener("input", function () { f.q = q.value; });
+        var a = el("textarea", { rows: "3", maxlength: "700", placeholder: "Answer", "aria-label": "Answer " + (i + 1) }); a.value = f.a; a.addEventListener("input", function () { f.a = a.value; });
+        function mv(d) { var j = i + d; if (j < 0 || j >= faqs.length) return; var t = faqs[i]; faqs[i] = faqs[j]; faqs[j] = t; paintFaqs(); }
+        faqBox.appendChild(el("div", { class: "faq-row" }, [q, a, el("div", { class: "faq-tools" }, [
+          el("button", { class: "icon-btn", type: "button", "aria-label": "Move question up", disabled: i === 0, onclick: function () { mv(-1); }, text: "↑" }),
+          el("button", { class: "icon-btn", type: "button", "aria-label": "Move question down", disabled: i === faqs.length - 1, onclick: function () { mv(1); }, text: "↓" }),
+          el("button", { class: "btn btn-ghost btn-sm", type: "button", onclick: function () { faqs.splice(i, 1); paintFaqs(); }, text: "Remove" })
+        ])]));
+      });
+    }
+    paintFaqs();
+
+    var panels = [
+      el("section", { class: "panel" }, [
+        el("h2", { text: "Business details" }),
+        el("div", { class: "two" }, [field("Business name", text("business.name", { max: 60 })), field("City", text("business.city", { max: 40, ph: "e.g. Lahore" }), "Used in titles and headings. Leave empty to say “Pakistan”.")]),
+        el("div", { class: "two" }, [el("div", { class: "field" }, [el("label", { for: "s-business-phone", text: "Phone and WhatsApp number" }), phone, waNote]), field("Email (optional)", text("business.email", { type: "email", max: 80, ph: "name@example.com" }), "Leave empty to show no email on the website.")]),
+        field("Address", text("business.address", { area: true, rows: 2, max: 200 }), "Copy it exactly as on your Google listing. Leave empty to show no address."),
+        field("Opening hours", text("business.hours", { area: true, rows: 2, max: 200, ph: "Mon to Sat, 10 am to 8 pm" }), "Leave empty to show no hours."),
+        el("div", { class: "two" }, [field("Google business link", text("business.googleUrl", { type: "url", max: 300 })), field("Website address", text("business.siteUrl", { type: "url", max: 200, ph: "https://www.yourdomain.com" }), "Change this only when your own domain is working. No slash at the end.")])
+      ]),
+      el("section", { class: "panel" }, [
+        el("h2", { text: "Social media links" }),
+        el("p", { class: "hint", style: "margin:0 0 12px", text: "Paste the full page address. An icon with no link is not shown on the website." }),
+        el("div", { class: "two" }, [field("Facebook", text("socials.facebook", { type: "url", max: 300 })), field("Instagram", text("socials.instagram", { type: "url", max: 300 }))]),
+        el("div", { class: "two" }, [field("LinkedIn", text("socials.linkedin", { type: "url", max: 300 })), field("X (Twitter)", text("socials.x", { type: "url", max: 300 }))]),
+        el("div", { class: "two" }, [field("YouTube", text("socials.youtube", { type: "url", max: 300 })), field("TikTok", text("socials.tiktok", { type: "url", max: 300 }))])
+      ]),
+      el("section", { class: "panel" }, [
+        el("h2", { text: "Top bar message" }),
+        el("div", { class: "two" }, [field("First part", text("announcement.lead", { max: 60 }), "Hidden on small phones."), field("Second part", text("announcement.text", { max: 80 }), "Only promise offers you really give.")])
+      ]),
+      el("section", { class: "panel" }, [
+        el("h2", { text: "Home page top section" }),
+        field("Small tag above the headline", text("hero.tag", { max: 60 })),
+        el("div", { class: "two" }, [field("Headline, first line", text("hero.line1", { max: 40 })), field("Headline, second line", text("hero.line2", { max: 40 }))]),
+        field("Line under the headline", text("hero.sub", { max: 90 }), tokens),
+        field("Paragraph", text("hero.text", { area: true, rows: 4, max: 400 }), tokens),
+        field("Three short points", text("hero.points", { area: true, rows: 3, lines: true }), "One per line, up to four.")
+      ]),
+      el("section", { class: "panel" }, [
+        el("h2", { text: "Home page banner" }),
+        el("div", { class: "two" }, [field("Small label", text("promo.label", { max: 40 })), field("Button text", text("promo.button", { max: 30 }))]),
+        el("div", { class: "two" }, [field("Headline", text("promo.headline", { max: 40 })), field("Highlighted words", text("promo.highlight", { max: 40 }))]),
+        field("Line under the headline", text("promo.text", { max: 100 }), "Only mention an offer you really have.")
+      ]),
+      el("section", { class: "panel" }, [
+        el("h2", { text: "Footer" }),
+        field("Short description", text("footer.about", { area: true, rows: 2, max: 200 }), tokens),
+        field("Line next to the copyright", text("footer.note", { max: 100 }))
+      ]),
+      el("section", { class: "panel" }, [
+        el("h2", { text: "Frequently asked questions" }),
+        el("p", { class: "hint", style: "margin:0 0 12px", text: "Shown on the home page and sent to Google. Answers can use {city}, {phone}, {from} (your lowest price) and {examples} (example prices)." }),
+        faqBox,
+        el("button", { class: "btn btn-ghost btn-sm", type: "button", onclick: function () { faqs.push({ q: "", a: "" }); paintFaqs(); }, text: "Add a question" })
+      ])
+    ];
+
+    function fail(m) { $err.textContent = m; $err.hidden = false; $err.scrollIntoView({ block: "nearest", behavior: "smooth" }); }
+    var saveBtn = el("button", { class: "btn btn-primary", type: "button", text: "Save settings" });
+    saveBtn.addEventListener("click", function () {
+      if (S.saving) return; $err.hidden = true;
+      var out = JSON.parse(JSON.stringify(S.site || {}));
+      Object.keys(inputs).forEach(function (path) {
+        var it = inputs[path], keys = path.split("."), cur = out;
+        for (var i = 0; i < keys.length - 1; i++) { if (typeof cur[keys[i]] !== "object" || cur[keys[i]] == null) cur[keys[i]] = {}; cur = cur[keys[i]]; }
+        cur[keys[keys.length - 1]] = it.lines ? it.node.value.split("\n").map(function (x) { return x.trim(); }).filter(Boolean).slice(0, 4) : it.node.value.trim();
+      });
+      var b = out.business;
+      if (!b.name) return fail("Enter your business name.");
+      if (waDigits(b.phone).length < 11) return fail("Enter the full phone number, for example 0311 7420474.");
+      if (b.email && !/^[^\s]+@[^\s]+\.[^\s]+$/.test(b.email)) return fail("That email address does not look right.");
+      var urls = [["Google business link", b.googleUrl], ["Website address", b.siteUrl]];
+      Object.keys(out.socials || {}).forEach(function (k) { urls.push([k, out.socials[k]]); });
+      for (var u = 0; u < urls.length; u++) if (urls[u][1] && !/^https?:\/\/\S+$/i.test(urls[u][1])) return fail("“" + urls[u][0] + "” must be a full address starting with https://");
+      if (b.siteUrl) b.siteUrl = b.siteUrl.replace(/\/+$/, "");
+      var cleanFaqs = [];
+      for (var i = 0; i < faqs.length; i++) {
+        var q = faqs[i].q.trim(), a = faqs[i].a.trim();
+        if (!q && !a) continue;
+        if (!q || !a) return fail("Question " + (i + 1) + " needs both a question and an answer, or remove it.");
+        cleanFaqs.push({ q: q, a: a });
+      }
+      out.faqs = cleanFaqs;
+      S.saving = true; saveBtn.disabled = true; saveBtn.textContent = "Saving…";
+      putFile("content/site.json", b64(JSON.stringify(out, null, 2) + "\n"), "Update site settings", S.siteSha || undefined).then(function (res) {
+        S.site = out; S.siteSha = res.content.sha; S.writeAt = Date.now(); S.saving = false;
+        saveBtn.disabled = false; saveBtn.textContent = "Save settings"; toast("Saved. Your website will update in a few minutes."); schedulePoll(5000); paintStatus();
+      }).catch(function (e) { S.saving = false; saveBtn.disabled = false; saveBtn.textContent = "Save settings"; fail(friendly(e)); });
+    });
+
+    $app.replaceChildren(tabs(), el("div", { class: "settings" }, [$err].concat(panels, [el("div", { class: "bar" }, [saveBtn])])));
+  }
+
+  function renderList() { if (S.tab === "settings") renderSettings(); else renderProducts(); }
+  function renderProducts() {
     $top.replaceChildren(
       el("button", { class: "btn btn-ghost btn-sm", type: "button", onclick: rebuild, text: "Update website now" }),
       el("a", { class: "btn btn-ghost btn-sm", href: "../", target: "_blank", rel: "noopener", text: "View website" }),
@@ -418,7 +573,7 @@ a.btn { text-decoration: none; }
     });
     grid.appendChild(el("button", { class: "add-tile", type: "button", onclick: startNew }, [el("span", { class: "plus", "aria-hidden": "true", text: "+" }), el("span", { text: "Add a new product" })]));
     var note = page === "home" ? el("p", { class: "hint", style: "margin:-6px 0 14px", text: "Only products shown on the home page are listed here. Open a product and tick “Home page” to add it." }) : null;
-    $app.replaceChildren(seg, note, list.length ? grid : el("div", { class: "empty" }, [el("p", { text: "No products here yet." }), grid]));
+    $app.replaceChildren(tabs(), seg, note, list.length ? grid : el("div", { class: "empty" }, [el("p", { text: "No products here yet." }), grid]));
   }
   function move(list, i, dir) {
     var a = list[i], b = list[i + dir]; if (!a || !b) return;
@@ -635,7 +790,7 @@ a.btn { text-decoration: none; }
   /* ---------- start ---------- */
   function start() {
     S.view = "list"; $app.replaceChildren(el("div", { class: "empty", text: "Loading your products…" })); $top.replaceChildren();
-    loadProducts().then(function () { renderList(); checkRun(); }).catch(function (e) {
+    Promise.all([loadProducts(), loadSite()]).then(function () { renderList(); checkRun(); }).catch(function (e) {
       if (e.status === 401) { signOut(); renderLogin("Your sign-in key stopped working. Please sign in again."); return; }
       $app.replaceChildren(el("div", { class: "empty", text: "Could not load products. Check your connection and reload this page." }));
     });
