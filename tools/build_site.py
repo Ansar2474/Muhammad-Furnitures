@@ -419,9 +419,7 @@ def social_html(indent="        "):
     for name, url, svg, ready in SOCIALS:
         if ready:
             out.append(f'{indent}<a href="{url}" aria-label="{NAME} on {name}" target="_blank" rel="noopener"><svg {ICON_ATTR}>{svg}</svg></a>')
-        else:
-            out.append(f'{indent}<!-- PUT YOUR {name.upper()} LINK HERE -->')
-            out.append(f'{indent}<a href="{url}" aria-label="{NAME} on {name}" data-social-pending="{name}"><svg {ICON_ATTR}>{svg}</svg></a>')
+        # an icon with no link is not shown at all (add the link in Site settings and it appears)
     return "\n".join(out)
 
 
@@ -568,6 +566,9 @@ def footer():
         <div class="social-icons">
 {social_html("          ")}
         </div>
+      </div>
+      <div class="container">
+        {photo_credits()}
       </div>
     </div>
   </footer>
@@ -728,6 +729,38 @@ CATS = [
 ]
 
 
+# Lifestyle photos from Unsplash (free to use). Product photos are NOT replaced: they must show the shop's own work.
+# key: (photo id, photographer, photographer username)
+UNSPLASH = {
+    "hero":    ("1758957701419-2c6e266f7988", "Aalo Lens", "aalolens"),
+    "living":  ("1759722665610-e13e59aa117b", "Costa Live", "vendedorescostalive"),
+    "bedroom": ("1750420556288-d0e32a6f517b", "Spl Interiors", "spl_interiors"),
+    "dining":  ("1723750290151-164cb19ebab7", "Clay Banks", "claybanks"),
+    "office":  ("1493934558415-9d19f0b2b4d2", "Roman Bozhko", "romanbozhko"),
+    "storage": ("1771328756144-02bde5549a9a", "Anisha Deb", "newleafdesigns"),
+    "about":   ("1659930087003-2d64e33181f7", "Craft Kitties", "craftkitties"),
+    "craft":   ("1679797850019-3d0d8659a695", "Samuel Cruz", "samuelcruz"),
+    "promo":   ("1775241202442-a49b659b3da5", "Aleksandra Dementeva", "alexphotogram"),
+}
+
+
+def uns(key, w, h):
+    """Address of an Unsplash photo, cropped to w by h."""
+    return (f"https://images.unsplash.com/photo-{UNSPLASH[key][0]}"
+            f"?ixlib=rb-4.1.0&amp;q=75&amp;fm=jpg&amp;auto=format&amp;fit=crop&amp;crop=entropy&amp;w={w}&amp;h={h}")
+
+
+def photo_credits():
+    ref = "?utm_source=muhammad_furnitures&amp;utm_medium=referral"
+    seen, names = set(), []
+    for _, who, user in UNSPLASH.values():
+        if user not in seen:
+            seen.add(user)
+            names.append(f'<a href="https://unsplash.com/@{user}{ref}" target="_blank" rel="noopener">{who}</a>')
+    return ('<p class="photo-credit">Room and workshop photos by ' + ", ".join(names) +
+            f' on <a href="https://unsplash.com/{ref}" target="_blank" rel="noopener">Unsplash</a>.</p>')
+
+
 def svg_icon(key):
     return ('<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
             'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg>' % ICONS[key])
@@ -737,7 +770,7 @@ def cat_cards():
     out = []
     for key, label, seed, _ in CATS:
         out.append(f"""          <a href="shop.html#{key}" class="cat-card">
-            <span class="cat-image"><img src="images/{seed}.jpg" width="480" height="360" alt="{ROOM_ALT[key]}" loading="lazy"></span>
+            <span class="cat-image"><img src="{uns(key, 640, 480)}" width="480" height="360" alt="{ROOM_ALT[key]}" loading="lazy" decoding="async"></span>
             <span class="cat-icon">{svg_icon(key)}</span>
             <strong class="cat-name">{label}</strong>
             <span class="cat-link">Explore now</span>
@@ -969,7 +1002,7 @@ def build():
          ============================================================ -->
     <section class="hero" id="home">
       <!-- PUT YOUR BEST PHOTO HERE (a bright, wide room photo works best, about 1600 wide by 700 tall). Change src and alt. Keep fetchpriority so it loads first. -->
-      <img class="hero-bg" src="images/hero.jpg" width="1600" height="760" alt="Living room with a handcrafted sofa set, centre table and TV unit made to order in {LOC}" fetchpriority="high">
+      <img class="hero-bg" src="{uns('hero', 1800, 855)}" srcset="{uns('hero', 900, 760)} 900w, {uns('hero', 1800, 855)} 1800w" sizes="100vw" width="1600" height="760" alt="Bright living room with a large sofa and a solid wood coffee table, the kind of furniture made to order in {LOC}" fetchpriority="high">
 
       <div class="container">
         <div class="hero-text">
@@ -1020,7 +1053,7 @@ def build():
          ============================================================ -->
     <section class="promo">
       <!-- PUT BANNER PHOTO HERE (a bedroom or living room photo, about 900 wide by 700 tall) -->
-      <img src="images/promo.jpg" width="900" height="700" alt="Custom made wardrobe with measurement lines: furniture built to your size in {LOC}" loading="lazy">
+      <img src="{uns('promo', 900, 700)}" width="900" height="700" alt="Bedroom with a built-in wardrobe and shelves, furniture made to your size in {LOC}" loading="lazy" decoding="async">
       <div class="promo-text">
         <span class="promo-label">{T("promo.label")}</span>
         <h2>{T("promo.headline")} <span>{T("promo.highlight")}</span></h2>
@@ -1064,7 +1097,7 @@ def build():
             <a href="about.html" class="btn btn-gold" style="margin-top:26px">About Us</a>
           </div>
           <!-- PUT A WORKSHOP PHOTO HERE (craftsmen at work, a joint, a finish close-up) -->
-          <img src="images/craft.jpg" width="900" height="675" alt="Furniture being built by hand at {NAME}" loading="lazy">
+          <img src="{uns('craft', 900, 675)}" width="900" height="675" alt="Carpenter shaping a piece of wood by hand, as furniture is built at {NAME}" loading="lazy" decoding="async">
         </div>
       </div>
     </section>
@@ -1142,7 +1175,7 @@ def build():
     for key, label, seed, text in CATS:
         rows.append(f"""        <div class="collection-row">
           <!-- PUT COLLECTION PHOTO HERE (change src and alt) -->
-          <img src="images/{seed}.jpg" width="800" height="600" alt="{ROOM_ALT[key]}" loading="lazy">
+          <img src="{uns(key, 900, 675)}" width="800" height="600" alt="{ROOM_ALT[key]}" loading="lazy" decoding="async">
           <div>
             <h2>{COLLECTION_EXTRA[key][0]}</h2>
             <!-- UPDATE COLLECTION TEXT HERE -->
@@ -1225,7 +1258,7 @@ def build():
     <section class="about" id="about">
       <div class="container about-inner">
         <!-- PUT YOUR ABOUT IMAGE HERE (a photo of your workshop or your craftsmen) -->
-        <img src="images/about.jpg" width="900" height="720" alt="Craftsmen building furniture at {NAME}" loading="lazy">
+        <img src="{uns('about', 900, 720)}" width="900" height="720" alt="Carpenter marking a wooden board with a pencil before cutting, as furniture is built at {NAME}" loading="lazy" decoding="async">
         <div class="about-text">
           <h2>About {NAME}</h2>
           <!-- UPDATE ABOUT TEXT: add your city and the year you started, e.g. "based in Lahore. Since 2012, we have built..." -->
@@ -1251,7 +1284,7 @@ def build():
             <p>Every step is under our control. That means strong joints, clean finishing, and furniture that is checked before it leaves.</p>
           </div>
           <!-- PUT A WORKSHOP PHOTO HERE (craftsmen at work, a joint, a finish close-up) -->
-          <img src="images/craft.jpg" width="900" height="675" alt="Furniture being built by hand at {NAME}" loading="lazy">
+          <img src="{uns('craft', 900, 675)}" width="900" height="675" alt="Carpenter shaping a piece of wood by hand, as furniture is built at {NAME}" loading="lazy" decoding="async">
         </div>
 {CRAFT_POINTS}      </div>
     </section>
