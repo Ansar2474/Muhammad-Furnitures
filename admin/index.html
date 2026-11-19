@@ -260,7 +260,7 @@ a.btn { text-decoration: none; }
   function imgSrc(p) {
     if (!p.image) return "";
     if (S.localImg[p.image]) return S.localImg[p.image];
-    return "../" + p.image;      /* the admin page lives in /admin/, the site images one level up */
+    return /^https?:\/\//.test(p.image) ? p.image : "../" + p.image;      /* the admin page lives in /admin/, the site images one level up */
   }
 
   /* ---------- GitHub ---------- */

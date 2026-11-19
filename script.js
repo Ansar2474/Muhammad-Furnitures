@@ -175,7 +175,7 @@ function renderCartPage() {
         '</div>' +
         '<strong class="cart-line-total"></strong>' +
         '<button type="button" class="cart-remove" data-act="remove" aria-label="Remove item">&times;</button>';
-      li.querySelector("img").src = SITE_ROOT + (item.image || ("images/product" + encodeURIComponent(item.id) + ".jpg"));
+      li.querySelector("img").src = /^https?:\/\//.test(item.image || "") ? item.image : SITE_ROOT + (item.image || ("images/product" + encodeURIComponent(item.id) + ".jpg"));
       li.querySelector(".cart-item-info strong").textContent = item.name;
       li.querySelector(".cart-item-price").textContent = formatPrice(item.price) + " each";
       li.querySelector(".qty-num").textContent = item.qty;

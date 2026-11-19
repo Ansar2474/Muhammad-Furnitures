@@ -238,6 +238,8 @@ def route(fn):
 
 
 def absurl(path):
+    if path.startswith(("http://", "https://")):
+        return path
     if not SITE_URL:
         return None
     return SITE_URL + "/" + (route(path) if path.endswith(".html") else path)
@@ -309,6 +311,7 @@ def load_products():
         products.append(dict(id=pid, name=name, price=price, cat=cat, catlabel=CAT_LABELS.get(cat, _e(cat.title())), spec=spec,
                              desc=_e(r.get("shortDesc") or r.get("description", "")), badge=_e(r.get("badge", "")),
                              alt=_e(r.get("alt") or r["name"]), image=r.get("image") or f"images/product{pid}.jpg",
+                             imgs=html.escape(r.get("image") or f"images/product{pid}.jpg", quote=True),
                              show_shop=bool(r.get("showShop", True)), show_home=bool(r.get("showHome", False)),
                              home_order=float(r.get("homeOrder", r.get("order", 999)))))
         title = _e(r.get("seoTitle") or f"{r['name']} Price in Pakistan")
@@ -369,10 +372,10 @@ def product_card(p, first_comment=False, level=3):
     c1 = ("          <!-- data-id must be UNIQUE. data-name and data-price feed the cart (script.js). "
           "data-category = living, bedroom, dining, office or storage -->\n") if first_comment else ""
     return f"""          <!-- ================= PRODUCT {p['id']}: {p['name']} ================= -->
-{c1}          <article class="product-card" data-id="{p['id']}" data-name="{p['name']}" data-price="{p['price']}" data-category="{p['cat']}" data-image="{p['image']}">
+{c1}          <article class="product-card" data-id="{p['id']}" data-name="{p['name']}" data-price="{p['price']}" data-category="{p['cat']}" data-image="{p['imgs']}">
             <div class="product-image">
 {badge}              <!-- PUT PRODUCT IMAGE HERE (square photo works best; change src and alt) -->
-              <a href="{PRODUCT_SEO[p['id']]['slug']}.html" aria-label="{p['name']}: details and price"><img src="{p['image']}" width="600" height="600" alt="{p['alt']}, made to order in {LOC} by {NAME}" loading="lazy"></a>
+              <a href="{PRODUCT_SEO[p['id']]['slug']}.html" aria-label="{p['name']}: details and price"><img src="{p['imgs']}" width="600" height="600" alt="{p['alt']}, made to order in {LOC} by {NAME}" loading="lazy"></a>
             </div>
             <div class="product-info">
               <span class="product-category">{p['catlabel']}</span>
@@ -741,6 +744,16 @@ UNSPLASH = {
     "about":   ("1659930087003-2d64e33181f7", "Craft Kitties", "craftkitties"),
     "craft":   ("1679797850019-3d0d8659a695", "Samuel Cruz", "samuelcruz"),
     "promo":   ("1775241202442-a49b659b3da5", "Aleksandra Dementeva", "alexphotogram"),
+    # product photos (their image addresses live in content/products/*.json)
+    "p-sofa-set-5-seater": ("", "Costa Live", "vendedorescostalive"),
+    "p-double-bed-with-storage": ("", "Sibeli Velázquez", "sibelivelazquez"),
+    "p-wardrobe-3-door": ("", "Rumman Amin", "rumanamin"),
+    "p-dining-table-6-seater": ("", "Costa Live", "vendedorescostalive"),
+    "p-office-desk": ("", "Kari Shea", "karishea"),
+    "p-dressing-table-with-mirror": ("", "Royaloak India", "royaloakindia123"),
+    "p-tv-unit-with-shelves": ("", "Prydumano Design", "prydumanodesign"),
+    "p-bookshelf-5-shelf": ("", "Eilis Garvey", "eilisgarvey"),
+    "p-coffee-table": ("", "Suryakant Prajapati", "maxgraphic_01"),
 }
 
 
@@ -757,7 +770,7 @@ def photo_credits():
         if user not in seen:
             seen.add(user)
             names.append(f'<a href="https://unsplash.com/@{user}{ref}" target="_blank" rel="noopener">{who}</a>')
-    return ('<p class="photo-credit">Room and workshop photos by ' + ", ".join(names) +
+    return ('<p class="photo-credit">Room, workshop and sample product photos by ' + ", ".join(names) +
             f' on <a href="https://unsplash.com/{ref}" target="_blank" rel="noopener">Unsplash</a>.</p>')
 
 
@@ -1505,7 +1518,7 @@ def build_product_pages():
             f'          <details class="faq-item"><summary>{q}</summary><p>{a}</p></details>' for q, a in faq_pairs)
         related = "\n".join(
             f"""          <a class="related-card" href="{PRODUCT_SEO[r]['slug']}.html">
-            <img src="{PBYID[r]['image']}" width="600" height="600" alt="{PBYID[r]['alt']}, made to order by {NAME}" loading="lazy">
+            <img src="{PBYID[r]['imgs']}" width="600" height="600" alt="{PBYID[r]['alt']}, made to order by {NAME}" loading="lazy">
             <strong>{PBYID[r]['name']}</strong>
             <span>From {money(PBYID[r]['price'])}</span>
           </a>""" for r in seo["related"])
@@ -1526,11 +1539,11 @@ def build_product_pages():
 
         <!-- PUT PRODUCT IMAGE HERE (square photo works best; change src and alt) -->
         <div class="pdp-media">
-          <img src="{p['image']}" width="600" height="600" alt="{p['alt']}, made to order in {LOC} by {NAME}" fetchpriority="high">
+          <img src="{p['imgs']}" width="600" height="600" alt="{p['alt']}, made to order in {LOC} by {NAME}" fetchpriority="high">
         </div>
 
         <!-- GENERATED PRODUCT PAGE -->
-        <article class="product-card pdp-card" data-id="{pid}" data-name="{p['name']}" data-price="{p['price']}" data-category="{p['cat']}" data-image="{p['image']}">
+        <article class="product-card pdp-card" data-id="{pid}" data-name="{p['name']}" data-price="{p['price']}" data-category="{p['cat']}" data-image="{p['imgs']}">
           <span class="pdp-category">{p['catlabel']}</span>
           <h1 class="pdp-title">{seo['h1']}</h1>
           <p class="pdp-lead">{seo['lead']}</p>
@@ -1551,7 +1564,7 @@ def build_product_pages():
             </ul>
           </div>
           <p class="pdp-spec"><strong>Standard size:</strong> {p['spec']}</p>
-          <p class="pdp-note">Final price depends on your size, wood or board, fabric and finish. We confirm it with you before we start.</p>
+          <p class="pdp-note">Photos show a similar style. Your piece is made to your size, wood or board, fabric and finish, and we confirm the final price with you before we start.</p>
         </article>
       </div>
     </section>
