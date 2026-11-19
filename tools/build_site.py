@@ -161,14 +161,14 @@ NAV = [
 FONTS = (
     '  <link rel="preconnect" href="https://fonts.googleapis.com">\n'
     '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
-    '  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700'
+    '  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700'
     '&family=DM+Sans:wght@400;500;600;700&display=swap">\n'
 )
 
 FAVICON = (
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' "
-    "fill='%2312161c'/%3E%3Ctext x='32' y='46' font-size='40' font-family='Arial' font-weight='700' text-anchor='middle' "
-    "fill='%23f6b80a'%3EM%3C/text%3E%3C/svg%3E"
+    "fill='%231f1511'/%3E%3Ctext x='32' y='46' font-size='40' font-family='Arial' font-weight='700' text-anchor='middle' "
+    "fill='%23f4b41a'%3EM%3C/text%3E%3C/svg%3E"
 )
 
 def local_ld():
@@ -685,7 +685,7 @@ def page(filename, key, title, desc, main_html, ld=False, faq=False, noindex=Fal
   {og_url}
   {og_img}
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#12161c">
+  <meta name="theme-color" content="#1f1511">
   {robots_meta}
   {canon_tag}
 
@@ -1071,7 +1071,7 @@ def build():
         <span class="promo-label">{T("promo.label")}</span>
         <h2>{T("promo.headline")} <span>{T("promo.highlight")}</span></h2>
         <p>{T("promo.text")}</p>
-        <a href="contact.html" class="btn btn-navy">{T("promo.button")}</a>
+        <a href="contact.html" class="btn btn-gold btn-lg">{T("promo.button")}</a>
       </div>
     </section>
 
