@@ -167,8 +167,8 @@ FONTS = (
 
 FAVICON = (
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' "
-    "fill='%231f1511'/%3E%3Ctext x='32' y='46' font-size='40' font-family='Arial' font-weight='700' text-anchor='middle' "
-    "fill='%23f4b41a'%3EM%3C/text%3E%3C/svg%3E"
+    "fill='%23f7b500'/%3E%3Ctext x='32' y='46' font-size='40' font-family='Arial' font-weight='700' text-anchor='middle' "
+    "fill='%232b2119'%3EM%3C/text%3E%3C/svg%3E"
 )
 
 def local_ld():
@@ -685,7 +685,7 @@ def page(filename, key, title, desc, main_html, ld=False, faq=False, noindex=Fal
   {og_url}
   {og_img}
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#1f1511">
+  <meta name="theme-color" content="#f7b500">
   {robots_meta}
   {canon_tag}
 
