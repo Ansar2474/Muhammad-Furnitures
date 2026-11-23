@@ -19,59 +19,59 @@
   },
   "announcement": {
     "lead": "Made-to-order furniture",
-    "text": "Get a clear quote on WhatsApp"
+    "text": "Send your room size on WhatsApp for a price"
   },
   "hero": {
-    "tag": "Made to order, built to last",
-    "line1": "Muhammad",
-    "line2": "Furnitures",
-    "sub": "Custom furniture maker in {city}",
-    "text": "Made-to-order sofa sets, beds, wardrobes, dining tables and office furniture in {city}. Choose a ready design or tell us your size, style and budget, and our craftsmen will build it for you.",
+    "tag": "Made to order in {city}",
+    "line1": "Custom furniture,",
+    "line2": "made to fit your room",
+    "sub": "Muhammad Furnitures, furniture maker in {city}",
+    "text": "Sofa sets, beds, wardrobes, dining tables and desks, built to order in {city}. Pick a design from the shop or send us your room size, and we reply on WhatsApp with a price.",
     "points": [
-      "Made to your size",
-      "Clear price before we start",
-      "Quick replies on WhatsApp"
+      "Your size, your finish",
+      "Price confirmed before we start",
+      "Replies on WhatsApp"
     ]
   },
   "promo": {
-    "label": "Custom orders welcome",
+    "label": "Custom orders",
     "headline": "Built to",
     "highlight": "your size",
-    "text": "In your choice of finish.",
-    "button": "Request a Quote"
+    "text": "Send your room size and a photo of what you like. We reply with a price and a timeline.",
+    "button": "Get a quote"
   },
   "footer": {
-    "about": "Made-to-order furniture for homes, shops and offices in {city}. Tell us your size, we send a clear price.",
+    "about": "We build furniture to order for homes, shops and offices in {city}. Send your size and we reply with a price.",
     "note": "Prices are in Pakistani rupees (Rs)."
   },
   "faqs": [
     {
       "q": "Can you make furniture to my size?",
-      "a": "Yes. We build beds, wardrobes, sofas, tables and more to your measurements, so the piece fits your room properly."
+      "a": "Yes. Beds, wardrobes, sofas, tables and desks are all built to the measurements you send, so the piece fits the space."
     },
     {
       "q": "How do I get a price?",
-      "a": "Send us a photo, your measurements or an idea on WhatsApp ({phone}). We reply with a clear price and timeline."
+      "a": "Message us on WhatsApp ({phone}) with a photo, your measurements or just an idea. We reply with a price and a timeline."
     },
     {
       "q": "Can I choose the finish and colour?",
-      "a": "Yes. Pick a wood tone or colour, or send us a photo of the look you want and we will match it where we can."
+      "a": "Yes. Pick a wood tone or colour, or send a photo of a finish you like. We match it as closely as we can."
     },
     {
       "q": "What is the price of a sofa set, bed or wardrobe?",
-      "a": "Prices start at {from} and depend on the size, wood or board, fabric and finish. {examples} Send us your size and we give you the exact price before we start."
+      "a": "Prices on this site start at {from}. The final figure depends on size, wood or board, fabric and finish. {examples} Send your size and we confirm the exact price before work begins."
     },
     {
       "q": "Can you make a full bed set?",
-      "a": "Yes. We build beds with storage and dressing tables, and we can plan them to match each other. Tell us which pieces you need and your mattress size."
+      "a": "Yes. We can build a bed with storage, a dressing table and side tables in the same finish. Tell us which pieces you want and your mattress size."
     },
     {
       "q": "Do you deliver?",
-      "a": "We can deliver and help with setup in {city}. Tell us your area when you ask for a quote and we will confirm the details."
+      "a": "We can arrange delivery and setup in {city}. Tell us your area when you ask for a price and we confirm the details."
     },
     {
       "q": "Can I see examples of your work?",
-      "a": "Yes. You can see our latest pieces and customer reviews on our Facebook page and our Google page."
+      "a": "Yes. Recent pieces and customer comments are on our Facebook page and our Google page."
     }
   ]
 }

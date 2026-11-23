@@ -27,23 +27,23 @@ SITE_DEFAULTS = {
         "siteUrl": "https://ansar2474.github.io/Muhammad-Furnitures",
     },
     "socials": {"facebook": "https://www.facebook.com/share/1KevMHNxmj/", "instagram": "", "linkedin": "", "x": "", "youtube": "", "tiktok": ""},
-    "announcement": {"lead": "Made-to-order furniture", "text": "Get a clear quote on WhatsApp"},
+    "announcement": {"lead": "Made-to-order furniture", "text": "Send your room size on WhatsApp for a price"},
     "hero": {
-        "tag": "Made to order, built to last", "line1": "Muhammad", "line2": "Furnitures", "sub": "Custom furniture maker in {city}",
-        "text": "Made-to-order sofa sets, beds, wardrobes, dining tables and office furniture in {city}. Choose a ready design or tell us your size, style and budget, and our craftsmen will build it for you.",
-        "points": ["Made to your size", "Clear price before we start", "Quick replies on WhatsApp"],
+        "tag": "Made to order in {city}", "line1": "Custom furniture,", "line2": "made to fit your room", "sub": "Muhammad Furnitures, furniture maker in {city}",
+        "text": "Sofa sets, beds, wardrobes, dining tables and desks, built to order in {city}. Pick a design from the shop or send us your room size, and we reply on WhatsApp with a price.",
+        "points": ["Your size, your finish", "Price confirmed before we start", "Replies on WhatsApp"],
     },
-    "promo": {"label": "Custom orders welcome", "headline": "Built to", "highlight": "your size", "text": "In your choice of finish.", "button": "Request a Quote"},
-    "footer": {"about": "Made-to-order furniture for homes, shops and offices in {city}. Tell us your size, we send a clear price.",
+    "promo": {"label": "Custom orders", "headline": "Built to", "highlight": "your size", "text": "Send your room size and a photo of what you like. We reply with a price and a timeline.", "button": "Get a quote"},
+    "footer": {"about": "We build furniture to order for homes, shops and offices in {city}. Send your size and we reply with a price.",
                "note": "Prices are in Pakistani rupees (Rs)."},
     "faqs": [
-        {"q": "Can you make furniture to my size?", "a": "Yes. We build beds, wardrobes, sofas, tables and more to your measurements, so the piece fits your room properly."},
-        {"q": "How do I get a price?", "a": "Send us a photo, your measurements or an idea on WhatsApp ({phone}). We reply with a clear price and timeline."},
-        {"q": "Can I choose the finish and colour?", "a": "Yes. Pick a wood tone or colour, or send us a photo of the look you want and we will match it where we can."},
-        {"q": "What is the price of a sofa set, bed or wardrobe?", "a": "Prices start at {from} and depend on the size, wood or board, fabric and finish. {examples} Send us your size and we give you the exact price before we start."},
-        {"q": "Can you make a full bed set?", "a": "Yes. We build beds with storage and dressing tables, and we can plan them to match each other. Tell us which pieces you need and your mattress size."},
-        {"q": "Do you deliver?", "a": "We can deliver and help with setup in {city}. Tell us your area when you ask for a quote and we will confirm the details."},
-        {"q": "Can I see examples of your work?", "a": "Yes. You can see our latest pieces and customer reviews on our Facebook page and our Google page."},
+        {"q": "Can you make furniture to my size?", "a": "Yes. Beds, wardrobes, sofas, tables and desks are all built to the measurements you send, so the piece fits the space."},
+        {"q": "How do I get a price?", "a": "Message us on WhatsApp ({phone}) with a photo, your measurements or just an idea. We reply with a price and a timeline."},
+        {"q": "Can I choose the finish and colour?", "a": "Yes. Pick a wood tone or colour, or send a photo of a finish you like. We match it as closely as we can."},
+        {"q": "What is the price of a sofa set, bed or wardrobe?", "a": "Prices on this site start at {from}. The final figure depends on size, wood or board, fabric and finish. {examples} Send your size and we confirm the exact price before work begins."},
+        {"q": "Can you make a full bed set?", "a": "Yes. We can build a bed with storage, a dressing table and side tables in the same finish. Tell us which pieces you want and your mattress size."},
+        {"q": "Do you deliver?", "a": "We can arrange delivery and setup in {city}. Tell us your area when you ask for a price and we confirm the details."},
+        {"q": "Can I see examples of your work?", "a": "Yes. Recent pieces and customer comments are on our Facebook page and our Google page."},
     ],
 }
 
@@ -184,7 +184,7 @@ def local_ld():
         "address": {"@type": "PostalAddress", "addressCountry": "PK"},
         "areaServed": {"@type": "Country", "name": "Pakistan"},
         "sameAs": [u for u in [FB, GOOGLE, sv("socials.instagram"), sv("socials.linkedin"), sv("socials.x"), sv("socials.youtube"), sv("socials.tiktok")] if u],
-        "slogan": "Handcrafted. Made to order. Built to last.",
+        "slogan": "Furniture made to fit your room.",
         "knowsAbout": ["Custom furniture", "Sofa sets", "Bed sets", "Wardrobes", "Dining tables", "Office desks", "TV units", "Wooden furniture"],
         "makesOffer": {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Made-to-order furniture"}},
     }
@@ -315,11 +315,11 @@ def load_products():
                              show_shop=bool(r.get("showShop", True)), show_home=bool(r.get("showHome", False)),
                              home_order=float(r.get("homeOrder", r.get("order", 999)))))
         title = _e(r.get("seoTitle") or f"{r['name']} Price in Pakistan")
-        meta = _e(r.get("seoDescription") or f"{r['name']} made to order by {{name}}. Starting price {{price}}. Get a clear quote on WhatsApp {{phone}}.")
+        meta = _e(r.get("seoDescription") or f"{r['name']} made to order by {{name}}. Starting price {{price}}. Ask for a price on WhatsApp {{phone}}.")
         paras = [_e(t) for t in r.get("paras", [])] or [
             lead,
             _e(f"We build the {r['name'].lower()} to order, so you can change the size, colour and finish. The standard size is {r.get('spec', '')}. "
-               "Send a photo of your space or your measurements on WhatsApp and we reply with a clear price before we start.")]
+               "Send a photo of your space or your measurements on WhatsApp and we reply with a price before work starts.")]
         faq = [(_e(q), _e(a)) for q, a in r.get("faq", [])] or [
             (_e(f"How much is the {r['name'].lower()}?"), "It starts at {price} for the standard size. The final price depends on your size, material and finish, and we confirm it before we start."),
             ("Can I order it in a different size?", "Yes. Send your measurements on WhatsApp and we make it to fit your space.")]
@@ -390,7 +390,7 @@ def product_card(p, first_comment=False, level=3):
               </div>
               <!-- ORDER ON WHATSAPP: opens WhatsApp with this product already written in the message -->
               <a class="product-order" href="https://wa.me/{WA}?text={quote("Hello %s, I would like to order: %s (Rs %s). Please share the details." % (NAME, p['name'], format(p['price'], ',')))}" target="_blank" rel="noopener">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">{WA_PATH}</svg> Order on WhatsApp
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">{WA_PATH}</svg> <span class="hide-xs">Order on&nbsp;</span>WhatsApp
               </a>
             </div>
           </article>
@@ -606,7 +606,7 @@ def footer():
 """
 
 
-def cta_band(title="Ready to furnish your home?", text="Call or message us with your size and style. We will reply with a clear price."):
+def cta_band(title="Have a room to furnish?", text="Call or message us with your size and style. We reply with a price."):
     return f"""    <!-- ============================================================
          CALL TO ACTION BAND (same on most pages)
          ============================================================ -->
@@ -786,7 +786,7 @@ def cat_cards():
             <span class="cat-image"><img src="{uns(key, 640, 480)}" width="480" height="360" alt="{ROOM_ALT[key]}" loading="lazy" decoding="async"></span>
             <span class="cat-icon">{svg_icon(key)}</span>
             <strong class="cat-name">{label}</strong>
-            <span class="cat-link">Explore now</span>
+            <span class="cat-link"><span class="sr-only">See {label} furniture</span></span>
           </a>""")
     return "\n".join(out)
 
@@ -799,16 +799,16 @@ TRUST = """    <!-- ============================================================
         <div class="trust-card">
           <div class="trust-item">
             <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg>
-            <div><strong>Quality Materials</strong><span>Chosen for lasting strength</span></div>
+            <div><strong>Made to order</strong><span>Your size, wood tone and finish</span></div>
           </div>
           <div class="trust-item">
             <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.3 8.7 8.7 21.3a1 1 0 0 1-1.4 0L2.7 16.7a1 1 0 0 1 0-1.4L15.3 2.7a1 1 0 0 1 1.4 0l4.6 4.6a1 1 0 0 1 0 1.4z"/><path d="m7.5 10.5 2 2M10.5 7.5l2 2M13.5 4.5l2 2M4.5 13.5l2 2"/></svg>
-            <div><strong>Made to Order</strong><span>Built to your size and finish</span></div>
+            <div><strong>Price first</strong><span>Confirmed before we start</span></div>
           </div>
           <div class="trust-item">
             <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/></svg>
             <!-- UPDATE: confirm delivery details before publishing -->
-            <div><strong>Delivery and Setup</strong><span>Ask us about delivery to your door</span></div>
+            <div><strong>Delivery</strong><span>Ask about your area</span></div>
           </div>
         </div>
       </div>
@@ -828,19 +828,19 @@ STEPS_FINISHES = """    <!-- ===================================================
           <ol class="steps">
             <li>
               <span class="step-num">1</span>
-              <div><h3>Tell us what you need</h3><p>Send photos, measurements or an idea by phone, WhatsApp or message.</p></div>
+              <div><h3>Tell us what you need</h3><p>Send photos, measurements or a rough idea by WhatsApp or phone.</p></div>
             </li>
             <li>
               <span class="step-num">2</span>
-              <div><h3>Get a clear quote</h3><p>We confirm the design, materials, price and timeline.</p></div>
+              <div><h3>Get a price</h3><p>We confirm the design, materials, price and timeline.</p></div>
             </li>
             <li>
               <span class="step-num">3</span>
-              <div><h3>We build it</h3><p>Your furniture is made to your size and checked before it leaves.</p></div>
+              <div><h3>We build it</h3><p>The piece is made to the size you gave us.</p></div>
             </li>
             <li>
               <span class="step-num">4</span>
-              <div><h3>Delivery</h3><p>We bring it to your door and can help with setup.</p></div>
+              <div><h3>Delivery</h3><p>We arrange delivery to your door and can help with setup.</p></div>
             </li>
           </ol>
         </div>
@@ -854,7 +854,7 @@ STEPS_FINISHES = """    <!-- ===================================================
             <div class="swatch"><span class="swatch-chip swatch-espresso"></span><strong>Dark espresso</strong></div>
             <div class="swatch"><span class="swatch-chip swatch-white"></span><strong>Matt white</strong></div>
           </div>
-          <p class="finishes-note">Looking for something else? Send us a photo and we will match it where we can.</p>
+          <p class="finishes-note">Want a different colour? Send a photo and we match it as closely as we can.</p>
           <a href="contact.html" class="btn btn-gold">Request a Quote</a>
         </div>
 
@@ -864,16 +864,16 @@ STEPS_FINISHES = """    <!-- ===================================================
 
 CRAFT_POINTS = """        <div class="craft-points">
           <div>
-            <h3>Planned with you</h3>
-            <p>We confirm the size, design and materials with you before any cutting starts.</p>
+            <h3>Plan</h3>
+            <p>We agree the size, design and materials with you before any wood is cut.</p>
           </div>
           <div>
-            <h3>Cut and joined</h3>
-            <p>Careful assembly with strong joints, built to last through everyday family use.</p>
+            <h3>Build</h3>
+            <p>The frame is cut and joined to your measurements.</p>
           </div>
           <div>
-            <h3>Finished by hand</h3>
-            <p>Smooth, clean finishing, then a last check before delivery.</p>
+            <h3>Finish</h3>
+            <p>The colour or polish you chose goes on, and we arrange delivery.</p>
           </div>
         </div>
 """
@@ -883,8 +883,8 @@ PROOF = f"""    <!-- ===========================================================
          ============================================================ -->
     <section class="proof">
       <div class="container proof-inner">
-        <h2>See our work and real customer reviews</h2>
-        <p>Our latest pieces and what customers say are on our Google and Facebook pages.</p>
+        <h2>See our work on Google and Facebook</h2>
+        <p>Recent pieces and customer comments are on our two pages.</p>
         <div class="proof-links">
           <!-- YOUR GOOGLE BUSINESS PAGE (the link you gave me) -->
           <a class="btn btn-outline" href="{GOOGLE}" target="_blank" rel="noopener">Our Google page</a>
@@ -907,40 +907,40 @@ WHY = f"""    <!-- ============================================================
     <section class="why">
       <div class="container">
         <div class="section-head">
-          <h2 class="section-title">Why choose {NAME}</h2>
-          <p>Furniture made by people you can speak to, built around your home.</p>
+          <h2 class="section-title">How we work</h2>
+          <p>You talk to the people who build your furniture.</p>
         </div>
         <div class="why-grid">
           <div class="why-card">
             <span class="why-icon">{_ic('<path d="M21.3 8.7 8.7 21.3a1 1 0 0 1-1.4 0L2.7 16.7a1 1 0 0 1 0-1.4L15.3 2.7a1 1 0 0 1 1.4 0l4.6 4.6a1 1 0 0 1 0 1.4z"/><path d="m7.5 10.5 2 2M10.5 7.5l2 2M13.5 4.5l2 2M4.5 13.5l2 2"/>')}</span>
-            <h3>Made to your size</h3>
-            <p>Tell us your space. We build to your measurements, so nothing is too big, too small or wasted.</p>
+            <h3>Built to your measurements</h3>
+            <p>Send the width, depth and height of the space. Nothing ends up too big for the room or wastes the corner.</p>
           </div>
           <div class="why-card">
             <span class="why-icon">{_ic('<path d="M12 3 4 6v6c0 4.5 3.2 8 8 9 4.8-1 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/>')}</span>
-            <h3>Strong, honest build</h3>
-            <p>Solid joints and careful finishing, checked before your furniture leaves our workshop.</p>
+            <h3>Ask about the build</h3>
+            <p>Ask what the frame, board and finish are made of. We answer before you order.</p>
           </div>
           <div class="why-card">
             <span class="why-icon">{_ic('<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>')}</span>
-            <h3>A clear quote first</h3>
-            <p>You get the price and timeline on WhatsApp before we start, so there are no surprises.</p>
+            <h3>Price before work</h3>
+            <p>The price and timeline come to you on WhatsApp first. You decide after you have seen them.</p>
           </div>
           <div class="why-card">
             <span class="why-icon">{_ic('<circle cx="12" cy="12" r="9"/><circle cx="8.5" cy="10" r="1.2"/><circle cx="12" cy="7.5" r="1.2"/><circle cx="15.5" cy="10" r="1.2"/><path d="M12 21a3 3 0 0 1 0-6h2a2 2 0 0 0 0-4"/>')}</span>
-            <h3>Your finish, your colour</h3>
-            <p>Choose a wood tone or colour you love, or send a photo and we will match it where we can.</p>
+            <h3>Your colour</h3>
+            <p>Choose a wood tone or colour, or send a photo of one you like and we match it as closely as we can.</p>
           </div>
           <div class="why-card">
             <span class="why-icon">{_ic('<path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>')}</span>
-            <h3>Talk to the maker</h3>
-            <p>You deal directly with the people who build your furniture. Quick answers, no call centre.</p>
+            <h3>Direct line to the workshop</h3>
+            <p>Your questions go straight to the people making the piece.</p>
           </div>
           <div class="why-card">
             <!-- UPDATE: confirm your delivery areas before publishing -->
             <span class="why-icon">{_ic('<path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/>')}</span>
-            <h3>Delivery to your door</h3>
-            <p>We can deliver and help with setup. Ask us about your area when you request your quote.</p>
+            <h3>Delivery</h3>
+            <p>We can arrange delivery and setup. Tell us your area when you ask for a price.</p>
           </div>
         </div>
       </div>
@@ -953,13 +953,13 @@ HOW = f"""    <!-- ============================================================
     <section class="how">
       <div class="container">
         <div class="section-head">
-          <h2 class="section-title">Order in 3 easy steps</h2>
-          <p>From your first message to furniture in your home.</p>
+          <h2 class="section-title">How an order works</h2>
+          <p>Three steps from your first message to your front door.</p>
         </div>
         <ol class="how-steps">
-          <li><span class="how-num">1</span><h3>Message us</h3><p>Send a photo, your size or just an idea on WhatsApp or by phone.</p></li>
-          <li><span class="how-num">2</span><h3>Get your quote</h3><p>We confirm the design, finish, price and timeline with you.</p></li>
-          <li><span class="how-num">3</span><h3>We build and deliver</h3><p>Your piece is made, checked and brought to your home.</p></li>
+          <li><span class="how-num">1</span><h3>Message us</h3><p>Send a photo, a size or a rough idea on WhatsApp, or call.</p></li>
+          <li><span class="how-num">2</span><h3>Get your price</h3><p>We reply with the design, finish, price and how long it takes.</p></li>
+          <li><span class="how-num">3</span><h3>We build it</h3><p>Once you say yes, we make the piece and arrange delivery.</p></li>
         </ol>
         <div class="how-cta">
           <a class="btn btn-wa btn-lg" href="https://wa.me/{WA}?text=Hello%20Muhammad%20Furnitures%2C%20I%20would%20like%20a%20quote." target="_blank" rel="noopener">Get a Quote on WhatsApp</a>
@@ -984,8 +984,8 @@ def faq_html():
     <section class="faq">
       <div class="container faq-inner">
         <div class="section-head">
-          <h2 class="section-title">Questions? We have answers</h2>
-          <p>Still unsure? Message us on WhatsApp and we will help.</p>
+          <h2 class="section-title">Common questions</h2>
+          <p>Something missing? Ask us on WhatsApp.</p>
         </div>
         <div class="faq-list">
 {items}
@@ -1014,29 +1014,30 @@ def build():
          HERO SECTION
          ============================================================ -->
     <section class="hero" id="home">
-      <!-- PUT YOUR BEST PHOTO HERE (a bright, wide room photo works best, about 1600 wide by 700 tall). Change src and alt. Keep fetchpriority so it loads first. -->
-      <img class="hero-bg" src="{uns('hero', 1800, 855)}" srcset="{uns('hero', 900, 760)} 900w, {uns('hero', 1800, 855)} 1800w" sizes="100vw" width="1600" height="760" alt="Bright living room with a large sofa and a solid wood coffee table, the kind of furniture made to order in {LOC}" fetchpriority="high">
-
-      <div class="container">
+      <div class="container hero-grid">
         <div class="hero-text">
-          <!-- UPDATE THE THREE WORDS IN THE TAG HERE -->
+          <!-- UPDATE THE TAG ABOVE THE HEADLINE (Site settings > Hero) -->
           <span class="hero-tag">{T("hero.tag")}</span>
 
-          <!-- HERO HEADLINE: the first line is navy, the second is gold -->
+          <!-- HERO HEADLINE (Site settings > Hero). Line 1 and line 2 are the big words, the small line below names the business. -->
           <h1><span class="h1-navy">{T("hero.line1")}</span> <span class="h1-gold">{T("hero.line2")}</span> <span class="h1-sub">{T("hero.sub")}</span></h1>
 
-          <!-- UPDATE HERO TEXT HERE. TIP: add your city, e.g. "...made in Lahore" -->
           <p class="hero-sub">{T("hero.text")}</p>
 
           <div class="hero-actions">
-            <a href="shop.html" class="btn btn-gold btn-lg">Shop Now</a>
-            <a href="https://wa.me/{WA}?text=Hello%20Muhammad%20Furnitures%2C%20I%20would%20like%20a%20quote." class="btn btn-wa btn-lg" target="_blank" rel="noopener">Get a Quote</a>
-            <a href="collections.html" class="link-explore">Explore Collections</a>
+            <a href="shop.html" class="btn btn-gold btn-lg">Shop furniture</a>
+            <a href="https://wa.me/{WA}?text=Hello%20Muhammad%20Furnitures%2C%20I%20would%20like%20a%20price." class="btn btn-wa btn-lg" target="_blank" rel="noopener">Ask for a price</a>
           </div>
 
           <ul class="hero-points">
 {hero_points()}
           </ul>
+        </div>
+
+        <!-- HERO PHOTO (arch shape). Change the photo in tools/build_site.py (UNSPLASH 'hero') or replace it with a photo of your own work. -->
+        <div class="hero-media">
+          <img class="hero-bg" src="{uns('hero', 720, 900)}" srcset="{uns('hero', 540, 675)} 540w, {uns('hero', 720, 900)} 720w, {uns('hero', 1080, 1350)} 1080w" sizes="(max-width: 860px) 86vw, 460px" width="720" height="900" alt="Bright living room with a large sofa and a solid wood coffee table, the kind of furniture made to order in {LOC}" fetchpriority="high">
+          <p class="hero-chip"><strong>From {tok("{from}")}</strong><span>Standard sizes. Change the size and we re-quote.</span></p>
         </div>
       </div>
     </section>
@@ -1049,7 +1050,7 @@ def build():
       <div class="container">
         <div class="section-head">
           <h2 class="section-title">Shop by category</h2>
-          <p>Find the perfect furniture for every space in your home.</p>
+          <p>Start with the room you are furnishing.</p>
         </div>
 
         <div class="cat-grid">
@@ -1071,7 +1072,7 @@ def build():
         <span class="promo-label">{T("promo.label")}</span>
         <h2>{T("promo.headline")} <span>{T("promo.highlight")}</span></h2>
         <p>{T("promo.text")}</p>
-        <a href="contact.html" class="btn btn-gold btn-lg">{T("promo.button")}</a>
+        <a href="contact.html" class="btn btn-white btn-lg">{T("promo.button")}</a>
       </div>
     </section>
 
@@ -1085,7 +1086,7 @@ def build():
 
         <div class="section-head">
           <h2 class="section-title">Featured products</h2>
-          <p>Handpicked pieces that combine elegance, comfort and durability.</p>
+          <p>Prices are for the standard size. Change the size or finish and we send a new price.</p>
         </div>
 
         <div class="product-grid">
@@ -1105,11 +1106,11 @@ def build():
       <div class="container">
         <div class="craft-top">
           <div>
-            <h2>Built, not just assembled</h2>
-            <p>Strong joints, clean finishing and furniture that is checked before it leaves. Every piece is planned with you, so it fits your room and your budget.</p>
-            <a href="about.html" class="btn btn-gold" style="margin-top:26px">About Us</a>
+            <h2>Planned before it is cut</h2>
+            <p>We agree the size, the design and the finish with you first, so the piece fits your room and your budget. Then we build it.</p>
+            <a href="about.html" class="btn btn-white">About us</a>
           </div>
-          <!-- PUT A WORKSHOP PHOTO HERE (craftsmen at work, a joint, a finish close-up) -->
+          <!-- PUT A WORKSHOP PHOTO HERE (your team at work, a joint, a finish close-up) -->
           <img src="{uns('craft', 900, 675)}" width="900" height="675" alt="Carpenter shaping a piece of wood by hand, as furniture is built at {NAME}" loading="lazy" decoding="async">
         </div>
       </div>
@@ -1120,12 +1121,12 @@ def build():
 {faq_html()}
 {cta_band()}"""
     page("index.html", "home", f"Furniture in {LOC} | Sofa Sets, Beds, Wardrobes | {NAME}",
-         f"{NAME} makes sofa sets, beds, wardrobes and dining tables to your size in {LOC}. Clear prices. Quote on WhatsApp {PHONE}.",
+         f"{NAME} builds sofa sets, beds, wardrobes and dining tables to your size in {LOC}. Ask for a price on WhatsApp {PHONE}.",
          home, ld=True, faq=True)
 
     # ---------------- SHOP ----------------
     shop_products = "\n".join(product_card(p, first_comment=(i == 0), level=2) for i, p in enumerate(SHOP_PRODUCTS))
-    shop = f"""{banner(f"Shop furniture online in {LOC}", "Sofa sets, beds, wardrobes, dining tables and office desks. Every piece can be made to your size and finish.", "Shop")}
+    shop = f"""{banner(f"Shop furniture online in {LOC}", "Sofa sets, beds, wardrobes, dining tables and desks, each with a starting price.", "Shop")}
 {quick("shop")}
     <!-- ============================================================
          PRODUCTS: every product lives here
@@ -1158,7 +1159,7 @@ def build():
         <div class="shop-custom">
           <div class="shop-custom-text">
             <h2>Can't find the size or style you need?</h2>
-            <p>Every piece can be made to your measurements and finish. Send us a photo or your idea and we will reply with a clear price.</p>
+            <p>Send a photo or your room size on WhatsApp. We reply with a price for the exact piece you describe.</p>
           </div>
           <div class="shop-custom-actions">
             <a class="btn btn-gold btn-lg" href="custom-furniture.html">Order Custom Furniture</a>
@@ -1172,9 +1173,9 @@ def build():
     <!-- SHOP SEO TEXT (helps Google understand the page and reassures buyers). EDIT TO MATCH YOUR RANGE. -->
     <section class="seo-text">
       <div class="container seo-inner">
-        <h2>Furniture made well, made for your home</h2>
-        <p>At {NAME} every bed, sofa set, wardrobe, dining table and office desk is built by our own craftsmen with strong joints and a clean finish. Because we make the furniture ourselves, we can change the size, colour and finish to suit your room and your budget.</p>
-        <p>Not sure what will fit? Send us a photo of your room and your measurements on WhatsApp. We will suggest a design and give you a clear price before we start.</p>
+        <h2>What we build and how to order</h2>
+        <p>Every bed, sofa set, wardrobe, dining table and desk at {NAME} is built to order. Because we make the furniture ourselves, a different size, colour or finish is just a message away.</p>
+        <p>Not sure what will fit? Send us a photo of your room and your measurements on WhatsApp. We suggest a design and send a price before we start.</p>
       </div>
     </section>
 
@@ -1204,7 +1205,7 @@ def build():
          ============================================================ -->
     <section class="collections">
       <div class="container">
-        <p class="collections-intro">Every collection is made by our craftsmen and can be adjusted to your size and finish. Pick a room to see what we build.</p>
+        <p class="collections-intro">Every collection can be adjusted to your size and finish. Pick a room to see what we build.</p>
 {chr(10).join(rows)}
       </div>
     </section>
@@ -1257,13 +1258,13 @@ def build():
     </section>
 
 {faq_html()}
-{cta_band("Have a design in mind?", "Send us your measurements or a photo on WhatsApp, or call us. We will reply with a clear quote.")}"""
+{cta_band("Have a design in mind?", "Send your measurements or a photo on WhatsApp, or call. We reply with a price.")}"""
     page("custom-furniture.html", "custom", f"Custom Furniture Maker in {LOC} | Made to Order | {NAME}",
-         f"Order custom sofa sets, beds, wardrobes and tables made to your size and finish in {LOC}. Send your measurements to {NAME} for a clear quote.", custom, faq=True,
+         f"Order custom sofa sets, beds, wardrobes and tables made to your size and finish in {LOC}. Send your measurements to {NAME} and get a price.", custom, faq=True,
          extra_ld=crumb_ld([("Home", "index.html"), ("Custom Furniture", "custom-furniture.html")]))
 
     # ---------------- ABOUT ----------------
-    about = f"""{banner("About us", f"Meet {NAME}, a local furniture maker.", "About Us")}
+    about = f"""{banner("About us", f"Who builds your furniture at {NAME}.", "About Us")}
 {quick("about")}
     <!-- ============================================================
          ABOUT SECTION
@@ -1275,9 +1276,9 @@ def build():
         <div class="about-text">
           <h2>About {NAME}</h2>
           <!-- UPDATE ABOUT TEXT: add your city and the year you started, e.g. "based in Lahore. Since 2012, we have built..." -->
-          <p>{NAME} is a local furniture maker. We build beds, sofas, wardrobes and tables for homes, shops and offices.</p>
-          <p>We work with you from the first measurement to the final polish. You tell us what you need, we suggest the right design and materials, and our craftsmen build it. Because we make everything ourselves, we can adjust sizes, colours and finishes to match your space and your budget.</p>
-          <p>We care about simple things: strong joints, clean finishing, honest prices and delivery on the day we promise.</p>
+          <p>{NAME} makes furniture to order. Beds, sofas, wardrobes, tables and desks, for homes, shops and offices.</p>
+          <p>You tell us the space and the budget. We suggest a design and the materials, then build it. Because we make each piece ourselves, changing a size or a colour is easy to ask for.</p>
+          <p>What we aim for is simple: a piece that fits, a price you know before we start, and a finish you picked.</p>
           <a href="contact.html" class="btn btn-outline">Get in Touch</a>
         </div>
       </div>
@@ -1293,10 +1294,10 @@ def build():
       <div class="container">
         <div class="craft-top">
           <div>
-            <h2>Built, not just assembled</h2>
-            <p>Every step is under our control. That means strong joints, clean finishing, and furniture that is checked before it leaves.</p>
+            <h2>One workshop, start to finish</h2>
+            <p>The same people plan, build and finish your piece, so a change of size or colour is a quick conversation.</p>
           </div>
-          <!-- PUT A WORKSHOP PHOTO HERE (craftsmen at work, a joint, a finish close-up) -->
+          <!-- PUT A WORKSHOP PHOTO HERE (your team at work, a joint, a finish close-up) -->
           <img src="{uns('craft', 900, 675)}" width="900" height="675" alt="Carpenter shaping a piece of wood by hand, as furniture is built at {NAME}" loading="lazy" decoding="async">
         </div>
 {CRAFT_POINTS}      </div>
@@ -1305,11 +1306,11 @@ def build():
 {PROOF}
 {cta_band()}"""
     page("about.html", "about", f"About {NAME} | Furniture Maker in {LOC}",
-         f"{NAME} is a furniture maker in {LOC} building sofa sets, beds, wardrobes and tables with strong joints and clean finishing.", about,
+         f"{NAME} is a furniture maker in {LOC} building sofa sets, beds, wardrobes and tables to order.", about,
          extra_ld=crumb_ld([("Home", "index.html"), ("About Us", "about.html")]) + page_ld("AboutPage", "About " + NAME, "about.html"))
 
     # ---------------- CONTACT ----------------
-    contact = f"""{banner("Contact us", "Call, WhatsApp or send a request. We will reply with a clear price and timeline.", "Contact")}
+    contact = f"""{banner("Contact us", "Call, WhatsApp or send a request. We reply with a price and a timeline.", "Contact")}
 {quick("contact")}
     <!-- ============================================================
          CONTACT + QUOTE FORM
@@ -1319,7 +1320,7 @@ def build():
 
         <div>
           <h2>Request a quote</h2>
-          <p>Tell us what you want built and roughly what size. We will reply with a clear price and timeline.</p>
+          <p>Tell us what you want built and roughly what size. We reply with a price and a timeline.</p>
 
           <!-- CONTACT DETAILS: change the number in BOTH the href and the visible text. Keep the +92 format in href. -->
           <dl class="contact-list">
@@ -1377,7 +1378,7 @@ def build():
          extra_ld=crumb_ld([("Home", "index.html"), ("Contact", "contact.html")]) + page_ld("ContactPage", "Contact " + NAME, "contact.html"))
 
     # ---------------- CART ----------------
-    cart = f"""{banner("Your cart", "Check your items, then send your order to us on WhatsApp. We confirm the final price and delivery with you.", "Cart")}
+    cart = f"""{banner("Your cart", "Check your items, then send the order to us on WhatsApp. We confirm the final price and delivery with you.", "Cart")}
     <!-- ============================================================
          CART PAGE (filled in by script.js from the items visitors add)
          CONNECT A REAL CHECKOUT / PAYMENT SYSTEM HERE LATER. For now the order is sent to your WhatsApp.
@@ -1398,7 +1399,7 @@ def build():
             <h2>Order summary</h2>
             <div class="sum-row"><span>Items</span><strong id="cartItems">0</strong></div>
             <div class="sum-row sum-total"><span>Estimated total</span><strong id="cartTotal">Rs 0</strong></div>
-            <p class="sum-note">Delivery and custom changes are confirmed by us on WhatsApp before you pay anything.</p>
+            <p class="sum-note">We confirm delivery and any changes on WhatsApp before you pay anything.</p>
             <a class="btn btn-wa btn-lg" id="cartCheckout" href="https://wa.me/{WA}" target="_blank" rel="noopener">Order on WhatsApp</a>
             <a class="btn btn-outline" href="shop.html">Continue Shopping</a>
             <button type="button" class="link-btn" id="cartClear">Clear cart</button>
@@ -1605,7 +1606,7 @@ def build_product_pages():
       </div>
     </section>
 
-{cta_band("Want this " + p['name'].lower() + " in your size?", "Send your measurements or a photo on WhatsApp, or call us. We will reply with a clear quote.")}"""
+{cta_band("Want this " + p['name'].lower() + " in your size?", "Send your measurements or a photo on WhatsApp, or call us. We reply with a price.")}"""
         ld = crumb_ld([("Home", "index.html"), ("Shop", "shop.html"), (p["name"], seo["slug"] + ".html")]) \
             + ld_script(product_ld(p, full=True)) + faq_ld_for(faq_pairs)
         page(seo["slug"] + ".html", "shop", title, meta, main, extra_ld=ld, og_image=p["image"])
@@ -1649,7 +1650,7 @@ def build_guide():
       </div>
     </article>
 
-{cta_band("Ready to plan your furniture?", "Send your measurements or a photo on WhatsApp, or call us. We will suggest a design and give you a clear price.")}"""
+{cta_band("Planning new furniture?", "Send your measurements or a photo on WhatsApp, or call us. We suggest a design and send a price.")}"""
     art = {"@context": "https://schema.org", "@type": "Article", "headline": "Furniture buying guide for Pakistan",
            "description": "How to choose a sofa set, bed, wardrobe, dining table and office desk, and what to ask about wood and finish.",
            "datePublished": UPDATED_ISO, "dateModified": UPDATED_ISO, "inLanguage": "en-PK",
@@ -1685,7 +1686,7 @@ def facts_block():
           <div><dt>Where</dt><dd>{where}</dd></div>
           <div><dt>Phone and WhatsApp</dt><dd><a href="tel:{TEL}">{PHONE}</a></dd></div>
 {contact_rows()}
-          <div><dt>Prices</dt><dd>In Pakistani rupees (Rs). Clear price confirmed before we start.</dd></div>
+          <div><dt>Prices</dt><dd>In Pakistani rupees (Rs). Price confirmed before we start.</dd></div>
           <div><dt>Last updated</dt><dd><time datetime="{UPDATED_ISO}">{UPDATED_TEXT}</time></dd></div>
         </dl>
       </div>
