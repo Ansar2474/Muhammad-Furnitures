@@ -14,6 +14,7 @@ from urllib.parse import quote
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from seo_content import COLLECTION_EXTRA, ROOM_ALT, GUIDE_SECTIONS, GUIDE_FAQ, GUIDE_SHORT, QUICK
+import more_content as MC
 
 OUT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))   # the website folder (one level up)
 
@@ -167,8 +168,8 @@ FONTS = (
 
 FAVICON = (
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' "
-    "fill='%23f7b500'/%3E%3Ctext x='32' y='46' font-size='40' font-family='Arial' font-weight='700' text-anchor='middle' "
-    "fill='%232b2119'%3EM%3C/text%3E%3C/svg%3E"
+    "fill='%231f1511'/%3E%3Ctext x='32' y='46' font-size='40' font-family='Arial' font-weight='700' text-anchor='middle' "
+    "fill='%23f4b41a'%3EM%3C/text%3E%3C/svg%3E"
 )
 
 def local_ld():
@@ -390,7 +391,7 @@ def product_card(p, first_comment=False, level=3):
               </div>
               <!-- ORDER ON WHATSAPP: opens WhatsApp with this product already written in the message -->
               <a class="product-order" href="https://wa.me/{WA}?text={quote("Hello %s, I would like to order: %s (Rs %s). Please share the details." % (NAME, p['name'], format(p['price'], ',')))}" target="_blank" rel="noopener">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">{WA_PATH}</svg> <span class="hide-xs">Order on&nbsp;</span>WhatsApp
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">{WA_PATH}</svg> Order on WhatsApp
               </a>
             </div>
           </article>
@@ -685,7 +686,7 @@ def page(filename, key, title, desc, main_html, ld=False, faq=False, noindex=Fal
   {og_url}
   {og_img}
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#f7b500">
+  <meta name="theme-color" content="#1f1511">
   {robots_meta}
   {canon_tag}
 
@@ -786,7 +787,7 @@ def cat_cards():
             <span class="cat-image"><img src="{uns(key, 640, 480)}" width="480" height="360" alt="{ROOM_ALT[key]}" loading="lazy" decoding="async"></span>
             <span class="cat-icon">{svg_icon(key)}</span>
             <strong class="cat-name">{label}</strong>
-            <span class="cat-link"><span class="sr-only">See {label} furniture</span></span>
+            <span class="cat-link">Explore now</span>
           </a>""")
     return "\n".join(out)
 
@@ -1014,30 +1015,29 @@ def build():
          HERO SECTION
          ============================================================ -->
     <section class="hero" id="home">
-      <div class="container hero-grid">
+      <!-- PUT YOUR BEST PHOTO HERE (a bright, wide room photo works best, about 1600 wide by 700 tall). Change src and alt. Keep fetchpriority so it loads first. -->
+      <img class="hero-bg" src="{uns('hero', 1800, 855)}" srcset="{uns('hero', 900, 760)} 900w, {uns('hero', 1800, 855)} 1800w" sizes="100vw" width="1600" height="760" alt="Bright living room with a large sofa and a solid wood coffee table, the kind of furniture made to order in {LOC}" fetchpriority="high">
+
+      <div class="container">
         <div class="hero-text">
-          <!-- UPDATE THE TAG ABOVE THE HEADLINE (Site settings > Hero) -->
+          <!-- UPDATE THE THREE WORDS IN THE TAG HERE -->
           <span class="hero-tag">{T("hero.tag")}</span>
 
-          <!-- HERO HEADLINE (Site settings > Hero). Line 1 and line 2 are the big words, the small line below names the business. -->
+          <!-- HERO HEADLINE: the first line is navy, the second is gold -->
           <h1><span class="h1-navy">{T("hero.line1")}</span> <span class="h1-gold">{T("hero.line2")}</span> <span class="h1-sub">{T("hero.sub")}</span></h1>
 
+          <!-- UPDATE HERO TEXT HERE. TIP: add your city, e.g. "...made in Lahore" -->
           <p class="hero-sub">{T("hero.text")}</p>
 
           <div class="hero-actions">
             <a href="shop.html" class="btn btn-gold btn-lg">Shop furniture</a>
             <a href="https://wa.me/{WA}?text=Hello%20Muhammad%20Furnitures%2C%20I%20would%20like%20a%20price." class="btn btn-wa btn-lg" target="_blank" rel="noopener">Ask for a price</a>
+            <a href="collections.html" class="link-explore">Explore Collections</a>
           </div>
 
           <ul class="hero-points">
 {hero_points()}
           </ul>
-        </div>
-
-        <!-- HERO PHOTO (arch shape). Change the photo in tools/build_site.py (UNSPLASH 'hero') or replace it with a photo of your own work. -->
-        <div class="hero-media">
-          <img class="hero-bg" src="{uns('hero', 720, 900)}" srcset="{uns('hero', 540, 675)} 540w, {uns('hero', 720, 900)} 720w, {uns('hero', 1080, 1350)} 1080w" sizes="(max-width: 860px) 86vw, 460px" width="720" height="900" alt="Bright living room with a large sofa and a solid wood coffee table, the kind of furniture made to order in {LOC}" fetchpriority="high">
-          <p class="hero-chip"><strong>From {tok("{from}")}</strong><span>Standard sizes. Change the size and we re-quote.</span></p>
         </div>
       </div>
     </section>
@@ -1072,7 +1072,7 @@ def build():
         <span class="promo-label">{T("promo.label")}</span>
         <h2>{T("promo.headline")} <span>{T("promo.highlight")}</span></h2>
         <p>{T("promo.text")}</p>
-        <a href="contact.html" class="btn btn-white btn-lg">{T("promo.button")}</a>
+        <a href="contact.html" class="btn btn-gold btn-lg">{T("promo.button")}</a>
       </div>
     </section>
 
@@ -1108,7 +1108,7 @@ def build():
           <div>
             <h2>Planned before it is cut</h2>
             <p>We agree the size, the design and the finish with you first, so the piece fits your room and your budget. Then we build it.</p>
-            <a href="about.html" class="btn btn-white">About us</a>
+            <a href="about.html" class="btn btn-gold" style="margin-top:26px">About Us</a>
           </div>
           <!-- PUT A WORKSHOP PHOTO HERE (your team at work, a joint, a finish close-up) -->
           <img src="{uns('craft', 900, 675)}" width="900" height="675" alt="Carpenter shaping a piece of wood by hand, as furniture is built at {NAME}" loading="lazy" decoding="async">
@@ -1118,6 +1118,7 @@ def build():
 
 {PROOF}
 {home_seo()}
+{prose(MC.HOME_MORE)}
 {faq_html()}
 {cta_band()}"""
     page("index.html", "home", f"Furniture in {LOC} | Sofa Sets, Beds, Wardrobes | {NAME}",
@@ -1179,10 +1180,12 @@ def build():
       </div>
     </section>
 
+{prose(MC.SHOP_MORE)}
+{shop_faq_html()}
 {cta_band()}"""
     page("shop.html", "shop", f"Buy Furniture Online in {LOC} | Sofa Sets, Beds | {NAME}",
          f"Buy sofa sets, beds, wardrobes, dining tables and office desks in {LOC}. See starting prices in Rs. Made to your size by {NAME}.", shop,
-         extra_ld=shop_ld())
+         extra_ld=shop_ld() + faq_ld_for(MC.SHOP_FAQ))
 
     # ---------------- COLLECTIONS ----------------
     rows = []
@@ -1210,6 +1213,7 @@ def build():
       </div>
     </section>
 
+{prose(MC.COLLECTIONS_MORE)}
 {cta_band()}"""
     page("collections.html", "collections", f"Furniture Collections: Sofa Sets, Beds, Office | {NAME}",
          f"Explore sofa sets, bed sets, dining tables, office desks and wardrobes made to your size in {LOC} by {NAME}.", collections,
@@ -1239,6 +1243,7 @@ def build():
     </section>
 
 {STEPS_FINISHES}
+{prose(MC.CUSTOM_MORE)}
     <!-- ============================================================
          HOW TO MEASURE (helpful for your customers)
          ============================================================ -->
@@ -1303,6 +1308,7 @@ def build():
 {CRAFT_POINTS}      </div>
     </section>
 
+{prose(MC.ABOUT_MORE)}
 {PROOF}
 {cta_band()}"""
     page("about.html", "about", f"About {NAME} | Furniture Maker in {LOC}",
@@ -1372,6 +1378,7 @@ def build():
       </div>
     </section>
 
+{prose(MC.CONTACT_MORE)}
 {PROOF}"""
     page("contact.html", "contact", f"Contact {NAME} | Get a Furniture Quote in {LOC}",
          f"Call or WhatsApp {PHONE}, or send a quote request to {NAME}. Custom furniture made to your size in {LOC}.", contact,
@@ -1423,6 +1430,56 @@ def plink(pid, text=None):
     if pid not in PBYID:       # product was hidden or removed in the admin page: show plain text, no link
         return text or ""
     return f'<a href="{PRODUCT_SEO[pid]["slug"]}.html">{text or PBYID[pid]["name"]}</a>'
+
+
+# --------------------------------------------------------------------------------------------
+# FLAT PROSE: extra page content written as headings, paragraphs and simple lists (no boxes)
+# --------------------------------------------------------------------------------------------
+PAGE_FILES = {"shop": "shop.html", "guide": "furniture-buying-guide.html", "custom": "custom-furniture.html",
+              "collections": "collections.html", "about": "about.html", "contact": "contact.html"}
+
+
+def inline(text):
+    """Turn [[p:4|text]] and [[page:shop|text]] into links and fill {PHONE}, {LOC}, {NAME}."""
+    def link(m):
+        kind, target, label = m.group(1), m.group(2), m.group(3)
+        label = label.replace("{PHONE}", PHONE)
+        if kind == "p":
+            return plink(int(target), label)
+        if kind == "tel":
+            return f'<a href="tel:{TEL}">{label}</a>'
+        return f'<a href="{PAGE_FILES[target]}">{label}</a>'
+    text = re.sub(r"\[\[(p|page|tel):([a-z0-9]+)\|([^\]]+)\]\]", link, text)
+    return text.replace("{PHONE}", PHONE).replace("{LOC}", LOC).replace("{NAME}", NAME)
+
+
+def prose_blocks(blocks):
+    out = []
+    for kind, val in blocks:
+        if kind == "h3":
+            out.append(f"        <h3>{inline(val)}</h3>")
+        elif kind == "p":
+            out.append(f"        <p>{inline(val)}</p>")
+        elif kind in ("ul", "ol"):
+            items = "\n".join(f"          <li>{inline(i)}</li>" for i in val)
+            out.append(f"        <{kind} class=\"plain-list\">\n{items}\n        </{kind}>")
+        elif kind == "quote":
+            out.append(f"        <blockquote class=\"copy-text\">{inline(val)}</blockquote>")
+    return "\n".join(out)
+
+
+def prose(sections, cls=""):
+    """One flat section per heading, separated by a thin line. No cards, no boxes."""
+    out = []
+    for heading, blocks in sections:
+        out.append(f"""    <section class="seo-text prose-more {cls}">
+      <div class="container seo-inner">
+        <h2>{inline(heading)}</h2>
+{prose_blocks(blocks)}
+      </div>
+    </section>
+""")
+    return "\n".join(out)
 
 
 def home_seo():
@@ -1496,6 +1553,19 @@ def collection_extra(key):
     return f'<p class="coll-extra">{text} See: {links}.</p>'
 
 
+def shop_faq_html():
+    items = "\n".join(f'          <details class="faq-item"><summary>{q}</summary><p>{a}</p></details>' for q, a in MC.SHOP_FAQ)
+    return f"""    <section class="faq">
+      <div class="container faq-inner">
+        <div class="section-head"><h2 class="section-title">Questions about ordering</h2></div>
+        <div class="faq-list">
+{items}
+        </div>
+      </div>
+    </section>
+"""
+
+
 def faq_ld_for(pairs):
     data = {"@context": "https://schema.org", "@type": "FAQPage",
             "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in pairs]}
@@ -1504,6 +1574,17 @@ def faq_ld_for(pairs):
 
 def fmt(text, p):
     return text.replace("{price}", money(p["price"])).replace("{name}", NAME).replace("{phone}", PHONE)
+
+
+def product_more(pid):
+    out = []
+    for heading, paras, bullets in MC.PRODUCT_MORE.get(pid, []):
+        out.append(f"        <h2>{heading}</h2>")
+        out += [f"        <p>{inline(x)}</p>" for x in paras]
+        if bullets:
+            lis = "\n".join(f"          <li>{x}</li>" for x in bullets)
+            out.append(f'        <p>You can change:</p>\n        <ul class="plain-list">\n{lis}\n        </ul>')
+    return "\n".join(out)
 
 
 def build_product_pages():
@@ -1574,6 +1655,7 @@ def build_product_pages():
       <div class="container seo-inner pdp-inner">
         <h2>About the {p['name'].lower()}</h2>
 {paras}
+{product_more(pid)}
         <h2>{p['name']}: key facts</h2>
         <dl class="facts">
           <div><dt>Starting price</dt><dd>{money(p['price'])} (standard size)</dd></div>
@@ -1613,19 +1695,22 @@ def build_product_pages():
 
 
 def build_guide():
-    toc = "\n".join(f'          <li><a href="#{sid}">{h}</a></li>' for sid, h, _, _ in GUIDE_SECTIONS)
+    sections = list(GUIDE_SECTIONS) + list(MC.GUIDE_EXTRA)
+    short = {**GUIDE_SHORT, **MC.GUIDE_EXTRA_SHORT}
+    faq_all = list(GUIDE_FAQ) + list(MC.GUIDE_EXTRA_FAQ)
+    toc = "\n".join(f'          <li><a href="#{sid}">{h}</a></li>' for sid, h, _, _ in sections)
     secs = []
-    for sid, h, paras, links in GUIDE_SECTIONS:
+    for sid, h, paras, links in sections:
         ps = "\n".join(f"          <p>{t}</p>" for t in paras)
         ln = ""
         if links:
             ln = '\n          <p class="guide-links">See: ' + ", ".join(plink(i, t) for _, t, i in links) + ".</p>"
         secs.append(f"""        <section class="guide-section" id="{sid}">
           <h2>{h}</h2>
-          <p class="short-answer"><strong>Short answer:</strong> {GUIDE_SHORT[sid]}</p>
+          <p class="short-answer"><strong>Short answer:</strong> {short[sid]}</p>
 {ps}{ln}
         </section>""")
-    faq_items = "\n".join(f'          <details class="faq-item"><summary>{q}</summary><p>{a}</p></details>' for q, a in GUIDE_FAQ)
+    faq_items = "\n".join(f'          <details class="faq-item"><summary>{q}</summary><p>{a}</p></details>' for q, a in faq_all)
     main = f"""{banner("Furniture buying guide for Pakistan", "How to choose a sofa set, bed, wardrobe, dining table and office desk, what to ask about wood and finish, and how to measure your space.", "Furniture Guide", crumbs=[("Home", "index.html"), ("Furniture Guide", None)])}
 {quick("guide")}
     <!-- ============================================================
@@ -1657,7 +1742,7 @@ def build_guide():
            "author": {"@type": "Organization", "name": NAME}, "publisher": {"@type": "Organization", "name": NAME}}
     if SITE_URL:
         art["mainEntityOfPage"] = absurl("furniture-buying-guide.html")
-    ld = crumb_ld([("Home", "index.html"), ("Furniture Guide", "furniture-buying-guide.html")]) + ld_script(art) + faq_ld_for(GUIDE_FAQ)
+    ld = crumb_ld([("Home", "index.html"), ("Furniture Guide", "furniture-buying-guide.html")]) + ld_script(art) + faq_ld_for(faq_all)
     page("furniture-buying-guide.html", "guide", f"Furniture Buying Guide: Sofa Set, Bed, Wardrobe | {NAME}",
          f"How to choose a sofa set, bed, wardrobe, dining table and office desk, plus wood, finish and measuring tips from {NAME}.",
          main, extra_ld=ld)
