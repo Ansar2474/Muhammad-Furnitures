@@ -748,6 +748,14 @@ UNSPLASH = {
     "about":   ("1659930087003-2d64e33181f7", "Craft Kitties", "craftkitties"),
     "craft":   ("1679797850019-3d0d8659a695", "Samuel Cruz", "samuelcruz"),
     "promo":   ("1775241202442-a49b659b3da5", "Aleksandra Dementeva", "alexphotogram"),
+    # Insights article photos
+    "a-measure":  ("1716698286313-9a2349d41110", "josh A. D.", "mista_j"),
+    "a-wood":     ("1515446134809-993c501ca304", "Joel & Jasmin Forestbird", "theforestbirds"),
+    "a-board":    ("1690768162439-7ca7a1813038", "Lucia Lu", "luciadandan"),
+    "a-sofa":     ("1560185127-6ed189bf02f4", "Francesca Tosolini", "fromitaly"),
+    "a-care":     ("1789656435406-8e3a9a126436", "Barney Goodman", "bgoodpic"),
+    "a-order":    ("1497219055242-93359eeed651", "Dominik Scythe", "drscythe"),
+    "a-wardrobe": ("1630904989936-da6328c2f92d", "A65 Design", "huutin23"),
     # product photos (their image addresses live in content/products/*.json)
     "p-sofa-set-5-seater": ("", "Costa Live", "vendedorescostalive"),
     "p-double-bed-with-storage": ("", "Sibeli Velázquez", "sibelivelazquez"),
@@ -1458,7 +1466,7 @@ def inline(text):
         if kind == "tel":
             return f'<a href="tel:{TEL}">{label}</a>'
         return f'<a href="{PAGE_FILES[target]}">{label}</a>'
-    text = re.sub(r"\[\[(p|page|tel|cat|art):([a-z0-9]+)\|([^\]]+)\]\]", link, text)
+    text = re.sub(r"\[\[(p|page|tel|cat|art):([a-z0-9-]+)\|([^\]]+)\]\]", link, text)
     return text.replace("{PHONE}", PHONE).replace("{LOC}", LOC).replace("{NAME}", NAME)
 
 
@@ -1753,20 +1761,54 @@ def build_category_pages():
         page(c["slug"] + ".html", "shop", fill(c["title"]), fill(c["meta"]), main, extra_ld=ld)
 
 
+ART_PHOTO = {
+    "measure-a-room-for-furniture": ("a-measure", "A person holding a tape measure"),
+    "sheesham-kikar-deodar-wood": ("a-wood", "A slab of brown wood with a visible grain"),
+    "plywood-mdf-or-solid-wood": ("a-board", "A stack of wooden boards"),
+    "how-big-should-a-sofa-set-be": ("a-sofa", "A living room with a sofa"),
+    "wooden-furniture-care-humid-weather": ("a-care", "A woman wiping a wooden sideboard with a cloth"),
+    "made-to-order-or-ready-made-furniture": ("a-order", "A craftsperson carving wood with a chisel"),
+    "plan-the-inside-of-a-wardrobe": ("a-wardrobe", "Shirts hanging in a white wooden wardrobe"),
+}
+
+
+def art_img(slug, w, h, lazy=True):
+    key, alt = ART_PHOTO[slug]
+    return (f'<img src="{uns(key, w, h)}" alt="{alt}" width="{w}" height="{h}" decoding="async"'
+            + (' loading="lazy"' if lazy else "") + ">")
+
+
 def build_insights():
     arts = IC.ARTICLES
     cat_label = {k: l for k, l, _, _ in CATS}
     page_label = {"guide": "Furniture buying guide", "custom": "Custom furniture", "shop": "Shop", "contact": "Contact us"}
-    listing = "\n".join("          <li>" + inline("[[art:" + a["slug"] + "|" + a["h1"] + "]]") + ": " + a["short"] + "</li>" for a in arts)
     intro = "\n".join("        <p>" + inline(x) + "</p>" for x in IC.HUB_INTRO)
+    def link(a):
+        return f'insights/{a["slug"]}.html'
+    f = arts[0]
+    feature = f"""        <article class="insight-feature">
+          <a class="insight-img" href="{link(f)}" tabindex="-1" aria-hidden="true">{art_img(f["slug"], 900, 600, lazy=False)}</a>
+          <div>
+            <h2><a href="{link(f)}">{f["h1"]}</a></h2>
+            <p>{f["short"]}</p>
+            <a class="insight-more" href="{link(f)}">Read the article</a>
+          </div>
+        </article>"""
+    items = "\n".join(f"""          <article class="insight-item">
+            <a class="insight-img" href="{link(a)}" tabindex="-1" aria-hidden="true">{art_img(a["slug"], 600, 400)}</a>
+            <h3><a href="{link(a)}">{a["h1"]}</a></h3>
+            <p>{a["short"]}</p>
+          </article>""" for a in arts[1:])
     main = f"""{banner("Insights", "Plain answers to the questions people ask before they order furniture.", "Insights", crumbs=[("Home", "index.html"), ("Insights", None)])}
-    <section class="seo-text">
-      <div class="container seo-inner">
+    <section class="seo-text insights-hub">
+      <div class="container">
+        <div class="seo-inner">
 {intro}
-        <h2>All articles</h2>
-        <ul class="plain-list article-list">
-{listing}
-        </ul>
+        </div>
+{feature}
+        <div class="insight-grid">
+{items}
+        </div>
       </div>
     </section>
 {prose([("Want a price instead?", [("p", "Send your room size and what you need on WhatsApp or call [[tel:call|{PHONE}]]. We reply with a price before any work starts. Browse the [[page:shop|shop]] to see starting prices.")])])}
@@ -1785,11 +1827,22 @@ def build_insights():
                 rel.append(f'<a href="{CAT_PAGE[target]}.html">{cat_label[target]} furniture</a>')
             elif kind == "page":
                 rel.append(f'<a href="{PAGE_FILES[target]}">{page_label[target]}</a>')
-        others = [f'<a href="insights/{o["slug"]}.html">{o["h1"]}</a>' for o in arts if o["slug"] != a["slug"]][:3]
-        more_items = "\n".join(f"          <li>{x}</li>" for x in rel + others)
+        rest = [o for o in arts if o["slug"] != a["slug"]]
+        i = next(n for n, o in enumerate(arts) if o["slug"] == a["slug"])
+        nxt = [arts[(i + k) % len(arts)] for k in (1, 2, 3)]
+        thumbs = "\n".join(f"""          <article class="insight-item">
+            <a class="insight-img" href="insights/{o["slug"]}.html" tabindex="-1" aria-hidden="true">{art_img(o["slug"], 600, 400)}</a>
+            <h3><a href="insights/{o["slug"]}.html">{o["h1"]}</a></h3>
+          </article>""" for o in nxt)
+        more_items = "\n".join(f"          <li>{x}</li>" for x in rel + ['<a href="insights.html">All insights</a>'])
         faq_items = "\n".join(f'          <details class="faq-item"><summary>{q}</summary><p>{x}</p></details>' for q, x in a["faq"])
         main = f"""{banner(a["h1"], a["short"], a["title"], crumbs=[("Home", "index.html"), ("Insights", "insights.html"), (a["title"].split(":")[0], None)])}
-    <section class="seo-text">
+    <section class="insight-hero">
+      <div class="container">
+        <figure>{art_img(a["slug"], 1100, 560, lazy=False)}</figure>
+      </div>
+    </section>
+    <section class="seo-text insight-intro">
       <div class="container seo-inner">
         <p class="byline">Written by the team at {NAME}. Published <time datetime="{UPDATED_ISO}">{UPDATED_TEXT}</time>.</p>
         <p class="short-answer"><strong>Short answer:</strong> {a["short"]}</p>
@@ -1807,6 +1860,10 @@ def build_insights():
     <section class="seo-text prose-more">
       <div class="container seo-inner">
         <h2>Keep reading</h2>
+        <div class="insight-grid insight-related">
+{thumbs}
+        </div>
+        <h3>Useful pages</h3>
         <ul class="plain-list">
 {more_items}
         </ul>

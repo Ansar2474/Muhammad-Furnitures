@@ -746,3 +746,36 @@ body.no-scroll { overflow: hidden; }
   .logo-mark { display: none; }
   .logo-name, .logo-sub { font-size: 0.82rem; }
 }
+
+/* Insights: photo-led reading pages, no boxes */
+.insights-hub .container { max-width: 1120px; }
+.insight-feature { display: grid; grid-template-columns: 1.35fr 1fr; gap: 36px; align-items: center; margin: 32px 0 44px; }
+.insight-feature h2 { font-family: var(--font-display); font-size: clamp(1.6rem, 3.2vw, 2.3rem); line-height: 1.15; margin: 0 0 12px; text-wrap: balance; }
+.insight-feature h2 a { color: var(--ink); }
+.insight-feature p { margin: 0 0 14px; max-width: 46ch; }
+.insight-more { font-weight: 700; color: var(--ink); text-decoration: underline; text-decoration-color: var(--sun); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+.insight-img { display: block; overflow: hidden; border-radius: 16px; background: var(--mist); }
+.insight-img img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; transition: transform 0.4s ease; }
+.insight-img:hover img { transform: scale(1.03); }
+.insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 28px; }
+.insight-item h3 { font-family: var(--font-display); font-size: 1.12rem; line-height: 1.3; margin: 14px 0 6px; text-wrap: balance; }
+.insight-item h3 a { color: var(--ink); }
+.insight-item h3 a:hover { text-decoration: underline; text-decoration-color: var(--sun); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.insight-item p { margin: 0; font-size: 0.95rem; color: var(--muted, #5b514a); }
+.insight-hero { padding: 28px 0 0; }
+.insight-hero .container { max-width: 980px; }
+.insight-hero figure { margin: 0; border-radius: 18px; overflow: hidden; box-shadow: 0 10px 28px rgba(31, 21, 17, 0.12); background: var(--mist); }
+.insight-hero img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; }
+.insight-intro { padding-top: 28px; }
+.byline { font-size: 0.92rem; color: var(--muted, #5b514a); margin-bottom: 14px; }
+.insight-related { margin: 22px 0 8px; }
+@media (max-width: 900px) {
+  .insight-feature { grid-template-columns: 1fr; gap: 20px; margin: 24px 0 32px; }
+  .insight-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 20px; }
+}
+@media (max-width: 560px) {
+  .insight-grid { grid-template-columns: 1fr; gap: 28px; }
+  .insight-hero { padding-top: 20px; }
+  .insight-hero img { aspect-ratio: 16 / 10; }
+  .insight-hero figure { border-radius: 14px; }
+}
