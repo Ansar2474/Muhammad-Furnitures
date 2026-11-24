@@ -15,6 +15,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from seo_content import COLLECTION_EXTRA, ROOM_ALT, GUIDE_SECTIONS, GUIDE_FAQ, GUIDE_SHORT, QUICK
 import more_content as MC
+import insights_content as IC
 
 OUT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))   # the website folder (one level up)
 
@@ -156,6 +157,7 @@ NAV = [
     ("Shop", "shop.html", "shop"),
     ("Collections", "collections.html", "collections"),
     ("Custom Furniture", "custom-furniture.html", "custom"),
+    ("Insights", "insights.html", "insights"),
     ("Contact", "contact.html", "contact"),
 ]
 
@@ -546,6 +548,7 @@ def footer():
           <li><a href="about.html">About us</a></li>
           <li><a href="collections.html">Collections</a></li>
           <li><a href="custom-furniture.html">Custom furniture</a></li>
+          <li><a href="insights.html">Insights</a></li>
           <li><a href="furniture-buying-guide.html">Buying guide</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="cart.html">Your cart</a></li>
@@ -1421,6 +1424,7 @@ def build():
     build_product_pages()
     build_guide()
     build_category_pages()
+    build_insights()
     build_sitemap()
 
 
@@ -1447,12 +1451,14 @@ def inline(text):
         label = label.replace("{PHONE}", PHONE)
         if kind == "p":
             return plink(int(target), label)
+        if kind == "art":
+            return f'<a href="insights/{target}.html">{label}</a>'
         if kind == "cat":
             return f'<a href="{CAT_PAGE[target]}.html">{label}</a>'
         if kind == "tel":
             return f'<a href="tel:{TEL}">{label}</a>'
         return f'<a href="{PAGE_FILES[target]}">{label}</a>'
-    text = re.sub(r"\[\[(p|page|tel|cat):([a-z0-9]+)\|([^\]]+)\]\]", link, text)
+    text = re.sub(r"\[\[(p|page|tel|cat|art):([a-z0-9]+)\|([^\]]+)\]\]", link, text)
     return text.replace("{PHONE}", PHONE).replace("{LOC}", LOC).replace("{NAME}", NAME)
 
 
@@ -1747,6 +1753,75 @@ def build_category_pages():
         page(c["slug"] + ".html", "shop", fill(c["title"]), fill(c["meta"]), main, extra_ld=ld)
 
 
+def build_insights():
+    arts = IC.ARTICLES
+    cat_label = {k: l for k, l, _, _ in CATS}
+    page_label = {"guide": "Furniture buying guide", "custom": "Custom furniture", "shop": "Shop", "contact": "Contact us"}
+    listing = "\n".join("          <li>" + inline("[[art:" + a["slug"] + "|" + a["h1"] + "]]") + ": " + a["short"] + "</li>" for a in arts)
+    intro = "\n".join("        <p>" + inline(x) + "</p>" for x in IC.HUB_INTRO)
+    main = f"""{banner("Insights", "Plain answers to the questions people ask before they order furniture.", "Insights", crumbs=[("Home", "index.html"), ("Insights", None)])}
+    <section class="seo-text">
+      <div class="container seo-inner">
+{intro}
+        <h2>All articles</h2>
+        <ul class="plain-list article-list">
+{listing}
+        </ul>
+      </div>
+    </section>
+{prose([("Want a price instead?", [("p", "Send your room size and what you need on WhatsApp or call [[tel:call|{PHONE}]]. We reply with a price before any work starts. Browse the [[page:shop|shop]] to see starting prices.")])])}
+{cta_band()}"""
+    page("insights.html", "insights", f"Furniture Insights: Wood, Sizes and Care | {NAME}",
+         f"Short articles from {NAME} on measuring a room, choosing wood and board, sofa size, wardrobe planning and caring for furniture.", main,
+         extra_ld=crumb_ld([("Home", "index.html"), ("Insights", "insights.html")]))
+    for a in arts:
+        fn = "insights/" + a["slug"] + ".html"
+        secs = prose([(h, blocks) for h, blocks in a["sections"]])
+        rel = []
+        for kind, target in a["links"]:
+            if kind == "p" and target in PBYID:
+                rel.append(plink(target, PBYID[target]["name"]))
+            elif kind == "cat":
+                rel.append(f'<a href="{CAT_PAGE[target]}.html">{cat_label[target]} furniture</a>')
+            elif kind == "page":
+                rel.append(f'<a href="{PAGE_FILES[target]}">{page_label[target]}</a>')
+        others = [f'<a href="insights/{o["slug"]}.html">{o["h1"]}</a>' for o in arts if o["slug"] != a["slug"]][:3]
+        more_items = "\n".join(f"          <li>{x}</li>" for x in rel + others)
+        faq_items = "\n".join(f'          <details class="faq-item"><summary>{q}</summary><p>{x}</p></details>' for q, x in a["faq"])
+        main = f"""{banner(a["h1"], a["short"], a["title"], crumbs=[("Home", "index.html"), ("Insights", "insights.html"), (a["title"].split(":")[0], None)])}
+    <section class="seo-text">
+      <div class="container seo-inner">
+        <p class="byline">Written by the team at {NAME}. Published <time datetime="{UPDATED_ISO}">{UPDATED_TEXT}</time>.</p>
+        <p class="short-answer"><strong>Short answer:</strong> {a["short"]}</p>
+      </div>
+    </section>
+{secs}
+    <section class="faq">
+      <div class="container faq-inner">
+        <div class="section-head"><h2 class="section-title">Common questions</h2></div>
+        <div class="faq-list">
+{faq_items}
+        </div>
+      </div>
+    </section>
+    <section class="seo-text prose-more">
+      <div class="container seo-inner">
+        <h2>Keep reading</h2>
+        <ul class="plain-list">
+{more_items}
+        </ul>
+      </div>
+    </section>
+{cta_band()}"""
+        art = {"@context": "https://schema.org", "@type": "Article", "headline": a["h1"], "description": a["meta"],
+               "datePublished": UPDATED_ISO, "dateModified": UPDATED_ISO, "inLanguage": "en-PK",
+               "author": {"@type": "Organization", "name": NAME}, "publisher": {"@type": "Organization", "name": NAME}}
+        if SITE_URL:
+            art["mainEntityOfPage"] = absurl(fn)
+        ld = crumb_ld([("Home", "index.html"), ("Insights", "insights.html"), (a["title"], fn)]) + ld_script(art) + faq_ld_for(a["faq"])
+        page(fn, "insights", f"{a['title']} | {NAME}", a["meta"], main, extra_ld=ld)
+
+
 def build_guide():
     sections = list(GUIDE_SECTIONS) + list(MC.GUIDE_EXTRA)
     short = {**GUIDE_SHORT, **MC.GUIDE_EXTRA_SHORT}
@@ -1771,7 +1846,7 @@ def build_guide():
          ============================================================ -->
     <article class="guide">
       <div class="container guide-inner">
-        <p class="byline">Written by the team at {NAME}. Last updated <time datetime="{UPDATED_ISO}">{UPDATED_TEXT}</time>.</p>
+        <p class="byline">Written by the team at {NAME}. Last updated <time datetime="{UPDATED_ISO}">{UPDATED_TEXT}</time>. For shorter answers, see our <a href="insights.html">insights</a>.</p>
         <nav class="guide-toc" aria-label="In this guide">
           <h2>In this guide</h2>
           <ol>
@@ -1842,9 +1917,10 @@ AI_BOTS = [
 
 def build_sitemap():
     base = SITE_URL or "https://YOUR-DOMAIN"
-    pages = [("", "1.0"), ("shop.html", "0.9"), ("collections.html", "0.8"), ("custom-furniture.html", "0.9"),
+    pages = [("", "1.0"), ("shop.html", "0.9"), ("insights.html", "0.7"), ("collections.html", "0.8"), ("custom-furniture.html", "0.9"),
              ("furniture-buying-guide.html", "0.7"), ("about.html", "0.6"), ("contact.html", "0.7")]
     pages += [(CAT_PAGE[k] + ".html", "0.8") for k, *_ in CATS]
+    pages += [("insights/" + a["slug"] + ".html", "0.6") for a in IC.ARTICLES]
     pages += [(PRODUCT_SEO[p["id"]]["slug"] + ".html", "0.8") for p in PRODUCTS]
     urls = "\n".join(f"  <url><loc>{base}/{u}</loc><lastmod>{UPDATED_ISO}</lastmod><priority>{pr}</priority></url>" for u, pr in [(route(u), pr) for u, pr in pages])
     with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as f:
@@ -1866,6 +1942,8 @@ def build_sitemap():
              f"- [Custom furniture]({base}/custom-furniture/): how made-to-order works",
              f"- [Furniture buying guide]({base}/furniture-buying-guide/): how to choose and measure",
              f"- [Collections]({base}/collections/): living room, bedroom, dining, office, storage",
+             f"- [Insights]({base}/insights/): short articles on measuring, wood, sofa size and care",
+             *[f"- [{a['h1']}]({base}/{route('insights/' + a['slug'] + '.html')})" for a in IC.ARTICLES],
              *[f"- [{label}]({base}/{route(CAT_PAGE[k] + '.html')}): every {label.lower()} piece with its starting price" for k, label, _, _ in CATS],
              f"- [About]({base}/about/) and [Contact]({base}/contact/)", "", "## Products"]
     for p in PRODUCTS:

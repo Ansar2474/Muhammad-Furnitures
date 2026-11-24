@@ -10,6 +10,14 @@
 - [Custom furniture](https://ansar2474.github.io/Muhammad-Furnitures/custom-furniture/): how made-to-order works
 - [Furniture buying guide](https://ansar2474.github.io/Muhammad-Furnitures/furniture-buying-guide/): how to choose and measure
 - [Collections](https://ansar2474.github.io/Muhammad-Furnitures/collections/): living room, bedroom, dining, office, storage
+- [Insights](https://ansar2474.github.io/Muhammad-Furnitures/insights/): short articles on measuring, wood, sofa size and care
+- [How to measure a room before you order furniture](https://ansar2474.github.io/Muhammad-Furnitures/insights/measure-a-room-for-furniture/)
+- [Sheesham, kikar and deodar: which wood for which piece](https://ansar2474.github.io/Muhammad-Furnitures/insights/sheesham-kikar-deodar-wood/)
+- [Plywood, MDF or solid wood: what to choose for each piece](https://ansar2474.github.io/Muhammad-Furnitures/insights/plywood-mdf-or-solid-wood/)
+- [How big should your sofa set be?](https://ansar2474.github.io/Muhammad-Furnitures/insights/how-big-should-a-sofa-set-be/)
+- [Looking after wooden furniture in humid weather](https://ansar2474.github.io/Muhammad-Furnitures/insights/wooden-furniture-care-humid-weather/)
+- [Made-to-order or ready-made furniture: which one should you buy?](https://ansar2474.github.io/Muhammad-Furnitures/insights/made-to-order-or-ready-made-furniture/)
+- [How to plan the inside of a wardrobe](https://ansar2474.github.io/Muhammad-Furnitures/insights/plan-the-inside-of-a-wardrobe/)
 - [Living Room](https://ansar2474.github.io/Muhammad-Furnitures/living-room-furniture/): every living room piece with its starting price
 - [Bedroom](https://ansar2474.github.io/Muhammad-Furnitures/bedroom-furniture/): every bedroom piece with its starting price
 - [Dining Room](https://ansar2474.github.io/Muhammad-Furnitures/dining-room-furniture/): every dining room piece with its starting price
