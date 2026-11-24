@@ -10,6 +10,11 @@
 - [Custom furniture](https://ansar2474.github.io/Muhammad-Furnitures/custom-furniture/): how made-to-order works
 - [Furniture buying guide](https://ansar2474.github.io/Muhammad-Furnitures/furniture-buying-guide/): how to choose and measure
 - [Collections](https://ansar2474.github.io/Muhammad-Furnitures/collections/): living room, bedroom, dining, office, storage
+- [Living Room](https://ansar2474.github.io/Muhammad-Furnitures/living-room-furniture/): every living room piece with its starting price
+- [Bedroom](https://ansar2474.github.io/Muhammad-Furnitures/bedroom-furniture/): every bedroom piece with its starting price
+- [Dining Room](https://ansar2474.github.io/Muhammad-Furnitures/dining-room-furniture/): every dining room piece with its starting price
+- [Office Furniture](https://ansar2474.github.io/Muhammad-Furnitures/office-furniture/): every office furniture piece with its starting price
+- [Storage](https://ansar2474.github.io/Muhammad-Furnitures/storage-furniture/): every storage piece with its starting price
 - [About](https://ansar2474.github.io/Muhammad-Furnitures/about/) and [Contact](https://ansar2474.github.io/Muhammad-Furnitures/contact/)
 
 ## Products
@@ -23,4 +28,4 @@
 - [Dressing Table with Mirror](https://ansar2474.github.io/Muhammad-Furnitures/products/dressing-table-with-mirror/): from Rs 55,000, 110 × 45 × 140 cm
 - [Bookshelf, 5 Shelf](https://ansar2474.github.io/Muhammad-Furnitures/products/bookshelf-5-shelf/): from Rs 30,000, 90 × 30 × 180 cm
 
-Last updated: 2026-11-23
+Last updated: 2026-11-24

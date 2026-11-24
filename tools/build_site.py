@@ -531,11 +531,11 @@ def footer():
         <h3>Shop</h3>
         <ul>
           <li><a href="shop.html">All furniture</a></li>
-          <li><a href="shop.html#living">Living room</a></li>
-          <li><a href="shop.html#bedroom">Bedroom</a></li>
-          <li><a href="shop.html#dining">Dining room</a></li>
-          <li><a href="shop.html#office">Office</a></li>
-          <li><a href="shop.html#storage">Storage</a></li>
+          <li><a href="{CAT_PAGE["living"]}.html">Living room</a></li>
+          <li><a href="{CAT_PAGE["bedroom"]}.html">Bedroom</a></li>
+          <li><a href="{CAT_PAGE["dining"]}.html">Dining room</a></li>
+          <li><a href="{CAT_PAGE["office"]}.html">Office</a></li>
+          <li><a href="{CAT_PAGE["storage"]}.html">Storage</a></li>
         </ul>
       </div>
 
@@ -570,9 +570,6 @@ def footer():
         <div class="social-icons">
 {social_html("          ")}
         </div>
-      </div>
-      <div class="container">
-        {photo_credits()}
       </div>
     </div>
   </footer>
@@ -733,6 +730,9 @@ CATS = [
 ]
 
 
+CAT_PAGE = {k: MC.CATEGORY_PAGES[k]["slug"] for k, *_ in CATS}
+
+
 # Lifestyle photos from Unsplash (free to use). Product photos are NOT replaced: they must show the shop's own work.
 # key: (photo id, photographer, photographer username)
 UNSPLASH = {
@@ -783,7 +783,7 @@ def svg_icon(key):
 def cat_cards():
     out = []
     for key, label, seed, _ in CATS:
-        out.append(f"""          <a href="shop.html#{key}" class="cat-card">
+        out.append(f"""          <a href="{CAT_PAGE[key]}.html" class="cat-card">
             <span class="cat-image"><img src="{uns(key, 640, 480)}" width="480" height="360" alt="{ROOM_ALT[key]}" loading="lazy" decoding="async"></span>
             <span class="cat-icon">{svg_icon(key)}</span>
             <strong class="cat-name">{label}</strong>
@@ -1198,7 +1198,7 @@ def build():
             <!-- UPDATE COLLECTION TEXT HERE -->
             <p>{text}</p>
             {collection_extra(key)}
-            <a href="shop.html#{key}" class="btn btn-navy">View {label}</a>
+            <a href="{CAT_PAGE[key]}.html" class="btn btn-navy">View {label}</a>
           </div>
         </div>""")
     collections = f"""{banner(f"Furniture collections for every room in {LOC}", "Living room, bedroom, dining room, office and storage furniture, made to your size.", "Collections")}
@@ -1420,6 +1420,7 @@ def build():
 
     build_product_pages()
     build_guide()
+    build_category_pages()
     build_sitemap()
 
 
@@ -1446,10 +1447,12 @@ def inline(text):
         label = label.replace("{PHONE}", PHONE)
         if kind == "p":
             return plink(int(target), label)
+        if kind == "cat":
+            return f'<a href="{CAT_PAGE[target]}.html">{label}</a>'
         if kind == "tel":
             return f'<a href="tel:{TEL}">{label}</a>'
         return f'<a href="{PAGE_FILES[target]}">{label}</a>'
-    text = re.sub(r"\[\[(p|page|tel):([a-z0-9]+)\|([^\]]+)\]\]", link, text)
+    text = re.sub(r"\[\[(p|page|tel|cat):([a-z0-9]+)\|([^\]]+)\]\]", link, text)
     return text.replace("{PHONE}", PHONE).replace("{LOC}", LOC).replace("{NAME}", NAME)
 
 
@@ -1694,6 +1697,56 @@ def build_product_pages():
         page(seo["slug"] + ".html", "shop", title, meta, main, extra_ld=ld, og_image=p["image"])
 
 
+def build_category_pages():
+    for key, label, _, _ in CATS:
+        c = MC.CATEGORY_PAGES[key]
+        items = [p for p in SHOP_PRODUCTS if p["cat"] == key]
+        fill = lambda x: x.replace("{NAME}", NAME).replace("{LOC}", LOC)
+        if items:
+            cards = "\n".join(product_card(p, level=2) for p in items)
+            grid = f"""    <section class="products cat-products">
+      <div class="container">
+        <div class="product-grid">
+{cards}
+        </div>
+      </div>
+    </section>
+"""
+        else:
+            grid = """    <section class="seo-text"><div class="container seo-inner">
+      <p>We are updating this room. Tell us what you need and we will build it. See <a href="custom-furniture.html">custom furniture</a>.</p>
+    </div></section>
+"""
+        intro = prose([(fill(c["h1"]).replace(" made to order in " + LOC, "") + ": what to know", [("p", x) for x in c["intro"]])])
+        more = prose([(h, b) for h, b in c["sections"]])
+        others = [(k, l) for k, l, _, _ in CATS if k != key]
+        other_links = prose([("Shop other rooms", [("ul", [f"[[cat:{k}|{l}]]" for k, l in others] + ["[[page:shop|All furniture]]"])])])
+        faq_pairs = c["faq"]
+        faq_items = "\n".join(f'          <details class="faq-item"><summary>{q}</summary><p>{a}</p></details>' for q, a in faq_pairs)
+        faq = f"""    <section class="faq">
+      <div class="container faq-inner">
+        <div class="section-head"><h2 class="section-title">Questions about {label.lower()} furniture</h2></div>
+        <div class="faq-list">
+{faq_items}
+        </div>
+      </div>
+    </section>
+"""
+        main = f"""{banner(fill(c["h1"]), c["lead"], label, crumbs=[("Home", "index.html"), ("Shop", "shop.html"), (label, None)])}
+{grid}
+{intro}
+{more}
+{faq}
+{other_links}
+{cta_band("Want " + label.lower() + " furniture in your size?", "Send your measurements or a photo on WhatsApp, or call us. We reply with a price.")}"""
+        ld = crumb_ld([("Home", "index.html"), ("Shop", "shop.html"), (label, c["slug"] + ".html")]) + faq_ld_for(faq_pairs)
+        if items:
+            lst = {"@context": "https://schema.org", "@type": "ItemList", "name": f"{label} furniture by {NAME}",
+                   "itemListElement": [{"@type": "ListItem", "position": n, "name": p["name"], "item": product_ld(p)} for n, p in enumerate(items, 1)]}
+            ld += ld_script(lst)
+        page(c["slug"] + ".html", "shop", fill(c["title"]), fill(c["meta"]), main, extra_ld=ld)
+
+
 def build_guide():
     sections = list(GUIDE_SECTIONS) + list(MC.GUIDE_EXTRA)
     short = {**GUIDE_SHORT, **MC.GUIDE_EXTRA_SHORT}
@@ -1791,6 +1844,7 @@ def build_sitemap():
     base = SITE_URL or "https://YOUR-DOMAIN"
     pages = [("", "1.0"), ("shop.html", "0.9"), ("collections.html", "0.8"), ("custom-furniture.html", "0.9"),
              ("furniture-buying-guide.html", "0.7"), ("about.html", "0.6"), ("contact.html", "0.7")]
+    pages += [(CAT_PAGE[k] + ".html", "0.8") for k, *_ in CATS]
     pages += [(PRODUCT_SEO[p["id"]]["slug"] + ".html", "0.8") for p in PRODUCTS]
     urls = "\n".join(f"  <url><loc>{base}/{u}</loc><lastmod>{UPDATED_ISO}</lastmod><priority>{pr}</priority></url>" for u, pr in [(route(u), pr) for u, pr in pages])
     with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as f:
@@ -1812,6 +1866,7 @@ def build_sitemap():
              f"- [Custom furniture]({base}/custom-furniture/): how made-to-order works",
              f"- [Furniture buying guide]({base}/furniture-buying-guide/): how to choose and measure",
              f"- [Collections]({base}/collections/): living room, bedroom, dining, office, storage",
+             *[f"- [{label}]({base}/{route(CAT_PAGE[k] + '.html')}): every {label.lower()} piece with its starting price" for k, label, _, _ in CATS],
              f"- [About]({base}/about/) and [Contact]({base}/contact/)", "", "## Products"]
     for p in PRODUCTS:
         lines.append(f"- [{p['name']}]({base}/{route(PRODUCT_SEO[p['id']]['slug'] + '.html')}): from {money(p['price'])}, {p['spec']}")

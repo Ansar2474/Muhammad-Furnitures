@@ -46,6 +46,16 @@ HOME_MORE = [
 ]
 
 SHOP_MORE = [
+    ("Shop by room", [
+        ("p", "Want to see only the pieces for one room? Each page lists every product in that category with its starting price."),
+        ("ul", [
+            "[[cat:living|Living room furniture]]: sofa sets, TV units and centre tables",
+            "[[cat:bedroom|Bedroom furniture]]: beds with storage and dressing tables",
+            "[[cat:dining|Dining room furniture]]: dining tables",
+            "[[cat:office|Office furniture]]: office desks",
+            "[[cat:storage|Storage furniture]]: wardrobes and bookshelves",
+        ]),
+    ]),
     ("How to read the prices on this page", [
         ("p", "Each price is a starting price for the standard size printed under the product name. It covers that size in a standard finish, so treat it as a fair starting point and not the final figure."),
         ("p", "Four things move the price:"),
@@ -290,3 +300,156 @@ GUIDE_EXTRA_FAQ = [
     ("Can the finish be changed later?",
      "Solid wood can often be sanded and polished again. Laminate and veneer are harder to change, so choose those finishes with care."),
 ]
+
+
+# ---------------------------------------------------------------------------------------------
+# Category pages (shop by room). Each page lists every product in that category, then these notes.
+# ---------------------------------------------------------------------------------------------
+CATEGORY_PAGES = {
+    "living": {
+        "slug": "living-room-furniture",
+        "title": "Living Room Furniture: Sofa Sets, TV Units | {NAME}",
+        "meta": "Sofa sets, TV units and centre tables made to your size in {LOC}. See every living room piece with its starting price from {NAME}.",
+        "h1": "Living room furniture made to order in {LOC}",
+        "lead": "Sofa sets, TV units and centre tables, each with a starting price. Change the size, fabric or finish to suit your room.",
+        "intro": [
+            "The living room is where size mistakes show most. A sofa that is a few centimetres too long blocks a door, and a TV unit that is too deep takes floor space you wanted for walking. Every piece below is made to order, so you give us the wall and we plan the furniture around it.",
+        ],
+        "sections": [
+            ("Planning a living room", [
+                ("p", "Start with the sofa set, because the other pieces follow its size. Measure the wall it will stand against and the width of the door it has to pass through. Keep a walking path of about 80 cm between the sofas and the other furniture, and about 40 cm between the sofa and the centre table."),
+                ("p", "For the TV unit, tell us the screen size and where the sockets are. A 55 inch screen is about 122 cm wide, so the unit should be a little wider than that, with space on both sides."),
+            ]),
+            ("What you can change", [
+                ("ul", [
+                    "Sofa fabric, colour, arm and back style, and how firm the seat feels.",
+                    "TV unit width, number of shelves and cable gaps at the back.",
+                    "Centre table shape, height and whether it has a lower shelf.",
+                    "Wood tone and finish, so all three pieces match.",
+                ]),
+            ]),
+        ],
+        "faq": [
+            ("Can I order a sofa set in a different size?", "Yes. The standard set is one three seater and two singles. Send us your wall length and door width and we adjust the size."),
+            ("Can the sofa, TV unit and centre table match?", "Yes. We can make all three in the same wood tone and finish, so the room looks planned."),
+            ("How do I get a price for my living room?", "Send the size of the room, a photo and the pieces you want on WhatsApp. We reply with a price before any work starts."),
+        ],
+    },
+    "bedroom": {
+        "slug": "bedroom-furniture",
+        "title": "Bedroom Furniture: Beds with Storage, Dressing Tables | {NAME}",
+        "meta": "Beds with storage and dressing tables made to your mattress and room in {LOC}. See every bedroom piece with its starting price from {NAME}.",
+        "h1": "Bedroom furniture made to order in {LOC}",
+        "lead": "Beds with storage and dressing tables, each with a starting price. Built around your mattress and your room.",
+        "intro": [
+            "A bed is built around the mattress, so the mattress size is the first thing we ask. Brands differ by a few centimetres, and a frame that is slightly too small is hard to live with. Every bedroom piece below can be made to your measurements and finished to match.",
+        ],
+        "sections": [
+            ("Planning a bedroom", [
+                ("p", "Keep about 60 cm free on the sides of the bed you get in and out from. Put the dressing table near the window or a socket, so you have good light and somewhere to plug in a hair dryer."),
+                ("p", "If the room also needs a wardrobe, see our [[cat:storage|storage furniture]]. Making the bed, dressing table and wardrobe in one finish keeps a small room calm."),
+            ]),
+            ("What you can change", [
+                ("ul", [
+                    "Bed size, to fit your mattress.",
+                    "Headboard style, wood tone and finish.",
+                    "How the storage under the bed opens: drawers or a lifting base.",
+                    "Dressing table mirror shape, drawers and a matching stool.",
+                ]),
+            ]),
+        ],
+        "faq": [
+            ("Can the bed be made for a mattress that is not a standard size?", "Yes. Send the length and width of your mattress and we build the frame to it."),
+            ("Is there storage under the bed?", "Our double bed with storage has it. Tell us whether you prefer drawers or a lifting base and we plan it with you."),
+            ("Can I get a dressing table to match the bed?", "Yes. We can make the dressing table and side tables in the same wood tone and finish as the bed."),
+        ],
+    },
+    "dining": {
+        "slug": "dining-room-furniture",
+        "title": "Dining Room Furniture: Dining Tables | {NAME}",
+        "meta": "Dining tables made to the size of your dining room in {LOC}. See the 6 seater dining table with its starting price from {NAME}.",
+        "h1": "Dining room furniture made to order in {LOC}",
+        "lead": "Dining tables with a starting price, made to the size of your room, with matching chairs made to order.",
+        "intro": [
+            "Size the table for the people who eat there every day, not for the biggest dinner of the year. Plan about 60 cm of table edge for each person. Six people, three on each long side, need a table about 180 cm long.",
+        ],
+        "sections": [
+            ("Planning a dining room", [
+                ("p", "Leave about 90 cm of free floor between the table and the wall, so chairs can slide back and people can walk behind them. Measure from the table edge to the wall before you choose a length."),
+                ("p", "If the room is small, a narrower table or one with a shorter length often works better than the standard size. We make both."),
+            ]),
+            ("What you can change", [
+                ("ul", [
+                    "Length and width of the top.",
+                    "Wood tone, colour and finish.",
+                    "Number and style of chairs, made to order with the table.",
+                    "Leg style, if you have one in mind.",
+                ]),
+            ]),
+        ],
+        "faq": [
+            ("What size dining table seats six people?", "A table about 180 × 90 cm seats six, with three people on each long side. That is the standard size of our 6 seater dining table."),
+            ("Can you make the chairs too?", "Yes. Chairs can be made to order with the table, in the same finish."),
+            ("Can the table be longer or shorter?", "Yes. Tell us the room size and how many people eat there, and we suggest a length."),
+        ],
+    },
+    "office": {
+        "slug": "office-furniture",
+        "title": "Office Furniture: Office Desks and Study Tables | {NAME}",
+        "meta": "Office desks and study tables made to your room in {LOC}. See every office piece with its starting price from {NAME}.",
+        "h1": "Office furniture made to order in {LOC}",
+        "lead": "Work desks with a starting price, made to fit your office, shop counter or home study.",
+        "intro": [
+            "A desk about 60 to 70 cm deep suits most screens and keyboards. Beyond that, the right desk depends on the room: a long and narrow desk can fit a small study where a deep one cannot. Every desk below is made to your size.",
+        ],
+        "sections": [
+            ("Planning a desk", [
+                ("p", "Leave legroom under the top, and decide where the cables will run before the desk is made. Light from the side is easier on the eyes than light from behind the screen."),
+                ("p", "If you need shelves beside the desk, see the bookshelf in our [[cat:storage|storage furniture]]."),
+            ]),
+            ("What you can change", [
+                ("ul", [
+                    "Length and depth of the top.",
+                    "Drawers on one side.",
+                    "A keyboard tray.",
+                    "A cable hole for the monitor and charger.",
+                ]),
+            ]),
+        ],
+        "faq": [
+            ("Can the desk be made for a small room?", "Yes. A long and narrow desk is often the better choice for a small room. Send the wall length and we plan it."),
+            ("Can I add drawers or a keyboard tray?", "Yes. Both can be added to the standard desk. Tell us which you want when you ask for a price."),
+            ("Do you make furniture for shops and offices?", "Yes. Send the size of the space and what you need, and we reply with a price."),
+        ],
+    },
+    "storage": {
+        "slug": "storage-furniture",
+        "title": "Storage Furniture: Wardrobes and Bookshelves | {NAME}",
+        "meta": "3 door wardrobes and 5 shelf bookshelves made to your wall in {LOC}. See every storage piece with its starting price from {NAME}.",
+        "h1": "Storage furniture made to order in {LOC}",
+        "lead": "Wardrobes and bookshelves with a starting price, made to your wall and planned inside for the way you store things.",
+        "intro": [
+            "Storage furniture has to fit the wall it stands against and hold what you own. Floors and ceilings are rarely level, so measure the wall height at both ends. Tell us what you store, and we plan the hanging space, shelves and drawers to match.",
+        ],
+        "sections": [
+            ("Planning storage", [
+                ("p", "A hinged wardrobe door needs space in front of it to open. If the room is tight, tell us and we talk through other layouts."),
+                ("p", "For a bookshelf, say what it will hold. Paperbacks need less depth than files or large books, and heavy books need shelves that do not sag. Fix tall shelves to the wall so they cannot tip."),
+            ]),
+            ("What you can change", [
+                ("ul", [
+                    "Width and height, to fit your wall.",
+                    "Hanging space, shelves and drawers inside a wardrobe.",
+                    "A mirror on a wardrobe door.",
+                    "Shelf spacing and shelf depth on a bookshelf.",
+                    "Colour and finish.",
+                ]),
+            ]),
+        ],
+        "faq": [
+            ("Can the inside of the wardrobe be planned?", "Yes. Tell us what you store and we plan the hanging space, shelves and drawers with you."),
+            ("Can the wardrobe be made for an uneven wall or ceiling?", "Yes. Send the measurements at both ends of the wall and a photo, and we plan around it."),
+            ("Can I order a bookshelf in a different size?", "Yes. Give us the width and height of the space and what the shelves will hold."),
+        ],
+    },
+}
