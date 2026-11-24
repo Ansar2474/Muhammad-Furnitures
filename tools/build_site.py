@@ -45,7 +45,7 @@ SITE_DEFAULTS = {
         {"q": "What is the price of a sofa set, bed or wardrobe?", "a": "Prices on this site start at {from}. The final figure depends on size, wood or board, fabric and finish. {examples} Send your size and we confirm the exact price before work begins."},
         {"q": "Can you make a full bed set?", "a": "Yes. We can build a bed with storage, a dressing table and side tables in the same finish. Tell us which pieces you want and your mattress size."},
         {"q": "Do you deliver?", "a": "We can arrange delivery and setup in {city}. Tell us your area when you ask for a price and we confirm the details."},
-        {"q": "Can I see examples of your work?", "a": "Yes. Recent pieces and customer comments are on our Facebook page and our Google page."},
+        {"q": "Can I see examples of your work?", "a": "Our Facebook and Google pages are linked on this site. You can also ask on WhatsApp about pieces similar to the one you want."},
     ],
 }
 
@@ -896,7 +896,7 @@ PROOF = f"""    <!-- ===========================================================
     <section class="proof">
       <div class="container proof-inner">
         <h2>See our work on Google and Facebook</h2>
-        <p>Recent pieces and customer comments are on our two pages.</p>
+        <p>Our two pages are linked below.</p>
         <div class="proof-links">
           <!-- YOUR GOOGLE BUSINESS PAGE (the link you gave me) -->
           <a class="btn btn-outline" href="{GOOGLE}" target="_blank" rel="noopener">Our Google page</a>
@@ -1981,14 +1981,12 @@ def build_sitemap():
     pages += [(PRODUCT_SEO[p["id"]]["slug"] + ".html", "0.8") for p in PRODUCTS]
     urls = "\n".join(f"  <url><loc>{base}/{u}</loc><lastmod>{UPDATED_ISO}</lastmod><priority>{pr}</priority></url>" for u, pr in [(route(u), pr) for u, pr in pages])
     with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as f:
-        f.write('<?xml version="1.0" encoding="UTF-8"?>\n<!-- Replace https://YOUR-DOMAIN with your real website address (or set SITE_URL in build_site.py and rebuild) -->\n'
+        f.write('<?xml version="1.0" encoding="UTF-8"?>\n'
                 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "\n</urlset>\n")
     bots = "\n".join(f"# {why}\nUser-agent: {name}\nAllow: /\nDisallow: /cart/\nDisallow: /admin/\n" for name, why in AI_BOTS)
     with open(os.path.join(OUT, "robots.txt"), "w", encoding="utf-8") as f:
-        f.write("# Replace YOUR-DOMAIN with your real website address (or set SITE_URL in build_site.py and rebuild)\n"
-                "User-agent: *\nAllow: /\nDisallow: /cart/\nDisallow: /admin/\n\n"
-                "# AI search and answer engines are allowed, so your furniture can be found and quoted in AI answers.\n"
-                "# To stop one of them, change its 'Allow: /' line to 'Disallow: /'.\n\n"
+        f.write("User-agent: *\nAllow: /\nDisallow: /cart/\nDisallow: /admin/\n\n"
+                "# AI search and answer engines are allowed, so the furniture can be found and quoted in AI answers.\n\n"
                 + bots + f"\nSitemap: {base}/sitemap.xml\n")
     # llms.txt: an optional plain-text summary for AI tools (Google says it does not need it; other tools may read it)
     lines = [f"# {NAME}", "",
@@ -2030,11 +2028,27 @@ def build_404_and_redirects():
                 f'<meta http-equiv="refresh" content="0; url=../shop/"></head><body><p><a href="../shop/">Go to the shop</a></p></body></html>\n')
 
 
+def strip_template_notes():
+    """Removes HTML comments (old setup instructions such as 'UPDATE THE MESSAGE HERE') from every generated page."""
+    import re as _re
+    for root, dirs, files in os.walk(OUT):
+        dirs[:] = [d for d in dirs if d not in (".git", "admin", "tools", "node_modules")]
+        for fn in files:
+            if not fn.endswith(".html") or fn.startswith("google"):
+                continue
+            p = os.path.join(root, fn)
+            s = open(p, encoding="utf-8").read()
+            n = _re.sub(r"<!--(?!\[if).*?-->\s*", "", s, flags=_re.S)
+            n = _re.sub(r"\n[ \t]*\n([ \t]*\n)+", "\n\n", n)
+            if n != s:
+                open(p, "w", encoding="utf-8").write(n)
+
+
 def remove_orphan_pages():
     """Keeps the folder tidy: old .html pages from before the clean addresses, and any product hidden or deleted in the admin page."""
     import shutil
     for fn in os.listdir(OUT):
-        if fn.endswith(".html") and fn not in ("index.html", "404.html"):
+        if fn.endswith(".html") and fn not in ("index.html", "404.html") and not fn.startswith("google"):
             os.remove(os.path.join(OUT, fn))
             print("removed old page", fn)
     keep = {PRODUCT_SEO[p["id"]]["slug"] for p in PRODUCTS}
@@ -2050,5 +2064,6 @@ if __name__ == "__main__":
     build()
     build_404_and_redirects()
     remove_orphan_pages()
+    strip_template_notes()
     print("pages written to", OUT)
     print(sorted(d for d in os.listdir(OUT) if os.path.isdir(os.path.join(OUT, d)) and not d.startswith(".")))

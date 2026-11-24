@@ -5,13 +5,13 @@ Multi-page website for **Muhammad Furnitures** (made-to-order furniture). Plain 
 ## Pages
 `index.html` (home), `shop.html`, `collections.html`, `custom-furniture.html`, `about.html`, `contact.html`, `cart.html`, `furniture-buying-guide.html`, and one page for each product (for example `sofa-set-5-seater.html`).
 
-## Things to update (search the files for `UPDATE` and `PUT YOUR`)
-- Your **city** and **website address**: set `CITY` and `SITE_URL` at the top of `tools/build_site.py`, then run `python3 tools/build_site.py`. This fills in titles, canonical links, share images, `sitemap.xml`, `robots.txt` and `llms.txt`.
-- Real **prices, sizes and product names**: edit the `PRODUCTS` list in `tools/build_site.py` and rebuild.
-- **Street address and opening hours** (About and Contact pages, and the business data in `local_ld()`).
-- **Social media links** in the footer (Instagram, LinkedIn, X, YouTube, TikTok) when those accounts exist.
-- **Photos**: the images in `images/` are 3D renders, not photographs. Replace them with real photos of your work using the same file names.
-- The "last updated" date (`UPDATED_ISO` and `UPDATED_TEXT` in `tools/build_site.py`) whenever you change prices or text.
+## Things to update
+- City, address, hours, email and social links: the admin page (Site settings), saved in `content/site.json`.
+- Products, prices and sizes: the admin page, saved in `content/products/`.
+- Page text for articles and category pages: `tools/insights_content.py` and `tools/more_content.py`.
+- After any change to `content/` or `tools/`, the "Rebuild website" action regenerates every page. To rebuild by hand, run `python3 tools/build_site.py`.
+- `google072384fc5a431183.html` is the Google Search Console ownership file. Do not delete it.
+- The "last updated" date is `UPDATED_ISO` and `UPDATED_TEXT` in `tools/build_site.py`.
 
 ## Notes
 - Contact: 0311 7420474 (call and WhatsApp). Email, address, hours, social links, homepage text and FAQs are edited on the admin page (Site settings) and saved in `content/site.json`.

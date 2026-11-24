@@ -1,11 +1,9 @@
-# Replace YOUR-DOMAIN with your real website address (or set SITE_URL in build_site.py and rebuild)
 User-agent: *
 Allow: /
 Disallow: /cart/
 Disallow: /admin/
 
-# AI search and answer engines are allowed, so your furniture can be found and quoted in AI answers.
-# To stop one of them, change its 'Allow: /' line to 'Disallow: /'.
+# AI search and answer engines are allowed, so the furniture can be found and quoted in AI answers.
 
 # ChatGPT search
 User-agent: OAI-SearchBot

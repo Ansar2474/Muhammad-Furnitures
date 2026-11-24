@@ -4,13 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- PAGE TITLE (browser tab + Google results). TIP: add your city, e.g. "... in Lahore | Muhammad Furnitures" -->
   <title>About Muhammad Furnitures | Furniture Maker in Pakistan</title>
 
-  <!-- SEO META DESCRIPTION (keep under 155 characters). TIP: add your city name here too -->
   <meta name="description" content="Muhammad Furnitures is a furniture maker in Pakistan building sofa sets, beds, wardrobes and tables to order.">
 
-  <!-- SOCIAL SHARING PREVIEW (WhatsApp, Facebook). ADD og:image WITH A REAL PHOTO URL WHEN YOUR SITE IS LIVE -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Muhammad Furnitures">
   <meta property="og:locale" content="en_PK">
@@ -24,7 +21,6 @@
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="https://ansar2474.github.io/Muhammad-Furnitures/about/">
 
-  <!-- FAVICON: simple "M" icon, no file needed. REPLACE WITH YOUR OWN favicon.png IF YOU HAVE ONE -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231f1511'/%3E%3Ctext x='32' y='46' font-size='40' font-family='Arial' font-weight='700' text-anchor='middle' fill='%23f4b41a'%3EM%3C/text%3E%3C/svg%3E">
 
   <script type="application/ld+json">
@@ -53,27 +49,21 @@
     "@type": "AboutPage",
     "name": "About Muhammad Furnitures",
     "inLanguage": "en-PK",
-    "dateModified": "2026-11-24",
+    "dateModified": "2026-11-25",
     "about": {
       "@id": "https://ansar2474.github.io/Muhammad-Furnitures/#business"
     },
     "url": "https://ansar2474.github.io/Muhammad-Furnitures/about/"
   }
   </script>
-  <!-- FONTS: Bricolage Grotesque (headings, prices) + DM Sans (menus, buttons, text). Only the weights used are loaded, with display=swap. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=DM+Sans:wght@400;500;600;700&display=swap">
 
-  <!-- All colors, fonts and spacing live in style.css (see ":root" at the top) -->
   <link rel="stylesheet" href="../style.css">
 </head>
 <body data-root="../">
 
-  <!-- ============================================================
-       HEADER (THE SAME ON EVERY PAGE: if you change it, it is built once by tools/build_site.py)
-       ============================================================ -->
-  <!-- ANNOUNCEMENT BAR (top of every page). UPDATE THE MESSAGE HERE. Only promise offers you really give. -->
   <div class="announce">
     <div class="container announce-inner">
       <span><span class="hide-sm">Made-to-order furniture &bull; </span>Send your room size on WhatsApp for a price</span>
@@ -84,19 +74,16 @@
   <header class="site-header">
     <div class="container header-inner">
 
-      <!-- Mobile menu toggle button (don't remove, JS uses it) -->
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
 
-      <!-- PUT YOUR LOGO HERE. To use a logo image, replace the three <span>s with <img src="../logo.png" alt="Muhammad Furnitures" height="44"> -->
       <a href="../" class="logo" aria-label="Muhammad Furnitures, home">
         <span class="logo-mark" aria-hidden="true">M</span>
         <span class="logo-name">Muhammad</span>
         <span class="logo-sub">Furnitures</span>
       </a>
 
-      <!-- NAVIGATION LINKS: ADD / REMOVE / RENAME LINKS HERE -->
       <nav class="main-nav" id="mainNav" aria-label="Main navigation">
         <ul>
           <li><a href="../">Home</a></li>
@@ -111,18 +98,15 @@
 
       <div class="header-actions">
 
-        <!-- SEARCH: the magnifier opens the search bar under the header -->
         <button type="button" class="icon-btn" id="searchToggle" aria-label="Search furniture" aria-expanded="false" aria-controls="searchPanel">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </button>
 
-        <!-- PHONE: taps to call on a phone. CHANGE THE NUMBER HERE (keep the +92 format in href, no spaces) -->
         <a class="header-phone" href="tel:+923117420474" aria-label="Call 0311 7420474">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           <span>0311 7420474</span>
         </a>
 
-        <!-- CART ICON: opens the cart page (/cart/). The badge number updates automatically via script.js -->
         <a href="../cart/" class="cart-link" id="cartLink" aria-label="View cart">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           <span class="cart-count" id="cartCount">0</span>
@@ -130,7 +114,6 @@
       </div>
     </div>
 
-    <!-- SEARCH BAR (hidden until the magnifier is tapped). Searching takes visitors to the Shop page. -->
     <div class="search-panel" id="searchPanel" hidden>
       <div class="container">
         <form class="search-form" id="searchForm" action="../shop/" role="search">
@@ -143,9 +126,6 @@
 
   <main data-page="about">
 
-    <!-- ============================================================
-         PAGE BANNER
-         ============================================================ -->
     <section class="page-banner">
       <div class="container">
         <ul class="breadcrumb" aria-label="Breadcrumb">
@@ -159,16 +139,11 @@
 
     <section class="quick-answer-wrap"><div class="container"><div class="quick-answer"><span class="qa-label">Quick answer</span><p>Muhammad Furnitures is a furniture maker in Pakistan. We build sofa sets, beds, wardrobes, tables and office furniture to order for homes, shops and offices.</p></div></div></section>
 
-    <!-- ============================================================
-         ABOUT SECTION
-         ============================================================ -->
     <section class="about" id="about">
       <div class="container about-inner">
-        <!-- PUT YOUR ABOUT IMAGE HERE (a photo of your workshop or your craftsmen) -->
         <img src="https://images.unsplash.com/photo-1659930087003-2d64e33181f7?ixlib=rb-4.1.0&amp;q=75&amp;fm=jpg&amp;auto=format&amp;fit=crop&amp;crop=entropy&amp;w=900&amp;h=720" width="900" height="720" alt="Carpenter marking a wooden board with a pencil before cutting, as furniture is built at Muhammad Furnitures" loading="lazy" decoding="async">
         <div class="about-text">
           <h2>About Muhammad Furnitures</h2>
-          <!-- UPDATE ABOUT TEXT: add your city and the year you started, e.g. "based in Lahore. Since 2012, we have built..." -->
           <p>Muhammad Furnitures makes furniture to order. Beds, sofas, wardrobes, tables and desks, for homes, shops and offices.</p>
           <p>You tell us the space and the budget. We suggest a design and the materials, then build it. Because we make each piece ourselves, changing a size or a colour is easy to ask for.</p>
           <p>What we aim for is simple: a piece that fits, a price you know before we start, and a finish you picked.</p>
@@ -177,9 +152,6 @@
       </div>
     </section>
 
-    <!-- ============================================================
-         AT A GLANCE (clear facts about the business: easy for Google and AI answers to quote. UPDATE with your address and hours when you have them.)
-         ============================================================ -->
     <section class="at-a-glance">
       <div class="container">
         <div class="section-head"><h2 class="section-title">Muhammad Furnitures at a glance</h2></div>
@@ -191,14 +163,11 @@
           <div><dt>Phone and WhatsApp</dt><dd><a href="tel:+923117420474">0311 7420474</a></dd></div>
 
           <div><dt>Prices</dt><dd>In Pakistani rupees (Rs). Price confirmed before we start.</dd></div>
-          <div><dt>Last updated</dt><dd><time datetime="2026-11-24">24 November 2026</time></dd></div>
+          <div><dt>Last updated</dt><dd><time datetime="2026-11-25">25 November 2026</time></dd></div>
         </dl>
       </div>
     </section>
 
-    <!-- ============================================================
-         WHY CHOOSE US (builds trust). CONFIRM EVERY POINT MATCHES HOW YOU REALLY WORK, then keep it.
-         ============================================================ -->
     <section class="why">
       <div class="container">
         <div class="section-head">
@@ -232,7 +201,6 @@
             <p>Your questions go straight to the people making the piece.</p>
           </div>
           <div class="why-card">
-            <!-- UPDATE: confirm your delivery areas before publishing -->
             <span class="why-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/></svg></span>
             <h3>Delivery</h3>
             <p>We can arrange delivery and setup. Tell us your area when you ask for a price.</p>
@@ -241,10 +209,6 @@
       </div>
     </section>
 
-    <!-- ============================================================
-         CRAFT SECTION (green band)
-         CONFIRM THESE STATEMENTS MATCH YOUR REAL PROCESS BEFORE PUBLISHING.
-         ============================================================ -->
     <section class="craft" id="craft">
       <div class="container">
         <div class="craft-top">
@@ -252,7 +216,6 @@
             <h2>One workshop, start to finish</h2>
             <p>The same people plan, build and finish your piece, so a change of size or colour is a quick conversation.</p>
           </div>
-          <!-- PUT A WORKSHOP PHOTO HERE (your team at work, a joint, a finish close-up) -->
           <img src="https://images.unsplash.com/photo-1679797850019-3d0d8659a695?ixlib=rb-4.1.0&amp;q=75&amp;fm=jpg&amp;auto=format&amp;fit=crop&amp;crop=entropy&amp;w=900&amp;h=675" width="900" height="675" alt="Carpenter shaping a piece of wood by hand, as furniture is built at Muhammad Furnitures" loading="lazy" decoding="async">
         </div>
         <div class="craft-points">
@@ -313,25 +276,17 @@
       </div>
     </section>
 
-    <!-- ============================================================
-         REVIEWS LINKS (real links to your pages, no invented reviews)
-         ============================================================ -->
     <section class="proof">
       <div class="container proof-inner">
         <h2>See our work on Google and Facebook</h2>
-        <p>Recent pieces and customer comments are on our two pages.</p>
+        <p>Our two pages are linked below.</p>
         <div class="proof-links">
-          <!-- YOUR GOOGLE BUSINESS PAGE (the link you gave me) -->
           <a class="btn btn-outline" href="https://share.google/vqhgRHfPlE7DO94DB" target="_blank" rel="noopener">Our Google page</a>
-          <!-- YOUR FACEBOOK PAGE (the link you gave me) -->
           <a class="btn btn-outline" href="https://www.facebook.com/share/1KevMHNxmj/" target="_blank" rel="noopener">Our Facebook page</a>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         CALL TO ACTION BAND (same on most pages)
-         ============================================================ -->
     <section class="cta-band">
       <div class="container">
         <h2>Have a room to furnish?</h2>
@@ -345,13 +300,9 @@
 
   </main>
 
-  <!-- ============================================================
-       FOOTER (THE SAME ON EVERY PAGE: if you change it, it is built once by tools/build_site.py)
-       ============================================================ -->
   <footer class="site-footer">
     <div class="container footer-top">
 
-      <!-- FOOTER COLUMN 1: BRAND + CALL / WHATSAPP BUTTONS -->
       <div class="footer-col footer-brand">
         <a href="../" class="logo logo-light" aria-label="Muhammad Furnitures, home">
           <span class="logo-mark" aria-hidden="true">M</span>
@@ -365,7 +316,6 @@
         </div>
       </div>
 
-      <!-- FOOTER COLUMN 2: SHOP BY ROOM -->
       <div class="footer-col">
         <h3>Shop</h3>
         <ul>
@@ -378,7 +328,6 @@
         </ul>
       </div>
 
-      <!-- FOOTER COLUMN 3: COMPANY LINKS -->
       <div class="footer-col">
         <h3>Company</h3>
         <ul>
@@ -392,7 +341,6 @@
         </ul>
       </div>
 
-      <!-- FOOTER COLUMN 4: CONTACT DETAILS. PUT YOUR ADDRESS AND HOURS HERE -->
       <div class="footer-col">
         <h3>Contact</h3>
         <ul class="footer-contact">
@@ -403,24 +351,20 @@
       </div>
     </div>
 
-    <!-- BOTTOM BAR: copyright (year updates automatically) + social icons -->
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
         <p>&copy; <span id="year"></span> Muhammad Furnitures. Prices are in Pakistani rupees (Rs).</p>
         <div class="social-icons">
-          <!-- SOCIAL MEDIA ICONS. Facebook is already linked to your page. FOR EACH OTHER ICON: when you create the account, replace href="#" with your page address and delete data-social-pending="...". To add another network, copy one <a> line. -->
           <a href="https://www.facebook.com/share/1KevMHNxmj/" aria-label="Muhammad Furnitures on Facebook" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.51 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></a>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- STICKY WHATSAPP BUTTON (the only sticky button: stays on screen while scrolling, on phones too). CHANGE THE NUMBER in the href (digits only, country code first, no +) and the message after text= -->
   <a class="whatsapp-float" href="https://wa.me/923117420474?text=Hello%20Muhammad%20Furnitures%2C%20I%20would%20like%20to%20ask%20about%20your%20furniture." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
     <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
-  <!-- CALL POPUP: on computers (no calling app) and as a backup on phones. CHANGE THE NUMBER here and in the links above. Don't remove, JS uses it -->
   <div class="call-dialog" id="callDialog" role="dialog" aria-modal="true" aria-labelledby="callTitle" hidden>
     <div class="call-box">
       <button type="button" class="call-close" id="callClose" aria-label="Close">&times;</button>
@@ -435,10 +379,8 @@
     </div>
   </div>
 
-  <!-- Small popup message shown when an item is added to the cart (don't remove, JS uses it) -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <!-- All behavior (mobile menu, cart, call popup, search, category filter, quote form, newsletter) lives in script.js -->
   <script src="../script.js"></script>
 </body>
 </html>
