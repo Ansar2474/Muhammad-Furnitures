@@ -666,7 +666,7 @@ def page(filename, key, title, desc, main_html, ld=False, faq=False, noindex=Fal
     og_img = (f'<meta property="og:image" content="{SITE_URL}/{og_image}">\n  <meta name="twitter:image" content="{SITE_URL}/{og_image}">' if SITE_URL else
               '<!-- og:image appears automatically once SITE_URL is set in build_site.py -->')
     head = f"""<!DOCTYPE html>
-<html lang="en">
+<html lang="en-PK">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1132,7 +1132,7 @@ def build():
 {prose(MC.HOME_MORE)}
 {faq_html()}
 {cta_band()}"""
-    page("index.html", "home", f"Furniture in {LOC} | Sofa Sets, Beds, Wardrobes | {NAME}",
+    page("index.html", "home", f"Furniture in {LOC}: Sofa Sets, Beds | {NAME}",
          f"{NAME} builds sofa sets, beds, wardrobes and dining tables to your size in {LOC}. Ask for a price on WhatsApp {PHONE}.",
          home, ld=True, faq=True)
 
@@ -1194,7 +1194,7 @@ def build():
 {prose(MC.SHOP_MORE)}
 {shop_faq_html()}
 {cta_band()}"""
-    page("shop.html", "shop", f"Buy Furniture Online in {LOC} | Sofa Sets, Beds | {NAME}",
+    page("shop.html", "shop", f"Buy Furniture in {LOC} | {NAME}",
          f"Buy sofa sets, beds, wardrobes, dining tables and office desks in {LOC}. See starting prices in Rs. Made to your size by {NAME}.", shop,
          extra_ld=shop_ld() + faq_ld_for(MC.SHOP_FAQ))
 
@@ -1226,7 +1226,7 @@ def build():
 
 {prose(MC.COLLECTIONS_MORE)}
 {cta_band()}"""
-    page("collections.html", "collections", f"Furniture Collections: Sofa Sets, Beds, Office | {NAME}",
+    page("collections.html", "collections", f"Furniture Collections by Room | {NAME}",
          f"Explore sofa sets, bed sets, dining tables, office desks and wardrobes made to your size in {LOC} by {NAME}.", collections,
          extra_ld=crumb_ld([("Home", "index.html"), ("Collections", "collections.html")]))
 
@@ -1275,7 +1275,7 @@ def build():
 
 {faq_html()}
 {cta_band("Have a design in mind?", "Send your measurements or a photo on WhatsApp, or call. We reply with a price.")}"""
-    page("custom-furniture.html", "custom", f"Custom Furniture Maker in {LOC} | Made to Order | {NAME}",
+    page("custom-furniture.html", "custom", f"Custom Furniture Maker in {LOC} | {NAME}",
          f"Order custom sofa sets, beds, wardrobes and tables made to your size and finish in {LOC}. Send your measurements to {NAME} and get a price.", custom, faq=True,
          extra_ld=crumb_ld([("Home", "index.html"), ("Custom Furniture", "custom-furniture.html")]))
 
@@ -1323,7 +1323,7 @@ def build():
 {PROOF}
 {cta_band()}"""
     page("about.html", "about", f"About {NAME} | Furniture Maker in {LOC}",
-         f"{NAME} is a furniture maker in {LOC} building sofa sets, beds, wardrobes and tables to order.", about,
+         f"{NAME} is a furniture maker in {LOC} building sofa sets, beds, wardrobes and tables to order. Send your size on WhatsApp for a price.", about,
          extra_ld=crumb_ld([("Home", "index.html"), ("About Us", "about.html")]) + page_ld("AboutPage", "About " + NAME, "about.html"))
 
     # ---------------- CONTACT ----------------
@@ -1391,8 +1391,8 @@ def build():
 
 {prose(MC.CONTACT_MORE)}
 {PROOF}"""
-    page("contact.html", "contact", f"Contact {NAME} | Get a Furniture Quote in {LOC}",
-         f"Call or WhatsApp {PHONE}, or send a quote request to {NAME}. Custom furniture made to your size in {LOC}.", contact,
+    page("contact.html", "contact", f"Contact Us and Get a Furniture Quote | {NAME}",
+         f"Call or WhatsApp {PHONE}, or send a quote request to {NAME}. Custom furniture made to your size in {LOC}. We reply with a price.", contact,
          extra_ld=crumb_ld([("Home", "index.html"), ("Contact", "contact.html")]) + page_ld("ContactPage", "Contact " + NAME, "contact.html"))
 
     # ---------------- CART ----------------
@@ -1813,7 +1813,7 @@ def build_insights():
     </section>
 {prose([("Want a price instead?", [("p", "Send your room size and what you need on WhatsApp or call [[tel:call|{PHONE}]]. We reply with a price before any work starts. Browse the [[page:shop|shop]] to see starting prices.")])])}
 {cta_band()}"""
-    page("insights.html", "insights", f"Furniture Insights: Wood, Sizes and Care | {NAME}",
+    page("insights.html", "insights", f"Furniture Insights: Wood, Size, Care | {NAME}",
          f"Short articles from {NAME} on measuring a room, choosing wood and board, sofa size, wardrobe planning and caring for furniture.", main,
          extra_ld=crumb_ld([("Home", "index.html"), ("Insights", "insights.html")]))
     for a in arts:
@@ -1928,7 +1928,7 @@ def build_guide():
     if SITE_URL:
         art["mainEntityOfPage"] = absurl("furniture-buying-guide.html")
     ld = crumb_ld([("Home", "index.html"), ("Furniture Guide", "furniture-buying-guide.html")]) + ld_script(art) + faq_ld_for(faq_all)
-    page("furniture-buying-guide.html", "guide", f"Furniture Buying Guide: Sofa Set, Bed, Wardrobe | {NAME}",
+    page("furniture-buying-guide.html", "guide", f"Furniture Buying Guide for {LOC} | {NAME}",
          f"How to choose a sofa set, bed, wardrobe, dining table and office desk, plus wood, finish and measuring tips from {NAME}.",
          main, extra_ld=ld)
 

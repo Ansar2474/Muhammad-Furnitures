@@ -50,7 +50,7 @@ ARTICLES = [
     },
     {
         "slug": "sheesham-kikar-deodar-wood",
-        "title": "Sheesham, Kikar and Deodar: Which Wood to Choose",
+        "title": "Sheesham, Kikar or Deodar: Which Wood?",
         "meta": "What sheesham, kikar and deodar are like to live with, and how to choose between them and between solid wood and board for your furniture.",
         "h1": "Sheesham, kikar and deodar: which wood for which piece",
         "short": "Sheesham is dense and polishes well. Kikar is hard and heavy. Deodar is lighter and softer. The right one depends on the piece, the room and your budget.",
@@ -85,8 +85,8 @@ ARTICLES = [
     },
     {
         "slug": "plywood-mdf-or-solid-wood",
-        "title": "Plywood, MDF or Solid Wood: What to Choose",
-        "meta": "How plywood, MDF and solid wood differ, and which one suits a wardrobe, a bed, a dining table or a bookshelf.",
+        "title": "Plywood, MDF or Solid Wood: Which?",
+        "meta": "How plywood, MDF and solid wood differ, and which one suits a wardrobe, a bed, a dining table or a bookshelf. Ask us if you are unsure.",
         "h1": "Plywood, MDF or solid wood: what to choose for each piece",
         "short": "Solid wood suits tables and bed frames. Plywood suits wardrobes and shelves. MDF suits painted surfaces, but keep it dry. Many pieces use more than one.",
         "sections": [
@@ -154,7 +154,7 @@ ARTICLES = [
     },
     {
         "slug": "wooden-furniture-care-humid-weather",
-        "title": "Looking After Wooden Furniture in Humid Weather",
+        "title": "Wooden Furniture Care in Humid Weather",
         "meta": "Simple ways to protect wooden furniture in the monsoon and other humid weather: airflow, distance from walls, cleaning and spills.",
         "h1": "Looking after wooden furniture in humid weather",
         "short": "Keep air moving, leave a small gap between furniture and wet walls, wipe spills at once, and clean with a dry or slightly damp cloth.",
@@ -229,7 +229,7 @@ ARTICLES = [
     {
         "slug": "plan-the-inside-of-a-wardrobe",
         "title": "How to Plan the Inside of a Wardrobe",
-        "meta": "How to plan hanging space, shelves and drawers inside a wardrobe, starting from what you actually store.",
+        "meta": "How to plan hanging space, shelves and drawers inside a wardrobe, starting from what you actually store. Send us your wall size for a price.",
         "h1": "How to plan the inside of a wardrobe",
         "short": "List what you store, measure your longest garment, and give each group its own space: hanging, folded, drawers and a shelf for bags and bedding.",
         "sections": [

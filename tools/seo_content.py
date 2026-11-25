@@ -6,7 +6,7 @@
 PRODUCT_SEO = {
     1: dict(
         slug="dining-table-6-seater",
-        title="Dining Table 6 Seater Price in Pakistan",
+        title="Dining Table Price in Pakistan",
         meta="Dining table, 6 seater, made to your size and finish by {name}. Starting price {price}. Ask for a price on WhatsApp {phone}.",
         h1="Dining Table, 6 Seater",
         lead="A six seater dining table built for family meals, made to the size of your dining room.",
@@ -21,7 +21,7 @@ PRODUCT_SEO = {
     ),
     2: dict(
         slug="double-bed-with-storage",
-        title="Double Bed with Storage Price in Pakistan",
+        title="Double Bed Price in Pakistan",
         meta="Double bed with storage, made to fit your mattress and room. Starting price {price}. Order from {name} on WhatsApp {phone}.",
         h1="Double Bed with Storage",
         lead="A strong double bed with storage underneath, made to fit your mattress and your bedroom.",
@@ -96,7 +96,7 @@ PRODUCT_SEO = {
     ),
     7: dict(
         slug="coffee-table",
-        title="Centre Table (Coffee Table) Price in Pakistan",
+        title="Centre Table Price in Pakistan",
         meta="Centre table (coffee table) made to fit your living room, with space for a tray and books. Starting price {price}. {name}.",
         h1="Coffee Table (Centre Table)",
         lead="A low centre table for the middle of your living room, with space for a tray, books and guests.",
@@ -111,7 +111,7 @@ PRODUCT_SEO = {
     ),
     8: dict(
         slug="dressing-table-with-mirror",
-        title="Dressing Table with Mirror Price in Pakistan",
+        title="Dressing Table Price in Pakistan",
         meta="Dressing table with mirror and drawers, made to fit your bedroom. Starting price {price}. Order from {name} on WhatsApp {phone}.",
         h1="Dressing Table with Mirror",
         lead="A dressing table with a mirror and drawers for your daily essentials.",

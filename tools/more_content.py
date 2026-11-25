@@ -308,7 +308,7 @@ GUIDE_EXTRA_FAQ = [
 CATEGORY_PAGES = {
     "living": {
         "slug": "living-room-furniture",
-        "title": "Living Room Furniture: Sofa Sets, TV Units | {NAME}",
+        "title": "Living Room Furniture Made to Order | {NAME}",
         "meta": "Sofa sets, TV units and centre tables made to your size in {LOC}. See every living room piece with its starting price from {NAME}.",
         "h1": "Living room furniture made to order in {LOC}",
         "lead": "Sofa sets, TV units and centre tables, each with a starting price. Change the size, fabric or finish to suit your room.",
@@ -337,7 +337,7 @@ CATEGORY_PAGES = {
     },
     "bedroom": {
         "slug": "bedroom-furniture",
-        "title": "Bedroom Furniture: Beds with Storage, Dressing Tables | {NAME}",
+        "title": "Bedroom Furniture Made to Order | {NAME}",
         "meta": "Beds with storage and dressing tables made to your mattress and room in {LOC}. See every bedroom piece with its starting price from {NAME}.",
         "h1": "Bedroom furniture made to order in {LOC}",
         "lead": "Beds with storage and dressing tables, each with a starting price. Built around your mattress and your room.",
@@ -366,7 +366,7 @@ CATEGORY_PAGES = {
     },
     "dining": {
         "slug": "dining-room-furniture",
-        "title": "Dining Room Furniture: Dining Tables | {NAME}",
+        "title": "Dining Room Furniture and Tables | {NAME}",
         "meta": "Dining tables made to the size of your dining room in {LOC}. See the 6 seater dining table with its starting price from {NAME}.",
         "h1": "Dining room furniture made to order in {LOC}",
         "lead": "Dining tables with a starting price, made to the size of your room, with matching chairs made to order.",
@@ -395,7 +395,7 @@ CATEGORY_PAGES = {
     },
     "office": {
         "slug": "office-furniture",
-        "title": "Office Furniture: Office Desks and Study Tables | {NAME}",
+        "title": "Office Desks and Study Tables | {NAME}",
         "meta": "Office desks and study tables made to your room in {LOC}. See every office piece with its starting price from {NAME}.",
         "h1": "Office furniture made to order in {LOC}",
         "lead": "Work desks with a starting price, made to fit your office, shop counter or home study.",
@@ -424,7 +424,7 @@ CATEGORY_PAGES = {
     },
     "storage": {
         "slug": "storage-furniture",
-        "title": "Storage Furniture: Wardrobes and Bookshelves | {NAME}",
+        "title": "Wardrobes and Bookshelves | {NAME}",
         "meta": "3 door wardrobes and 5 shelf bookshelves made to your wall in {LOC}. See every storage piece with its starting price from {NAME}.",
         "h1": "Storage furniture made to order in {LOC}",
         "lead": "Wardrobes and bookshelves with a starting price, made to your wall and planned inside for the way you store things.",
