@@ -4,7 +4,7 @@
 # Rules: no invented facts, numbers about customers, delivery times or guarantees. Material notes are general information.
 
 HUB_INTRO = [
-    "Short, plain articles on the questions people ask before they order furniture: how to measure, which wood to pick, how big a sofa should be, and how to look after what you buy.",
+    "Short, plain articles on the questions people ask before they order furniture: how to measure, which wood to pick, how big a sofa should be, what furniture costs, and how to look after what you buy.",
     "Each one answers a single question. For a wider overview, read the [[page:guide|furniture buying guide]].",
 ]
 
@@ -261,3 +261,248 @@ ARTICLES = [
         "links": [("p", 3), ("cat", "storage"), ("page", "guide")],
     },
 ]
+
+NEW_ARTICLES = [
+    {
+        "slug": "furniture-prices-in-pakistan-explained",
+        "title": "Furniture Prices in Pakistan Explained",
+        "meta": "What decides the price of furniture in Pakistan: material, size, finish, fabric and labour. See our starting prices and how to compare two quotes.",
+        "h1": "Furniture prices in Pakistan: what decides the cost",
+        "short": "The price comes from the material, the size, the finish and the hours of work. Two quotes only compare when all four match.",
+        "sections": [
+            ("Why two prices for the same piece can differ", [
+                ("p", "A quote for \"a wardrobe\" tells you little. One wardrobe may be 150 cm wide in board with a laminate finish. Another may be 210 cm wide with a solid wood frame and a polished finish. Both are wardrobes, and the prices will be far apart."),
+                ("p", "So before you compare prices, compare what the price includes."),
+            ]),
+            ("What moves the price", [
+                ("ul", [
+                    "Material. Solid wood usually costs more than plywood. Plywood usually costs more than MDF or particle board. Read [[art:plywood-mdf-or-solid-wood|plywood, MDF or solid wood]] for what each is good at.",
+                    "Size. A wider, taller or deeper piece uses more material and takes more hours to build.",
+                    "Finish. Natural polish, paint, veneer and laminate cost different amounts, and a finish with several coats takes longer.",
+                    "Fittings. Hinges, drawer runners, sliding tracks and handles range from basic to heavy duty.",
+                    "Fabric and foam. For sofas and bed headboards, the cover and the foam inside change the price as much as the frame does.",
+                    "Detail. Extra drawers, shelves, mirrors, carving or lighting add work.",
+                ]),
+            ]),
+            ("Our starting prices", [
+                ("p", "These are the starting prices shown on our product pages. Each one is for the standard size. The final price depends on your size and finish, and we confirm it before anything is built."),
+                ("ul", [
+                    "[[p:1|Dining table, 6 seater]]: from {price:1} ({spec:1})",
+                    "[[p:2|Double bed with storage]]: from {price:2}",
+                    "[[p:3|Wardrobe, 3 door]]: from {price:3}",
+                    "[[p:4|Sofa set, 5 seater]]: from {price:4}",
+                    "[[p:5|Office desk]]: from {price:5}",
+                    "[[p:6|TV unit with shelves]]: from {price:6}",
+                    "[[p:7|Coffee table]]: from {price:7}",
+                    "[[p:8|Dressing table with mirror]]: from {price:8}",
+                    "[[p:9|Bookshelf, 5 shelf]]: from {price:9}",
+                ]),
+            ]),
+            ("How to compare two quotes", [
+                ("ol", [
+                    "Ask for the exact size in centimetres, and check it is the same in both quotes.",
+                    "Ask what the frame, the back panel, the shelves and the drawer bottoms are made of.",
+                    "Ask what finish is used and how many coats.",
+                    "Ask what is included: delivery, fitting, chairs with a table, a mattress with a bed.",
+                    "Ask when the work will be ready and when each payment is due.",
+                ]),
+                ("p", "If one quote cannot answer these, it is not yet a price you can compare."),
+            ]),
+            ("Ways to lower the cost without weakening the piece", [
+                ("ul", [
+                    "Choose a simpler finish. A plain finish costs less than a multi-coat one.",
+                    "Make the piece the size you need, not larger. Measure the room first with [[art:measure-a-room-for-furniture|this guide]].",
+                    "Use solid wood where the piece carries weight, such as legs and frames, and board for panels that carry none.",
+                    "Cut the number of drawers or shelves you will not use.",
+                ]),
+            ]),
+            ("Get a price for your size", [
+                ("p", "Send the piece you want, the size and the finish on WhatsApp {PHONE}. We reply with a price. Nothing starts until you say yes."),
+            ]),
+        ],
+        "faq": [
+            ("Is solid wood always better than board?", "No. Solid wood is strong and can be repaired, but it moves with the weather. Good board stays flat and suits large panels. Many pieces use both."),
+            ("Why is a made-to-order price different from a shop price?", "A shop price is for a fixed size and finish. A made-to-order price is for your size and your choices, so it can be lower or higher."),
+            ("Can I get a price before I decide?", "Yes. Send your size and finish on WhatsApp and we reply with a price. You decide after that."),
+        ],
+        "links": [("p", 4), ("p", 2), ("p", 1), ("page", "shop"), ("page", "guide")],
+    },
+    {
+        "slug": "wardrobe-design-for-a-small-room",
+        "title": "Wardrobe Design for a Small Room",
+        "meta": "Wardrobe design for a small bedroom: use the height, choose the right doors, keep the depth sensible and send the sizes we need for a price.",
+        "h1": "Wardrobe design for a small room: what works",
+        "short": "In a small room, build tall, keep doors from swinging into the walkway, and plan the inside before you choose the outside.",
+        "sections": [
+            ("Start with what you store", [
+                ("p", "Count what you hang and what you fold. A wardrobe full of long coats needs a different inside from one holding folded shirts and bedding. [[art:plan-the-inside-of-a-wardrobe|Plan the inside first]], then fit the outside to the wall."),
+            ]),
+            ("Use the height", [
+                ("p", "A wardrobe that runs close to the ceiling gives the most storage for the floor it takes. Put things you use a few times a year on the top shelf: bedding, suitcases, winter quilts. Measure the ceiling height at both ends of the wall, as in [[art:measure-a-room-for-furniture|how to measure a room]]."),
+            ]),
+            ("Choose doors that suit the space", [
+                ("ul", [
+                    "Hinged doors swing out, so they need clear floor about as wide as one door.",
+                    "Sliding doors need no room in front, but only part of the wardrobe is open at one time.",
+                    "Narrower hinged doors swing less, which helps when the bed stands close.",
+                ]),
+                ("p", "[[art:sliding-or-hinged-wardrobe-doors|Sliding or hinged wardrobe doors]] compares the two in more detail."),
+            ]),
+            ("Keep the depth sensible", [
+                ("p", "Clothes on hangers need about 55 to 60 cm of depth. Folded clothes and shelves need less. A deeper wardrobe takes floor space you may not have, so put the hanging section at full depth and use shallower shelves beside it."),
+            ]),
+            ("Use corners and odd spaces", [
+                ("p", "Alcoves, corners and the wall above a door can hold storage that a ready-made wardrobe cannot use. A wardrobe made to order can be cut to fit around a window, a beam or a recess. Send a photo with your numbers."),
+            ]),
+            ("Light colours and a mirror", [
+                ("p", "A light finish makes a small room feel larger. A mirror on one door saves you buying a separate mirror and the floor space it needs."),
+            ]),
+            ("What to send us", [
+                ("p", "Send the wall width, the ceiling height, the position of doors, windows and sockets, and a photo of the wall. Add what you store. We reply with questions or a price."),
+            ]),
+        ],
+        "faq": [
+            ("How wide should a wardrobe be for one person?", "As a rough guide, about 100 to 120 cm works for one person who mostly hangs clothes. Two people, or anyone with many long garments, will want 180 cm or more."),
+            ("Can a wardrobe fit around a window or a beam?", "Yes. A made-to-order wardrobe can be cut around obstacles. Send the numbers and a photo."),
+            ("Is a built-in wardrobe better for a small room?", "It often is, because it uses the full height and fills the corners. It is also harder to move later, so measure carefully and be sure of the position."),
+        ],
+        "links": [("p", 3), ("cat", "storage"), ("page", "custom")],
+    },
+    {
+        "slug": "sliding-or-hinged-wardrobe-doors",
+        "title": "Sliding or Hinged Wardrobe Doors?",
+        "meta": "Sliding or hinged wardrobe doors? A plain comparison of space needed, access, wear and care, so you can pick the one that suits your bedroom.",
+        "h1": "Sliding or hinged wardrobe doors: which should you choose?",
+        "short": "Hinged doors open the whole wardrobe but need room to swing. Sliding doors need no swing space, but only open part of it at a time.",
+        "sections": [
+            ("Hinged doors", [
+                ("ul", [
+                    "You see the whole wardrobe at once, so it is easy to find things.",
+                    "They need clear floor in front, about the width of one door.",
+                    "Hinges are simple parts and are easy to adjust or replace.",
+                    "A heavy mirror on a hinged door puts weight on the hinges, so the fitting must be chosen for it.",
+                ]),
+            ]),
+            ("Sliding doors", [
+                ("ul", [
+                    "They need no space in front, which helps in a narrow room or when the bed is close.",
+                    "Only part of the wardrobe is open at any time.",
+                    "The track collects dust and grit, so it needs a regular wipe.",
+                    "How smoothly they run depends on the track and wheels, and on the wardrobe standing level.",
+                ]),
+            ]),
+            ("How to decide", [
+                ("ul", [
+                    "If the room is tight, choose sliding.",
+                    "If you want to see everything and have the floor space, choose hinged.",
+                    "If the wardrobe is wide, sliding doors or several narrower hinged doors are easier than two huge doors.",
+                    "If you want both, hinged doors over the hanging section and open shelves or drawers beside it.",
+                ]),
+            ]),
+            ("Check the fittings", [
+                ("p", "Whichever you pick, ask what hinges or tracks will be used. Cheap fittings are the part that fails first. This matters most for tall doors and for doors with a mirror."),
+            ]),
+            ("Plan the whole wardrobe", [
+                ("p", "The doors are one choice among several. Read [[art:wardrobe-design-for-a-small-room|wardrobe design for a small room]] and [[art:plan-the-inside-of-a-wardrobe|how to plan the inside]], then send us your sizes."),
+            ]),
+        ],
+        "faq": [
+            ("Which is cheaper, sliding or hinged?", "It depends on the size and the fittings, so ask for a quote for both. The difference is often in the hardware, not the door."),
+            ("Do sliding doors jam?", "They can if dust fills the track or the wardrobe is not level. A regular wipe along the track and a level fitting prevent most problems."),
+            ("Can I put a mirror on either type?", "Yes. A mirror is heavy, so the hinges or track should be chosen for that weight."),
+        ],
+        "links": [("p", 3), ("cat", "storage"), ("page", "custom")],
+    },
+    {
+        "slug": "dining-table-size-by-seats",
+        "title": "Dining Table Size by Number of Seats",
+        "meta": "How big a dining table should be for 4, 6 or 8 people: space per person, room around the table, shapes and the sizes to send us for a price.",
+        "h1": "Dining table size: how big for 4, 6 or 8 people",
+        "short": "Allow about 60 cm of table edge for each person and about 90 cm behind each chair. Then test the size against your room.",
+        "sections": [
+            ("Start with the people", [
+                ("p", "Each person needs roughly 60 cm of table edge to eat without bumping elbows. Here are rough sizes for a rectangular table:"),
+                ("ul", [
+                    "4 people: about 120 × 75 cm.",
+                    "6 people: about 150 to 180 × 90 cm. Our [[p:1|6 seater dining table]] is {spec:1}.",
+                    "8 people: about 200 to 240 × 90 to 100 cm.",
+                ]),
+                ("p", "These are guides, not rules. Chairs with arms need more room, and so do bigger families."),
+            ]),
+            ("Test it in your room", [
+                ("ol", [
+                    "Mark the table size on the floor with tape or sheets of newspaper.",
+                    "Leave about 90 cm behind each chair so it can slide back.",
+                    "If people walk behind the chairs, leave about 120 cm.",
+                    "Stand where the door opens and check you can still get in and out.",
+                ]),
+                ("p", "[[art:measure-a-room-for-furniture|How to measure a room]] covers the rest of the numbers to write down."),
+            ]),
+            ("Choose the shape", [
+                ("ul", [
+                    "Rectangular tables seat the most people for the length.",
+                    "A round table of about 100 to 120 cm suits four people in a square room, and no one sits in a corner.",
+                    "In a long, narrow room, a narrower rectangular table leaves a better walking path.",
+                ]),
+            ]),
+            ("Height and legs", [
+                ("p", "Most dining tables stand about 74 to 76 cm high, and chairs with a seat around 45 cm high go with them. Look at where the legs are. Legs set at the corners leave more room for knees, and a leg set in from the end can block someone seated there."),
+            ]),
+            ("If you host a crowd only sometimes", [
+                ("p", "Tell us how often you have a full table. A slightly longer table, or a separate side table for big days, can work better than a large table that fills the room every day."),
+            ]),
+        ],
+        "faq": [
+            ("How many people sit at a 180 × 90 cm table?", "Six, with three on each long side. Two more can sit at the ends if the legs allow it."),
+            ("What size should dining chairs be?", "A seat about 45 cm from the floor suits a table about 75 cm high. That leaves roughly 28 to 30 cm between the seat and the tabletop."),
+            ("Can the table be made to my size?", "Yes. Send the room size and how many people you seat, and we reply with a price."),
+        ],
+        "links": [("p", 1), ("cat", "dining"), ("page", "custom")],
+    },
+    {
+        "slug": "bed-frame-size-and-your-mattress",
+        "title": "Bed Frame Size and Your Mattress",
+        "meta": "How to choose a bed frame size: measure the mattress, add the frame edge, leave room to walk and check storage and height before you order.",
+        "h1": "Bed frame size: how to match the frame to your mattress",
+        "short": "Decide the mattress first. The frame is the mattress size plus the edge around it, and the room needs space on every side you use.",
+        "sections": [
+            ("Measure the mattress, not the name", [
+                ("p", "Names such as single, double, queen and king do not mean the same size at every brand. Measure the length, the width and the thickness of your mattress in centimetres. If you have not bought one yet, choose it first and send us its size."),
+            ]),
+            ("Add the frame", [
+                ("ul", [
+                    "The inside of the frame should match the mattress, with 1 to 2 cm of ease so the mattress goes in.",
+                    "The outside is bigger by the thickness of the frame boards on every side.",
+                    "A headboard adds depth at the head end, and a footboard adds length at the foot.",
+                ]),
+                ("p", "Always plan the room with the outside size, not the mattress size."),
+            ]),
+            ("Check the room", [
+                ("ul", [
+                    "About 60 cm beside the bed on each side you get in and out.",
+                    "About 80 cm to walk past the foot of the bed.",
+                    "Room for wardrobe doors and drawers to open.",
+                    "Space for side tables if you want them.",
+                ]),
+            ]),
+            ("If the bed has storage", [
+                ("p", "Drawers need clear floor to pull out. A lift-up base needs room to reach the sides or the foot, and head room if a shelf sits above the bed. Tell us which kind you want and we plan the room around it. See the [[p:2|double bed with storage]]."),
+            ]),
+            ("Check the height", [
+                ("p", "The mattress sits on the frame, so the height of the sleeping surface is the frame height plus the mattress thickness. A surface about 45 to 55 cm from the floor is comfortable for most adults to sit on and stand up from."),
+            ]),
+            ("What to send us", [
+                ("p", "Send the mattress size and thickness, the room size, the position of the door and window, and whether you want storage. We reply with questions or a price."),
+            ]),
+        ],
+        "faq": [
+            ("Can you make a bed for a mattress I already have?", "Yes. Send the length, width and thickness of the mattress and we make the frame to match."),
+            ("What if my room is small?", "Choose a low headboard, leave out the footboard, and check that the door and the wardrobe doors still open. Our article on wardrobe design for a small room has more ideas."),
+            ("Should I buy the mattress or the bed first?", "The mattress. The frame is made around it, so its size decides the rest."),
+        ],
+        "links": [("p", 2), ("cat", "bedroom"), ("page", "custom")],
+    },
+]
+
+# The price guide comes first because it answers the most searched question.
+ARTICLES = NEW_ARTICLES[:1] + ARTICLES + NEW_ARTICLES[1:]

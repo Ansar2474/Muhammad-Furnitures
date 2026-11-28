@@ -11,6 +11,7 @@
 - [Furniture buying guide](https://ansar2474.github.io/Muhammad-Furnitures/furniture-buying-guide/): how to choose and measure
 - [Collections](https://ansar2474.github.io/Muhammad-Furnitures/collections/): living room, bedroom, dining, office, storage
 - [Insights](https://ansar2474.github.io/Muhammad-Furnitures/insights/): short articles on measuring, wood, sofa size and care
+- [Furniture prices in Pakistan: what decides the cost](https://ansar2474.github.io/Muhammad-Furnitures/insights/furniture-prices-in-pakistan-explained/)
 - [How to measure a room before you order furniture](https://ansar2474.github.io/Muhammad-Furnitures/insights/measure-a-room-for-furniture/)
 - [Sheesham, kikar and deodar: which wood for which piece](https://ansar2474.github.io/Muhammad-Furnitures/insights/sheesham-kikar-deodar-wood/)
 - [Plywood, MDF or solid wood: what to choose for each piece](https://ansar2474.github.io/Muhammad-Furnitures/insights/plywood-mdf-or-solid-wood/)
@@ -18,6 +19,10 @@
 - [Looking after wooden furniture in humid weather](https://ansar2474.github.io/Muhammad-Furnitures/insights/wooden-furniture-care-humid-weather/)
 - [Made-to-order or ready-made furniture: which one should you buy?](https://ansar2474.github.io/Muhammad-Furnitures/insights/made-to-order-or-ready-made-furniture/)
 - [How to plan the inside of a wardrobe](https://ansar2474.github.io/Muhammad-Furnitures/insights/plan-the-inside-of-a-wardrobe/)
+- [Wardrobe design for a small room: what works](https://ansar2474.github.io/Muhammad-Furnitures/insights/wardrobe-design-for-a-small-room/)
+- [Sliding or hinged wardrobe doors: which should you choose?](https://ansar2474.github.io/Muhammad-Furnitures/insights/sliding-or-hinged-wardrobe-doors/)
+- [Dining table size: how big for 4, 6 or 8 people](https://ansar2474.github.io/Muhammad-Furnitures/insights/dining-table-size-by-seats/)
+- [Bed frame size: how to match the frame to your mattress](https://ansar2474.github.io/Muhammad-Furnitures/insights/bed-frame-size-and-your-mattress/)
 - [Living Room](https://ansar2474.github.io/Muhammad-Furnitures/living-room-furniture/): every living room piece with its starting price
 - [Bedroom](https://ansar2474.github.io/Muhammad-Furnitures/bedroom-furniture/): every bedroom piece with its starting price
 - [Dining Room](https://ansar2474.github.io/Muhammad-Furnitures/dining-room-furniture/): every dining room piece with its starting price
@@ -36,4 +41,4 @@
 - [Dressing Table with Mirror](https://ansar2474.github.io/Muhammad-Furnitures/products/dressing-table-with-mirror/): from Rs 55,000, 110 × 45 × 140 cm
 - [Bookshelf, 5 Shelf](https://ansar2474.github.io/Muhammad-Furnitures/products/bookshelf-5-shelf/): from Rs 30,000, 90 × 30 × 180 cm
 
-Last updated: 2026-11-25
+Last updated: 2026-11-28

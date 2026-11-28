@@ -779,3 +779,23 @@ body.no-scroll { overflow: hidden; }
   .insight-hero img { aspect-ratio: 16 / 10; }
   .insight-hero figure { border-radius: 14px; }
 }
+
+/* Touch comfort: larger tap areas on phones */
+@media (pointer: coarse), (max-width: 760px) {
+  .footer-col ul { gap: 0; }
+  .footer-col a:not(.btn) { display: inline-block; padding: 10px 0; }
+  .footer-contact li { padding-block: 4px; }
+  .btn-sm { min-height: 42px; display: inline-flex; align-items: center; justify-content: center; }
+  .footer-bottom a { display: inline-block; padding: 8px 0; }
+}
+.cart-count { font-size: 0.75rem; }
+.badge { font-size: 0.82rem; }
+.cat-link { font-size: 0.84rem; }
+@media (max-width: 560px) { .cat-link { font-size: 0.82rem; padding: 6px 12px; } }
+@media (pointer: coarse), (max-width: 760px) {
+  .guide-toc ol { gap: 0; }
+  .guide-toc a { display: inline-block; padding: 10px 0; }
+}
+@media (max-width: 560px) {
+  .insight-grid .insight-img img { aspect-ratio: 16 / 10; }
+}

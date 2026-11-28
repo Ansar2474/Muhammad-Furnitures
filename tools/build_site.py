@@ -756,6 +756,10 @@ UNSPLASH = {
     "a-care":     ("1789656435406-8e3a9a126436", "Barney Goodman", "bgoodpic"),
     "a-order":    ("1497219055242-93359eeed651", "Dominik Scythe", "drscythe"),
     "a-wardrobe": ("1630904989936-da6328c2f92d", "A65 Design", "huutin23"),
+    "a-slide":    ("1631889993877-71e193bf79b8", "Backbone", "bkbn"),
+    "a-small":    ("1680503146476-abb8c752e1f4", "Albero Furniture Bratislava", "alberofurniture"),
+    "a-dining":   ("1581970696275-253e75ecf269", "Liana Mikah", "lianamikah"),
+    "a-bed":      ("1718894071528-1108a094cc78", "Sanju Pandita", "spxclicks"),
     # product photos (their image addresses live in content/products/*.json)
     "p-sofa-set-5-seater": ("", "Costa Live", "vendedorescostalive"),
     "p-double-bed-with-storage": ("", "Sibeli Velázquez", "sibelivelazquez"),
@@ -1467,6 +1471,8 @@ def inline(text):
             return f'<a href="tel:{TEL}">{label}</a>'
         return f'<a href="{PAGE_FILES[target]}">{label}</a>'
     text = re.sub(r"\[\[(p|page|tel|cat|art):([a-z0-9-]+)\|([^\]]+)\]\]", link, text)
+    text = re.sub(r"\{price:(\d+)\}", lambda m: money(PBYID[int(m.group(1))]["price"]), text)
+    text = re.sub(r"\{spec:(\d+)\}", lambda m: PBYID[int(m.group(1))]["spec"], text)
     return text.replace("{PHONE}", PHONE).replace("{LOC}", LOC).replace("{NAME}", NAME)
 
 
@@ -1769,6 +1775,11 @@ ART_PHOTO = {
     "wooden-furniture-care-humid-weather": ("a-care", "A woman wiping a wooden sideboard with a cloth"),
     "made-to-order-or-ready-made-furniture": ("a-order", "A craftsperson carving wood with a chisel"),
     "plan-the-inside-of-a-wardrobe": ("a-wardrobe", "Shirts hanging in a white wooden wardrobe"),
+    "furniture-prices-in-pakistan-explained": ("a-order", "A craftsperson shaping wood by hand"),
+    "wardrobe-design-for-a-small-room": ("a-small", "A bedroom with a bed and a built-in closet"),
+    "sliding-or-hinged-wardrobe-doors": ("a-slide", "A bedroom with a bed and a wardrobe along the wall"),
+    "dining-table-size-by-seats": ("a-dining", "A wooden dining table with chairs"),
+    "bed-frame-size-and-your-mattress": ("a-bed", "A neatly made bed in a bedroom"),
 }
 
 
